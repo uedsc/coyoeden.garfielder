@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body{background:#f4f4f4; color:#fff;}
+
+/*header-start*/
+
+.header{width:960px; margin:30px auto 0; background:#fff;}
+.logo{float:left; padding:32px 0 0 40px; width:198px; height:68px;}
+.logo .lz{ background:url(../image/bg.jpg) no-repeat 0 0; display:block; width:198px; height:68px; text-indent:-9999px;}
+.logo .lz:hover{background-position:-307px 0px;}
+.nav{float:right; padding:58px 44px 0 0;}
+.nav li{float:left; text-indent:-9999px; height:38px; margin:0 0 0 30px;}
+.nav li a{background:url(../image/bg.jpg) no-repeat; display:block; height:26px;}
+
+.nav li#web a{width:38px;background-position:0 -88px;}
+.nav li#web a:hover,.nav li#web a.on{width:38px;background-position:0 -129px;}
+
+.nav li#graphic a{width:57px;background-position:-67px -88px;}
+.nav li#graphic a:hover,.nav li#graphic a.on{width:57px;background-position:-67px -129px;}
+
+.nav li#illu a{width:75px;background-position:-154px -88px;}
+.nav li#illu a:hover,.nav li#illu a.on{width:75px;background-position:-154px -129px;}
+
+.nav li#others a{width:54px;background-position:-257px -88px;}
+.nav li#others a:hover,.nav li#others a.on{width:54px;background-position:-257px -129px;}
+
+.nav li#shop a{width:40px;background-position:-339px -88px;}
+.nav li#shop a:hover,.nav li#shop a.on{width:40px;background-position:-339px -129px;}
+
+/*header-end*/
+
+/*content-start*/
+
+.content{background:#fff; padding:100px 133px; width:694px; margin:0 auto;}
+.conbox li{float:left; width:170px; height:113px;}
+.conbox li a{display:block; text-align:center; padding:6px; height:100px; width:160px;}
+.conbox li a:hover{background:url(../image/bg.jpg) no-repeat -9px -184px;}
+
+/*content-end*/
+
+/*footer-start*/
+
+.footer{background:#000; margin:0 auto 30px; width:872px; padding:30px 44px;}
+.footer h4{height:25px; width:70px; text-indent:-9999px;background:url(../image/bg.jpg) no-repeat}
+.links{float:left; width:230px;}
+.contact{float:left; width:330px;}
+.contact h4{background-position:0 -359px;}
+.links h4{background-position:0 -325px;}
+.about{float:right; width:230px; text-align:right;}
+.about p{height:25px;}
+.about .me{padding-top:25px;}
+.me a{background:url(../image/bg.jpg) no-repeat; width:21px; height:21px; float:right; padding-left:5px;}
+.me a.blog{background-position:-28px -403px;}
+.me a.twi{background-position:0 -403px;}
+.me a.blog:hover{background-position:-28px -434px;}
+.me a.twi:hover{background-position:0 -434px;}
+.footer ul{padding:25px 0 0 50px;}
+.footer ul li{line-height:24px;}
+
+/*footer-end*/

@@ -1,0 +1,76 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage<VMBase>" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <!--css-->
+    <link rel="stylesheet" type="text/css" href="/Assets/css/reset-min.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/css/fonts-min.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/css/camp_font.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/css/camp_color.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/css/camp.css" />
+    <!--/css-->
+    <!--js-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
+    <!--/js-->
+    <asp:ContentPlaceHolder ID="cphHead" runat="server" />
+</head>
+<body class="<%:this.Model.PageFlag %>">
+	<!--#header-->
+	<div id="scHead" class="clear">
+		<img class="l" id="sch_logo" height="45" width="45" alt="" src="<%:UrlHelper.GenerateContentUrl("~/assets/img/blank.gif",Context.Request.RequestContext.HttpContext) %>"/>
+		<h1 id="sch_head" class="l">
+			<a title="Go to homepage" href="/">
+				<span id="sch_title">Garfielder Camp</span>
+			</a>
+		</h1>
+		<div id="sch_info" class="r">
+			<div id="favlinks" class="l">
+				<div id="favlink0"><%:Html.ActionLink("New Topic","EditTopic","Camp",null,null) %></div>
+				<div id="favlink_trigger"></div>
+				<div id="favlinks_" class="hide">
+						
+				</div>
+			</div>
+			<div id="userinfo" class="l">
+				<span id="hello">Welcome,</span>
+				<a id="username" href="#"><%:Model.CurrentUser==null?"IamWhoIam":Model.CurrentUser.Nickname %></a>
+				<span>|</span>
+				<a id="userstate" href="#">Log Out</a>
+			</div>
+		</div>
+	</div>
+	<!--#main-->
+	<div id="scMain" class="clear">
+        <!--#sidebar-->
+        <%Html.RenderPartial("CampMenu"); %>
+        <!--/sidebar-->
+		<!--#viewport-->
+		<div id="scViewport">
+			<div id="scTip">
+                Today is <span class="year"><%:DateTime.Now.Year %></span>-<span class="month"><%:DateTime.Today.ToString("MM") %></span>-<span class="date"><%:DateTime.Today.ToString("dd") %></span>, 
+                totally <a href="#"><span class="cnt_topic">10</span></a> new topics found in <a href="#"><span class="cnt_group">5</span></a> groups.
+			</div>
+            <div id="scViewport_" class="clear">
+                <div class="icon32"></div>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </div>
+    <!--/#scMain-->
+	<!--#scfoot-->
+	<div id="scFoot" class="bd0 clear">
+		<div class="r">Version <%:DateTime.Now.ToString("yyyy.MM.dd") %></div>
+	</div>
+    <!--common js-->
+    <script type="text/javascript" src="<%:Url.JS("Garfielder") %>"></script> 
+    <!--/common js--> 
+    <asp:ContentPlaceHolder ID="cphFoot" runat="server"></asp:ContentPlaceHolder>
+    <script type="text/javascript">
+    //<![CDATA[
+            Garfielder.Init({ siteRoot: '<%:Url.Home() %>' });
+    //]]>
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+.txtR{text-align:right;}
+.btn{font-style:normal;font-weight:normal;}
+.btn_g1{
+	font-weight:bold;
+	text-shadow:0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+strong,a.now,.widefat th{font-weight:bold;}
+/* 22px */
+#sch_head{font-size:167%;}
+/* 20px */
+#scSubhead{
+	font-size:153.9%;
+}
+.widget th a{
+	font-size:138.5%;
+}
+/* 11px */
+.cmt blockquote,.btn,.tip{font-size:85%;}
+#scSubhead a{font-size:55%;}
+/* 12px */
+#scTip,.widget .w_ct,.widget h3,#scFoot,.widefat{font-size:93%;}
+/* 13px */
+#scTip span{font-size:108%;}
+/* bold */
+.menu_sub_ li.now a,
+	.widget h3,
+	#scSubhead,
+	#scTip span{font-weight:bold;}
+
+/* font-italic */
+#scSubhead,.widget .tbl .txtth,#scFoot,.howto,.form-wrap p,.tip{font-style:italic;}
+/* font-family */
+#scSubhead,
+	#wSiteStat table th,
+	.cmt_meta,
+	.widget .tbl .txtth{
+	font-family:Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+}
+
+/* ============= listView like stories.html================== */
+.listView .acts1 li{font-size:85%;}
+.listView .acts1 span.cnt{font-weight:normal;}
+/* ============= topic_add.html =============== */
+.bigipt{font-size:1.7em;}
+

@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Garfielder camp</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="css/reset-min.css"></link>
+		<link rel="stylesheet" type="text/css" href="css/fonts-min.css"></link>   
+		<link rel="stylesheet" type="text/css" href="css/camp_color.css"></link> 
+		<link rel="stylesheet" type="text/css" href="css/camp_font.css"></link> 
+		<link rel="stylesheet" type="text/css" href="css/camp.css"></link>
+	</head>
+	<body class="camp_index">
+		<!--#header-->
+		<div id="scHead" class="clear">
+			<img class="l" id="sch_logo" height="45" width="45" alt="" src="images/blank.gif"/>
+			<h1 id="sch_head" class="l">
+				<a title="Go to homepage" href="#">
+					<span id="sch_title">Garfielder Camp</span>
+				</a>
+			</h1>
+			<div id="sch_info" class="r">
+				<div id="favlinks" class="l">
+					<div id="favlink0"><a href="#">New Topic</a></div>
+					<div id="favlink_trigger"></div>
+					<div id="favlinks_" class="hide">
+						
+					</div>
+				</div>
+				<div id="userinfo" class="l">
+					<span id="hello">Welcome,</span>
+					<a id="username" href="#">Levin</a>
+					<span>|</span>
+					<a id="userstate" href="#">Log Out</a>
+				</div>
+			</div>
+		</div>
+		<!--#main-->
+		<div id="scMain" class="clear">
+			<!--#sidebar-->
+			<ul id="scMenus">
+				<li id="menu_home" class="menu_first menu_hasSub menu_hotSub menu_open menu_top menu_top_last">
+                    <div class="menu_bg"></div>
+                    <div class="menu_trigger"></div>
+                    <a href="#" tabindex="1" class="menu_hotSub menu_top menu_first">Camper</a>
+                    <div class="menu_sub">
+                        <ul class="menu_sub_">
+                            <li class="menu_first now">
+                                <a href="index.html" tabindex="1">Summary</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu_split"><a href="#">&nbsp;</a></li>
+                <li id="menu_topic" class="menu_hasSub menu_open menu_top menu_top_first">
+                    <div class="menu_bg"></div>
+                    <div class="menu_trigger"></div>
+                    <a href="#" tabindex="2" class="menu_hasSub menu_top menu_first">Topics</a>
+                    <div class="menu_sub">
+                        <ul class="menu_sub_">
+                            <li><a href="topics.html">Topics</a></li>
+                            <li><a href="topic_add.html">Add topic</a></li>
+                            <li><a href="group.html">Groups</a></li>
+                            <li><a href="tag.html">Tags</a></li>
+                        </ul>
+                    </div>                    
+                </li>
+                <li id="menu_media" class="menu_hasSub menu_open menu_top">
+                    <div class="menu_bg"></div>
+                    <div class="menu_trigger"></div>
+                    <a href="#" class="menu_hasSub menu_top">Media</a>
+                    <div class="menu_sub">
+                        <ul class="menu_sub_">
+                            <li><a href="media.html">Library</a></li>
+                            <li><a href="media_new.html">Add Media</a></li>                            
+                        </ul>
+                    </div>
+                </li>
+                <li id="menu_comment" class="menu_top menu_top_last">
+                    <div class="menu_bg"></div>
+                    <a href="#" class="menu_top menu_top_last">Comments</a>
+                </li>
+                <li class="menu_split"><a href="#">&nbsp;</a></li>
+                <li id="menu_user" class="menu_hasSub menu_open menu_top menu_top_first menu_top_last">
+                    <div class="menu_bg"></div>
+                    <div class="menu_trigger"></div>
+                    <a href="#" tabindex="2" class="menu_hasSub menu_top menu_first">Users</a>
+                    <div class="menu_sub">
+                        <ul class="menu_sub_">
+                            <li><a href="#">Users</a></li>
+                            <li><a href="#">Add new</a></li>
+                            <li><a href="#">Your profile</a></li>
+                        </ul>
+                    </div>                    
+                </li>
+			</ul>
+			<!--#viewport-->
+			<div id="scViewport">
+				<div id="scTip">
+                    Today is <span class="year">2010</span>-<span class="month">10</span>-<span class="date">16</span>, 
+                    totally <a href="#"><span class="cnt_topic">10</span></a> new topics found in <a href="#"><span class="cnt_group">5</span></a> groups.
+				</div>
+				<div id="scViewport_" class="clear">
+					<div class="icon32"></div>
+					<h2 id="scSubhead">Summary of the site</h2>
+					<div id="scWidgets" class="clear">
+						<div class="wlist l">
+							<div id="wlist1">
+								<div id="wSiteStat" class="widget">
+									<div class="w_tgl" title="click to toggle"></div>
+									<h3 class="w_hd"><span>Site statistic</span></h3>
+									<div class="w_ct">
+										<div class="tbl tbl_ct l">
+											<p class="txtth">Content</p>
+											<table>
+												<tr>
+													<th><a href="#">10</a></th>
+													<td><a href="#">Topics</a></td>
+												</tr>
+												<tr>
+													<th><a href="#">20</a></th>
+													<td><a href="#">Figures</a></td>
+												</tr>			
+												<tr>
+													<th><a href="#">4</a></th>
+													<td><a href="#">Groups</a></td>
+												</tr>
+												<tr>
+													<th><a href="#">12</a></th>
+													<td><a href="#">Tags</a></td>
+												</tr>																																	
+											</table>
+										</div>
+										<div class="tbl tbl_cmt r">
+											<p class="txtth">Discussion</p>
+											<table>
+												<tr>
+													<th><a href="#">22</a></th>
+													<td><a href="#">Comments</a></td>
+												</tr>	
+												<tr>
+													<th><a href="#">20</a></th>
+													<td><a class="approved" href="#">Approved</a></td>
+												</tr>
+												<tr>
+													<th><a href="#">2</a></th>
+													<td><a class="pending" href="#">Pending</a></td>
+												</tr>
+												<tr>
+													<th><a href="#">0</a></th>
+													<td><a class="spam" href="#">Spam</a></td>
+												</tr>																																															
+											</table>
+										</div>
+									</div>
+								</div>
+								<div id="wGroup" class="widget">
+									<div class="w_tgl" title="click to toggle"></div>
+									<h3 class="w_hd"><span>Group statistic</span></h3>
+									<div class="w_ct">
+										<div class="tbl l">
+											<table cellspacing="5px">
+												<tr>
+													<th><div class="txtth">Topic</div></th>
+													<th><div class="txtth">Total topics</div></th>
+													<th><div class="txtth">Lastest topics</div></th>
+												</tr>
+												<tr>
+													<td><a href="#">Topic1</a></td>
+													<td><a href="#">12</a></td>
+													<td><a href="#">1</a></td>
+												</tr>			
+												<tr>
+													<td><a href="#">Topic2</a></td>
+													<td><a href="#">13</a></td>
+													<td><a href="#">3</a></td>													
+												</tr>
+												<tr>
+													<td><a href="#">Topic3</a></td>
+													<td><a href="#">1</a></td>
+													<td><a href="#">0</a></td>													
+												</tr>																																	
+											</table>
+										</div>									
+									</div>
+								</div><!--#wTopic-->								
+							</div>
+						</div>
+						<div class="wlist l">
+							<div id="wlist2">
+								<div id="wComments" class="widget">
+									<div class="w_tgl" title="click to toggle"></div>
+									<h3 class="w_hd"><span>Recent comments</span></h3>
+									<div class="w_ct">
+										<div id="cmtList">
+											<div class="cmt cmt_first odd">
+												<img class="avatar avatar_50" src="images/avatar-default.jpg" height="50" width="50" />
+												<div class="cmt_">
+													<h4 class="cmt_meta">
+														From <cite class="cmt_user"><a href="#">LEVIN</a></cite>
+														On <a class="cmt_src" href="#">Topic1111</a>
+														<a class="cmt_anchor" href="#">#</a>
+													</h4>
+													<blockquote>
+														<p>我是一只小蜜蜂，飞到花丛中...</p>
+													</blockquote>
+													<p class="cmt_acts">
+														<a href="#" class="approved">approve</a>
+														<a href="#" class="unapprove">Unapprove</a>
+														<a href="#" class="reply">reply</a>
+														<a href="#" class="spam">spam</a>
+														<a href="#" class="trash">trash</a>
+													</p>
+												</div>
+											</div>
+											<div class="cmt even">
+												<img class="avatar avatar_50" src="images/avatar-default.jpg" height="50" width="50" />
+												<div class="cmt_">
+													<h4 class="cmt_meta">
+														From <cite class="cmt_user"><a href="#">LEVIN</a></cite>
+														On <a class="cmt_src" href="#">Topic1111</a>
+														<a class="cmt_anchor" href="#">#</a>
+													</h4>
+													<blockquote>
+														<p>我是一只小蜜蜂，飞到花丛中...</p>
+													</blockquote>
+													<p class="cmt_acts">
+														<a href="#" class="approved">approve</a>
+														<a href="#" class="unapprove">Unapprove</a>
+														<a href="#" class="reply">reply</a>
+														<a href="#" class="spam">spam</a>
+														<a href="#" class="trash">trash</a>
+													</p>
+												</div>											
+											</div>
+											<div class="cmt odd">
+												<img class="avatar avatar_50" src="images/avatar-default.jpg" height="50" width="50" />
+												<div class="cmt_">
+													<h4 class="cmt_meta">
+														From <cite class="cmt_user"><a href="#">LEVIN</a></cite>
+														On <a class="cmt_src" href="#">Topic1111</a>
+														<a class="cmt_anchor" href="#">#</a>
+													</h4>
+													<blockquote>
+														<p>我是一只小蜜蜂，飞到花丛中...</p>
+													</blockquote>
+													<p class="cmt_acts">
+														<a href="#" class="approved">approve</a>
+														<a href="#" class="unapprove">Unapprove</a>
+														<a href="#" class="reply">reply</a>
+														<a href="#" class="spam">spam</a>
+														<a href="#" class="trash">trash</a>
+													</p>
+												</div>											
+											</div>
+											<div class="cmt even">
+												<img class="avatar avatar_50" src="images/avatar-default.jpg" height="50" width="50" />
+												<div class="cmt_">
+													<h4 class="cmt_meta">
+														From <cite class="cmt_user"><a href="#">LEVIN</a></cite>
+														On <a class="cmt_src" href="#">Topic1111</a>
+														<a class="cmt_anchor" href="#">#</a>
+													</h4>
+													<blockquote>
+														<p>我是一只小蜜蜂，飞到花丛中...</p>
+													</blockquote>
+													<p class="cmt_acts">
+														<a href="#" class="approved">approve</a>
+														<a href="#" class="unapprove">Unapprove</a>
+														<a href="#" class="reply">reply</a>
+														<a href="#" class="spam">spam</a>
+														<a href="#" class="trash">trash</a>
+													</p>
+												</div>											
+											</div>
+											<div class="cmt odds">
+												<img class="avatar avatar_50" src="images/avatar-default.jpg" height="50" width="50" />
+												<div class="cmt_">
+													<h4 class="cmt_meta">
+														From <cite class="cmt_user"><a href="#">LEVIN</a></cite>
+														On <a class="cmt_src" href="#">Topic1111</a>
+														<a class="cmt_anchor" href="#">#</a>
+													</h4>
+													<blockquote>
+														<p>我是一只小蜜蜂，飞到花丛中...</p>
+													</blockquote>
+													<p class="cmt_acts">
+														<a href="#" class="approved">approve</a>
+														<a href="#" class="unapprove">Unapprove</a>
+														<a href="#" class="reply">reply</a>
+														<a href="#" class="spam">spam</a>
+														<a href="#" class="trash">trash</a>
+													</p>
+												</div>											
+											</div><!--/cmt-->
+										</div><!--#cmtList-->
+										<p class="txtR viewall"><a class="btn" href="#">View all</a></p>
+									</div><!--w_ct-->									
+								</div><!--#wComments-->
+							</div><!--#wlist2-->
+						</div><!--.wlist-->
+					</div><!--#scWidgets-->				
+				</div><!--#viewport_-->
+			</div>
+			<!--/#viewport-->
+		</div>
+		<!--/#scMian-->
+		<!--#scfoot-->
+		<div id="scFoot" class="bd0 clear">
+			<div class="r">Version 2010.10.30</div>
+		</div>
+	</body>
+</html>

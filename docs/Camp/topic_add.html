@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+		<title>Add new topic</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="css/reset-min.css"></link>
+		<link rel="stylesheet" type="text/css" href="css/fonts-min.css"></link>   
+		<link rel="stylesheet" type="text/css" href="css/camp_color.css"></link> 
+		<link rel="stylesheet" type="text/css" href="css/camp_font.css"></link> 
+		<link rel="stylesheet" type="text/css" href="css/camp.css"></link>
+	</head>
+	<body class="camp topic_add">
+		<!--#header-->
+		<div id="scHead" class="clear">
+			<img class="l" id="sch_logo" height="45" width="45" alt="" src="images/blank.gif"/>
+			<h1 id="sch_head" class="l">
+				<a title="Go to homepage" href="#">
+					<span id="sch_title">Garfielder Camp</span>
+				</a>
+			</h1>
+			<div id="sch_info" class="r">
+				<div id="favlinks" class="l">
+					<div id="favlink0"><a href="#">New Topic</a></div>
+					<div id="favlink_trigger"></div>
+					<div id="favlinks_" class="hide">
+						
+					</div>
+				</div>
+				<div id="userinfo" class="l">
+					<span id="hello">Welcome,</span>
+					<a id="username" href="#">Levin</a>
+					<span>|</span>
+					<a id="userstate" href="#">Log Out</a>
+				</div>
+			</div>
+		</div>
+		<!--#main-->
+		<div id="scMain" class="clear">
+			<!--#sidebar-->
+			<ul id="scMenus">
+				<li id="menu_home" class="menu_first menu_hasSub menu_open menu_top menu_top_last">
+                    <div class="menu_bg"></div>
+                    <div class="menu_trigger"></div>
+                    <a href="#" tabindex="1" class="menu_hasSub menu_top menu_first">Camper</a>
+                    <div class="menu_sub">
+                        <ul class="menu_sub_">
+                            <li class="menu_first">
+                                <a href="index.html" tabindex="1">Summary</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu_split"><a href="#">&nbsp;</a></li>
+                <li id="menu_topic" class="menu_hasSub menu_hotSub menu_open menu_top menu_top_first">
+                    <div class="menu_bg"></div>
+                    <div class="menu_trigger"></div>
+                    <a href="#" tabindex="2" class="menu_hotSub menu_top menu_first">Topics</a>
+                    <div class="menu_sub">
+                        <ul class="menu_sub_">
+                            <li><a href="topics.html">Topics</a></li>
+                            <li class="now"><a href="topic_add.html">Add topic</a></li>
+                            <li><a href="group.html">Groups</a></li>
+                            <li><a href="tag.html">Tags</a></li>
+                        </ul>
+                    </div>                    
+                </li>
+                <li id="menu_media" class="menu_hasSub menu_open menu_top">
+                    <div class="menu_bg"></div>
+                    <div class="menu_trigger"></div>
+                    <a href="#" class="menu_hasSub menu_top">Media</a>
+                    <div class="menu_sub">
+                        <ul class="menu_sub_">
+                            <li><a href="media.html">Library</a></li>
+                            <li><a href="media_new.html">Add Media</a></li>                            
+                        </ul>
+                    </div>
+                </li>
+                <li id="menu_comment" class="menu_top menu_top_last">
+                    <div class="menu_bg"></div>
+                    <a href="#" class="menu_top menu_top_last">Comments</a>
+                </li>
+                <li class="menu_split"><a href="#">&nbsp;</a></li>
+                <li id="menu_user" class="menu_hasSub menu_open menu_top menu_top_first menu_top_last">
+                    <div class="menu_bg"></div>
+                    <div class="menu_trigger"></div>
+                    <a href="#" tabindex="2" class="menu_hasSub menu_top menu_first">Users</a>
+                    <div class="menu_sub">
+                        <ul class="menu_sub_">
+                            <li><a href="#">Users</a></li>
+                            <li><a href="#">Add new</a></li>
+                            <li><a href="#">Your profile</a></li>
+                        </ul>
+                    </div>                    
+                </li>
+			</ul>
+			<!--#viewport-->
+			<div id="scViewport">
+				<div id="scTip">
+                    Today is <span class="year">2010</span>-<span class="month">10</span>-<span class="date">16</span>, 
+                    totally <a href="#"><span class="cnt_topic">10</span></a> new topics found in <a href="#"><span class="cnt_group">5</span></a> groups.
+				</div>
+				<div id="scViewport_" class="clear">
+					<div class="icon32"></div>
+					<h2 id="scSubhead">Add a new Topic</h2>
+					<div id="ste_root" class="metabox rsb clear">
+						<!--#ste_sidebar-->
+						<div id="ste_sidebar" class="rsb_sb">
+							<div id="ste_sidebar_">
+								<div id="boxsubmit" class="widget">
+									<div class="w_tgl" title="click to toggle"></div>
+									<h3 class="w_hd"><span>Publish</span></h3>
+									<div class="w_ct">
+										<div id="act_publish">
+											<input id="btnPublish" class="btn btn_g1" type="submit" value="Publish"/>
+										</div>
+									</div>
+								</div>
+								<div id="boxGroup" class="widget">
+									<div class="w_tgl" title="click to toggle"></div>
+									<h3 class="w_hd"><span>Groups</span></h3>
+									<div class="w_ct">
+										<div id="catSelector">
+											<ul id="group-tabs" class="slimtab">
+												<li class="slimtab_on"><a href="#group-all">All groups</a></li>
+												<li class=""><a href="#group-pop">Most used</a></li>
+											</ul>
+											<div id="group-all" class="slimtab_bd">
+												<ul id="cbxlist-cat-all" class="cbxlist">
+													<li><input id="cat-1" type="checkbox" value="1"/><label for="cat-1">Group1</label></li>
+													<li><input id="cat-2" type="checkbox" value="2"/><label for="cat-2">Group2</label></li>
+													<li><input id="cat-3" type="checkbox" value="3"/><label for="cat-3">Group3</label></li>
+												</ul>
+											</div>
+											<div id="group-pop" class="slimtab_bd hide">
+												<ul id="cbxlist-cat-pop" class="cbxlist">
+													<li><input id="cat-3" type="checkbox" value="3"/><label for="cat-3">Group3</label></li>
+													<li><input id="cat-2" type="checkbox" value="2"/><label for="cat-2">Group2</label></li>
+													<li><input id="cat-1" type="checkbox" value="1"/><label for="cat-1">Group1</label></li>
+												</ul>												
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--/#boxGroup-->
+								<!--boxTag-->
+								<div id="boxTag" class="widget">
+									<div class="w_tgl" title="click to toggle"></div>
+									<h3 class="w_hd"><span>Topic tags</span></h3>
+									<div class="w_ct">
+										<div id="tagAdder">
+											<div id="tagAdder_">
+												<p>
+													<input type="text" value="" size="16" class="newtag form-input-tip" name="newtag_topic" id="newtag-topic"/>
+													<input type="button" tabindex="3" value="Add" class="btn btnAddTag"/>
+												</p>														
+											</div>
+											<p class="howto">Separate tags with commas</p>
+										</div>
+										<p id="tagSelector">
+											<a href="#">Choose from most used tags</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--#ste_main-->
+						<div id="ste_main" class="rsb_ct">
+							<div id="ste_main_" class="rsb_ct_">
+								<div id="ste_title">
+									<div id="ste_title_">
+										<input id="topicTitle" class="bigipt bd0" type="text" value="" tabindex="1" size="30" name="topicTitle"/>
+									</div>
+									<div id="ste_slug">
+										<div id="ste_slug_">
+											<!--
+											<strong>Permanent link</strong>
+											<span id="ste_slug_auto"></span>
+											-->
+										</div>
+									</div>
+								</div>
+								<div id="ste_richedt" class="richedt bd0">
+									<div id="edt_toolbar" class="clear">
+										<a id="edtbtn_html" class="bd0" href="#">HTML</a>
+										<a id="edtbtn_preview" class="edtbtn_on bd0" href="#">Preview</a>
+										<div id="edtbtn_others">
+											<span>Upload / Insert</span>
+											<a id="edtbtn_img" class="thickbox"><img alt="" src="images/media-button-image.gif"/></a>
+										</div>
+									</div>
+									<div id="edt_main" class="bd0">
+										<textarea id="edt_hoder" class="edt_holder" tabindex="2" name="topicContent" cols="40" rows="20"></textarea>
+									</div>
+								</div>
+							</div>
+						</div><!--#ste_main-->
+					</div><!--#ste_root-->			
+				</div><!--#viewport_-->
+			</div>
+			<!--/#viewport-->
+		</div>
+		<!--/#scMian-->
+		<!--#scfoot-->
+		<div id="scFoot" class="bd0 clear">
+			<div class="r">Version 2010.10.30</div>
+		</div>
+		<!--scripts-->
+		<script type="text/javascript" src="assets/javascripts/jquery.vsUtils.js"></script>
+		<script type="text/javascript" src="assets/javascripts/tiny_mce/jquery.tinymce.js"></script>
+		<script type="text/javascript" src="assets/javascripts/Admin.TopicAdd.js"></script>
+		<script type="text/javascript">
+		//<![CDATA[
+			this$.Init({});
+		//]]>
+		</script>
+		<!--/scripts-->		
+	</body>
+</html>
