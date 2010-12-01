@@ -74,7 +74,7 @@
             </div>
         </div>																
 	</div>
-    <!--#topicList-->
+    <!--#userList-->
 
 </asp:Content>
 

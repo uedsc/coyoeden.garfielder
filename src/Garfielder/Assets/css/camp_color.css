@@ -433,12 +433,12 @@ a.menu_first
 .camp .clearlooks2 .mceFocus .mceTop span {
 	color: #e5e5e5;
 }
+/* end TinyMCE */
 
 /* =============== listView ================= */
 .listView .acts1 span.cnt,.listView a.now{color:#999;}
 .listView a.now{color:#000;}
 
-/* end TinyMCE */
 /* footer */
 #scFoot{
 	background:-moz-linear-gradient(center bottom , #D7D7D7, #E4E4E4) repeat scroll 0 0 transparent;
@@ -457,3 +457,7 @@ a.menu_first
 	color:#222222;
 	text-shadow:0 1px 0 #FFFFFF;
 }
+
+/* =====form validation style========= */
+.form-wrap .input-validation-error{background:#FFEFEF;}
+.form-wrap .field-validation-error{color:#FF0000;}

@@ -19,7 +19,7 @@ using System.Runtime.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("Garfielder.Models", "FK_EntityLog_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Garfielder.Models.User), "EntityLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Garfielder.Models.EntityLog), true)]
-[assembly: EdmRelationshipAttribute("Garfielder.Models", "FK_Group_Group", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Garfielder.Models.Group), "Group1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Garfielder.Models.Group), true)]
+[assembly: EdmRelationshipAttribute("Garfielder.Models", "FK_Group_Group", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Garfielder.Models.Group), "Group1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Garfielder.Models.Group), true)]
 [assembly: EdmRelationshipAttribute("Garfielder.Models", "FK_Topic_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Garfielder.Models.User), "Topic", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Garfielder.Models.Topic), true)]
 [assembly: EdmRelationshipAttribute("Garfielder.Models", "FK_TopicComment_Topic", "Topic", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Garfielder.Models.Topic), "TopicComment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Garfielder.Models.TopicComment), true)]
 [assembly: EdmRelationshipAttribute("Garfielder.Models", "FK_XFile_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Garfielder.Models.User), "XFile", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Garfielder.Models.XFile), true)]
@@ -523,16 +523,16 @@ namespace Garfielder.Models
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="slug">Initial value of the Slug property.</param>
-        /// <param name="parentID">Initial value of the ParentID property.</param>
+        /// <param name="level">Initial value of the Level property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdAt">Initial value of the CreatedAt property.</param>
-        public static Group CreateGroup(global::System.Guid id, global::System.String name, global::System.String slug, global::System.Guid parentID, global::System.String createdBy, global::System.DateTime createdAt)
+        public static Group CreateGroup(global::System.Guid id, global::System.String name, global::System.String slug, global::System.Int32 level, global::System.String createdBy, global::System.DateTime createdAt)
         {
             Group group = new Group();
             group.Id = id;
             group.Name = name;
             group.Slug = slug;
-            group.ParentID = parentID;
+            group.Level = level;
             group.CreatedBy = createdBy;
             group.CreatedAt = createdAt;
             return group;
@@ -645,7 +645,31 @@ namespace Garfielder.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ParentID
+        public global::System.Int32 Level
+        {
+            get
+            {
+                return _Level;
+            }
+            set
+            {
+                OnLevelChanging(value);
+                ReportPropertyChanging("Level");
+                _Level = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Level");
+                OnLevelChanged();
+            }
+        }
+        private global::System.Int32 _Level;
+        partial void OnLevelChanging(global::System.Int32 value);
+        partial void OnLevelChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> ParentID
         {
             get
             {
@@ -660,8 +684,8 @@ namespace Garfielder.Models
                 OnParentIDChanged();
             }
         }
-        private global::System.Guid _ParentID;
-        partial void OnParentIDChanging(global::System.Guid value);
+        private Nullable<global::System.Guid> _ParentID;
+        partial void OnParentIDChanging(Nullable<global::System.Guid> value);
         partial void OnParentIDChanged();
     
         /// <summary>

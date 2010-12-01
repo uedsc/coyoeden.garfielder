@@ -22,8 +22,8 @@
             <ul class="menu_sub_">
                 <li class="<%:this.Model.AssertStr(()=>this.Model.PageFlag=="topic_index","now") %>"><%:Html.ActionLink("Topics","ListTopic","Camp",null,new {tabIndex="2"}) %></li>
                 <li class="<%:this.Model.AssertStr(()=>this.Model.PageFlag=="topic_add","now") %>"><%:Html.ActionLink("Add Topic","EditTopic","Camp",null,new {tabIndex="3"}) %></li>
-                <li class="<%:this.Model.AssertStr(()=>this.Model.PageFlag=="group_index","now") %>"><a href="group.html">Groups</a></li>
-                <li class="<%:this.Model.AssertStr(()=>this.Model.PageFlag=="tag_index","now") %>"><a href="tag.html">Tags</a></li>
+                <li class="<%:this.Model.AssertStr(()=>this.Model.PageFlag=="group_index","now") %>"><%:Html.ActionLink("Groups","ListGroup","Camp",null,new {tabIndex="4"}) %></li>
+                <li class="<%:this.Model.AssertStr(()=>this.Model.PageFlag=="tag_index","now") %>"><%:Html.ActionLink("Tags","ListTag","Camp",null,new {tabIndex="5"}) %></li>
             </ul>
         </div>                    
     </li>

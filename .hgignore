@@ -4,3 +4,5 @@ glob:*.user
 glob:Thumb.db
 glob:*.suo
 glob:*.DS_Store
+glob:src/Garfielder/packages.config
+glob:src/packages/*

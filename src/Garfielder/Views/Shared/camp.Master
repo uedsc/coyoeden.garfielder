@@ -12,14 +12,14 @@
     <link rel="stylesheet" type="text/css" href="/Assets/css/camp.css" />
     <!--/css-->
     <!--js-->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <!--/js-->
     <asp:ContentPlaceHolder ID="cphHead" runat="server" />
 </head>
 <body class="<%:this.Model.PageFlag %>">
 	<!--#header-->
 	<div id="scHead" class="clear">
-		<img class="l" id="sch_logo" height="45" width="45" alt="" src="<%:UrlHelper.GenerateContentUrl("~/assets/img/blank.gif",Context.Request.RequestContext.HttpContext) %>"/>
+		<img class="l" id="sch_logo" height="45" width="45" alt="" src="<%:Url.Img("blank.gif") %>"/>
 		<h1 id="sch_head" class="l">
 			<a title="Go to homepage" href="/">
 				<span id="sch_title">Garfielder Camp</span>

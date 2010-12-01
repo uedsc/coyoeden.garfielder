@@ -488,3 +488,6 @@ table.fixed {
 .swfupload {
 	vertical-align: top;
 }
+
+/* --========form validation styles==========-- */
+.form-wrap .field-validation-error{margin-left:8px;}

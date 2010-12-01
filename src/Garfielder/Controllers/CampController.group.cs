@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Garfielder.ViewModels;
 using Garfielder.Models;
+using Garfielder.Core.Infrastructure;
 
 namespace Garfielder.Controllers
 {
@@ -13,6 +14,7 @@ namespace Garfielder.Controllers
         public ActionResult ListGroup()
         {
             var vm = CreateViewData<VMGroupList>();
+            //load list data
             using (var db = new GarfielderEntities()) {
                 var items = db.Groups.ToList();
                 vm.GroupList=new List<VMGroupEdit>();
@@ -20,41 +22,34 @@ namespace Garfielder.Controllers
                     vm.GroupList.Add(new VMGroupEdit { 
                         Name=x.Name,
                         Slug=x.Slug,
-                        Id=x.Id
+                        Id=x.Id,
+                        Level=x.Level,
+                        Description=x.Description,
+                        ParentID=x.ParentID,
+                        ParentName=x.Parent==null?"":x.Parent.Name
                     });
                 });
             }
             return View(vm);
         }
-        [HttpGet]
-        public ActionResult EditGroup(Guid? id)
+        [HttpPost]
+        public JsonResult EditGroup(VMGroupEdit obj)
         {
-            if (id == null || id == Guid.Empty)
-            {
-                return NewGroup();
-            };
-            var vm = CreateViewData<VMGroupEdit>();
-            using (var db = new GarfielderEntities())
-            {
-                var dbModel = db.Groups.Single(x => x.Id == id.Value);
-                vm.Id = dbModel.Id;
-                vm.Name = dbModel.Name;
-                vm.Slug = dbModel.Slug;
-                vm.Description = dbModel.Description;
-            };
-            return View(vm);
-        }
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditGroup(VMGroupEdit obj)
-        {
+            if (!TryUpdateModel(obj)) {
+                return new JsonResult() { Data=false};
+            }
             if (this.ModelState.IsValid)
             {
+                obj.Id = Guid.NewGuid();
+                obj.Slug=string.IsNullOrEmpty(obj.Slug)?obj.Name.CHSToPinyin().ToLower():obj.Slug.ToLower();
+
                 var dbm = new Group();
-                dbm.Id = Guid.NewGuid();
+                dbm.Id =obj.Id;
                 dbm.Name = obj.Name;
                 dbm.Slug = obj.Slug;
                 dbm.Description = obj.Description;
                 dbm.CreatedAt = DateTime.Now;
+                dbm.ParentID = obj.ParentID.Equals(Guid.Empty) ? default(Guid?): obj.ParentID;
                 //TODO:
                 dbm.CreatedBy = "Sys";
                 using (var db = new GarfielderEntities())
@@ -62,15 +57,14 @@ namespace Garfielder.Controllers
                     db.CommandTimeout = 0;
                     db.AddToGroups(dbm);
                     db.SaveChanges();
+
+                    if (dbm.Parent != null) {
+                        obj.ParentName = dbm.Parent.Name;
+                    }
+
                 };
             };
-            return View(obj);
-        }
-        private ActionResult NewGroup()
-        {
-            var vm = CreateViewData<VMGroupEdit>();
-            vm.Id = Guid.NewGuid();
-            return View(vm);
+            return new JsonResult { Data=obj};
         }
     }
 }

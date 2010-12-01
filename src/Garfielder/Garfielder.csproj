@@ -73,6 +73,7 @@
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\XFileController.cs" />
+    <Compile Include="Extension\RedirectResultX.cs" />
     <Compile Include="Extension\StringX.cs" />
     <Compile Include="Extension\UrlHelperX.cs" />
     <Compile Include="Global.asax.cs">
@@ -148,6 +149,8 @@
     <Content Include="Assets\js\Admin.Group.js" />
     <Content Include="Assets\js\Admin.TopicAdd.js" />
     <Content Include="Assets\js\Garfielder.js" />
+    <Content Include="Assets\js\jquery-ui-1.8.6.effects.min.js" />
+    <Content Include="Assets\js\jquery.datalink.js" />
     <Content Include="Assets\js\jquery.json-2.2.min.js" />
     <Content Include="Assets\js\jquery.vsUtils.js" />
     <Content Include="Assets\js\swfupload\swfupload.cookies.js" />
@@ -413,6 +416,10 @@
     <Content Include="Assets\js\tiny_mce\utils\validate.js" />
     <Content Include="Global.asax" />
     <Content Include="Assets\css\Site.css" />
+    <Content Include="Scripts\jquery-1.4.3.js" />
+    <Content Include="Scripts\jquery-1.4.3.min.js" />
+    <Content Include="Assets\js\jQuery.tmpl.js" />
+    <Content Include="Assets\js\jQuery.tmpl.min.js" />
     <Content Include="Views\Camp\AddMedia.aspx" />
     <Content Include="Views\Camp\CampMenu.ascx" />
     <Content Include="Views\Camp\EditTopic.aspx" />
@@ -423,6 +430,7 @@
     <Content Include="Views\Camp\ListTag.aspx" />
     <Content Include="Views\Camp\ListTopic.aspx" />
     <Content Include="Views\Camp\ListUser.aspx" />
+    <Content Include="Views\Camp\SelectGroup.ascx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -455,12 +463,6 @@
     <Content Include="Views\Shared\camp.Master" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\Garfielder.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Garfielder.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\site.Master" />
   </ItemGroup>
   <ItemGroup>
@@ -468,6 +470,16 @@
       <Project>{DAB56064-5CFA-42DE-A2A5-0D939A952C75}</Project>
       <Name>Garfielder.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EntityDeploy Include="Models\Garfielder.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Garfielder.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
