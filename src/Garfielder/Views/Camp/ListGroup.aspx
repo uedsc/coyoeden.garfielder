@@ -23,8 +23,8 @@
 		<div id="catAdmin-detail" class="form-wrap">
 			<h3>Add New Group</h3>
 			<div class="form-field">	
-                <label for="cat-name">Name<%:Html.ValidationMessageFor(x => x.Name)%></label>
-                <%:Html.TextBoxFor(x => x.Name, new { id = "cat-name", size = 40 })%>
+                <label for="gr-name">Name<%:Html.ValidationMessageFor(x => x.Name)%></label>
+                <%:Html.TextBoxFor(x => x.Name, new { id = "gr-name", size = 40 })%>
 				<p>The name is how it appears on your site.</p>
 			</div>	
 			<div class="form-field">

@@ -148,6 +148,7 @@
     <Content Include="Assets\js\Admin.AddMedia.js" />
     <Content Include="Assets\js\Admin.Group.js" />
     <Content Include="Assets\js\Admin.TopicAdd.js" />
+    <Content Include="Assets\js\Admin.Tag.js" />
     <Content Include="Assets\js\Garfielder.js" />
     <Content Include="Assets\js\jquery-ui-1.8.6.effects.min.js" />
     <Content Include="Assets\js\jquery.datalink.js" />

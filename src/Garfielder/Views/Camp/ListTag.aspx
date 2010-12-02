@@ -14,23 +14,25 @@
 </div>
 <div id="tagAdmin-wrap" class="multiColBox clear">
 	<div id="tagAdmin-wrap_L" class="l mcb_L">
-        <%using (Ajax.BeginForm("EditTag", new AjaxOptions { 
-            HttpMethod="Post",OnSuccess="function(){alert('hi');}"
-          }))
+        <%using (Ajax.BeginForm("EditTag", null, new AjaxOptions
+          {
+              HttpMethod = "Post",
+              OnSuccess = "this$.OnEdit"
+          }, new { id = "frmEdit" }))
           { %>
 		<div id="tagAdmin-detail" class="form-wrap">
 			<h3>Add New Tag</h3>
 			<div class="form-field form-required">
-				<label for="tag-name">Name</label>
-				<input type="text" size="40" value="" id="tag-name" name="Name"/>
+                <label for="obj-name">Name<%:Html.ValidationMessageFor(x => x.Name)%></label>
+                <%:Html.TextBoxFor(x => x.Name, new { id = "obj-name", size = 40 })%>
 				<p>The name is how it appears on your site.</p>
 			</div>	
 			<div class="form-field">
-				<label for="tag-slug">Slug</label>
-				<input type="text" size="40" value="" id="tag-slug" name="Slug"/>
+				<label for="obj-slug">Slug</label>
+				<input type="text" size="40" value="" id="obj-slug" name="Slug"/>
 				<p>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</p>
 			</div>	
-			<div class="form-field">
+			<div class="form-field" style="display:none">
 				<label for="tag-desc">Description</label>
 				<textarea cols="40" rows="5" id="tag-desc" name="Description"></textarea>
 				<p>The description is not prominent by default; however, some themes may show it.</p>
@@ -51,7 +53,7 @@
 				</div>								
 			</div>
 			<div class="row">
-				<table cellspacing="0" class="widefat tag fixed">
+				<table id="tbItemList" cellspacing="0" class="widefat tag fixed">
 					<thead>
 						<tr>
 							<th class="manage-column column-cb check-column" id="col-cb" scope="col"><input type="checkbox"/></th>
@@ -111,4 +113,34 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
+<!--scripts-->
+<script src="<%:Url.Content("~/Scripts/jquery.unobtrusive-ajax.js") %>" type="text/javascript"></script>
+<script src="<%:Url.Content("~/Scripts/jquery.validate.js") %>" type="text/javascript"></script>
+<script src="<%:Url.Content("~/Scripts/jquery.validate.unobtrusive.js") %>" type="text/javascript"></script>
+<script type="text/javascript" src="<%:Url.JS("jquery-ui-1.8.6.effects.min") %>"></script>
+<script id="tpl_item" type="text/x-jquery-tmpl">
+    <tr id="tag-${Id}">
+        <th class="check-column" scope="row"> 
+			<input type="checkbox" value="${Id}" name="delete_tags[]"/>
+		</th>
+		<td class="name column-name">
+			<strong><a title="Edit [${Name}] " href="javascript://" class="row-title">${Name}</a></strong>
+			<div class="row-actions">
+				<span class="edit"><a href="javascript://">Edit</a> | </span>
+				<span class="inline"><a class="editinline" href="javascript://">Quick&nbsp;Edit</a> | </span>
+				<span class="delete"><a href="javascript://" class="delete-tag">Delete</a></span>
+			</div>
+		</td>
+		<td class="slug column-slug">${Slug}</td>
+		<td class="topics column-topics num"><a href="javascript://">2</a></td>
+    </tr>
+</script> 
+<script type="text/javascript" src="<%:Url.JS("jQuery.tmpl.min") %>"></script>
+<script type="text/javascript" src="<%:Url.JS("Admin.Tag") %>"></script>
+<script type="text/javascript">
+//<![CDATA[
+    this$.Init({});
+//]]>
+</script>
+<!--/scripts-->	
 </asp:Content>
