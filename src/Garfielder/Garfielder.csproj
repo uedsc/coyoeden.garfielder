@@ -72,6 +72,7 @@
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\FBIController.cs" />
     <Compile Include="Controllers\XFileController.cs" />
     <Compile Include="Extension\RedirectResultX.cs" />
     <Compile Include="Extension\StringX.cs" />
@@ -84,6 +85,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Garfielder.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Group.biz.cs" />
+    <Compile Include="Models\Tag.biz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\VMTagList.cs" />
     <Compile Include="ViewModels\VMGroupList.cs" />
@@ -498,8 +501,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54706</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>55555</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

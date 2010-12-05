@@ -21,7 +21,8 @@ namespace Garfielder.Controllers
                     vm.TagList.Add(new VMTagEdit { 
                         Name=x.Name,
                         Slug=x.Slug,
-                        Id=x.Id
+                        Id=x.Id,
+                        CntTopic=x.Topics.Count
                     });
                 });
             }
@@ -53,7 +54,7 @@ namespace Garfielder.Controllers
                     db.SaveChanges();
                 };
             };
-            return new JsonResult { Data=obj};
+            return Json(obj);
         }
     }
 }

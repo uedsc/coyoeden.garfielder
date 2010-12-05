@@ -28,15 +28,15 @@
 				<p>The name is how it appears on your site.</p>
 			</div>	
 			<div class="form-field">
-				<label for="gr-slug">Slug</label>
-				<input type="text" size="40" value="" id="gr-slug" name="Slug"/>
+				<label for="gr-slug">Slug<%:Html.ValidationMessageFor(x => x.Slug)%></label>
+                <%:Html.TextBoxFor(x=>x.Slug,new{id="gr-slug",size=40}) %>
 				<p>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</p>
 			</div>	
 			<div class="form-field">
 				<label for="ddlGroup">Parent</label>
                 <%Html.RenderPartial("SelectGroup", new { items = Model.GroupList, name = "ParentID", level = 3 }); %>
 				<p>Groups, unlike tags, can have a hierarchy. You might have a Jazz group, and under that have children categories for Bebop and Big Band. Totally optional.</p>
-			    <input type="hidden" id="gr-level" name="Level" />
+			    <input type="hidden" id="gr-level" name="Level" value="0" />
             </div>
 			<div class="form-field">
 				<label for="grDesc">Description<%:Html.ValidationMessageFor(x => x.Description)%></label>
@@ -97,7 +97,7 @@
 							    </td>
 							    <td class="desc column-desc"><%:item.Description %></td>
 							    <td class="slug column-slug"><%:item.Slug %></td>
-							    <td class="topics column-topics num"><a href="javascript://">2</a></td>
+							    <td class="topics column-topics num"><a href="javascript://"><%:item.CntTopic %></a></td>
                            </tr>
                         <%} %>											
 					</tbody>
@@ -144,7 +144,7 @@
 	    </td>
 	    <td class="desc column-desc">${Description}</td>
 	    <td class="slug column-slug">${Slug}</td>
-	    <td class="topics column-topics num"><a href="javascript://">2</a></td>
+	    <td class="topics column-topics num"><a href="javascript://">0</a></td>
     </tr>
 </script> 
 <script type="text/javascript" src="<%:Url.JS("jQuery.tmpl.min") %>"></script>

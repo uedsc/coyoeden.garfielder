@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Garfielder.ViewModels
 {
@@ -14,8 +15,10 @@ namespace Garfielder.ViewModels
         //edit field data-fields should be same as VMGroupEdit
         [StringLength(50)]
         [Required(ErrorMessage = "Name is required")]
+        [Remote("GroupName", "FBI", HttpMethod = "Post")]
         public string Name { get; set; }
         [StringLength(50)]
+        [Remote("GroupSlug", "FBI", HttpMethod = "Post")]
         public string Slug { get; set; }
         [StringLength(200)]
         public string Description { get; set; }

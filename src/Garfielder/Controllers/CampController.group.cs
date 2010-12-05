@@ -26,7 +26,8 @@ namespace Garfielder.Controllers
                         Level=x.Level,
                         Description=x.Description,
                         ParentID=x.ParentID,
-                        ParentName=x.Parent==null?"":x.Parent.Name
+                        ParentName=x.Parent==null?"":x.Parent.Name,
+                        CntTopic=x.Topics.Count
                     });
                 });
             }
@@ -64,7 +65,7 @@ namespace Garfielder.Controllers
 
                 };
             };
-            return new JsonResult { Data=obj};
+            return Json(obj);
         }
     }
 }

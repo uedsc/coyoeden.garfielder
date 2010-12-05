@@ -131,11 +131,7 @@ namespace Garfielder.Controllers
                 };
 
             };
-
-            var retVal = new JsonResult();
-            retVal.Data = new { pic=pic};
-
-            return retVal;
+            return Json(new { pic=pic});
         }
 
     }

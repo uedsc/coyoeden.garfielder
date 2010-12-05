@@ -9,7 +9,7 @@
 <div class="row">
 	<div class="r sbox">
 		<input type="text" value="" name="s" id="ipts-cat"/>
-		<input type="submit" value="Search Groups" class="btn"/>
+		<input type="submit" value="Search Tags" class="btn"/>
 	</div>
 </div>
 <div id="tagAdmin-wrap" class="multiColBox clear">
@@ -28,8 +28,8 @@
 				<p>The name is how it appears on your site.</p>
 			</div>	
 			<div class="form-field">
-				<label for="obj-slug">Slug</label>
-				<input type="text" size="40" value="" id="obj-slug" name="Slug"/>
+				<label for="obj-slug">Slug<%:Html.ValidationMessageFor(x => x.Slug)%></label>
+                <%:Html.TextBoxFor(x=>x.Slug,new{id="obj-slug",size=40}) %>
 				<p>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</p>
 			</div>	
 			<div class="form-field" style="display:none">
@@ -88,7 +88,7 @@
 								    </div>
 							    </td>
 							    <td class="slug column-slug"><%:item.Slug %></td>
-							    <td class="topics column-topics num"><a href="javascript://">2</a></td>
+							    <td class="topics column-topics num"><a href="javascript://"><%:item.CntTopic %></a></td>
                            </tr>
                         <%} %>											
 					</tbody>
@@ -132,7 +132,7 @@
 			</div>
 		</td>
 		<td class="slug column-slug">${Slug}</td>
-		<td class="topics column-topics num"><a href="javascript://">2</a></td>
+		<td class="topics column-topics num"><a href="javascript://">0</a></td>
     </tr>
 </script> 
 <script type="text/javascript" src="<%:Url.JS("jQuery.tmpl.min") %>"></script>
