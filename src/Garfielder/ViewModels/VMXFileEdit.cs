@@ -14,5 +14,11 @@ namespace Garfielder.ViewModels
         public DateTime CreatedAt { get; set; }
         public string Description { get; set; }
         public string UserName { get; set; }
+
+        public bool NoFlash { get; set; }
+        /// <summary>
+        /// Name without extension
+        /// </summary>
+        public string Name1 { get; set; }
     }
 }

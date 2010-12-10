@@ -56,13 +56,18 @@ namespace Garfielder.Core.Infrastructure
         /// <param name="newFileName">新图路径</param>
         /// <param name="maxWidth">最大宽度</param>
         /// <param name="maxHeight">最大高度</param>
-        public static void GetThumbnail(string fileName, string newFileName, int maxWidth, int maxHeight)
+        public static void GetThumbnail(string fileName, string newFileName, int maxWidth, int maxHeight,bool ignoreIfInvalidSize=false)
         {
             try
             {
                 using(var original = Image.FromFile(fileName)){
                     var _newSize = GetImgSize(original.Width, original.Height, maxWidth, maxHeight);
-            
+
+                    var invalidSize = _newSize.Width == original.Width && _newSize.Height == original.Height;
+                    if (invalidSize&&ignoreIfInvalidSize) {
+                        return;
+                    }
+
                     var thumbnailBitmap = new Bitmap(_newSize.Width, _newSize.Height);
                     var thumbnailGraph = Graphics.FromImage(thumbnailBitmap);
                     thumbnailGraph.CompositingQuality = CompositingQuality.HighQuality;
@@ -85,7 +90,7 @@ namespace Garfielder.Core.Infrastructure
         /// <param name="scaleFactor">缩放比例</param>
         /// <param name="fromStream"></param>
         /// <param name="toStream"></param>
-        public void ResizeImage(double scaleFactor, Stream fromStream, Stream toStream)
+        public static void ResizeImage(double scaleFactor, Stream fromStream, Stream toStream)
         {
             using (var image = Image.FromStream(fromStream))
             {
@@ -103,7 +108,7 @@ namespace Garfielder.Core.Infrastructure
         /// <param name="newHeight"></param>
         /// <param name="fromStream"></param>
         /// <param name="toStream"></param>
-        public void ResizeImage(int newWidth,int newHeight, Stream fromStream, Stream toStream)
+        public static void ResizeImage(int newWidth, int newHeight, Stream fromStream, Stream toStream)
         {
 
             var image = Image.FromStream(fromStream);

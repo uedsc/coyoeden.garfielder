@@ -110,6 +110,13 @@ table.fixed {
 	padding:0;
 	vertical-align:text-top;
 }
+.error
+{
+    padding:2px;
+  	-webkit-box-shadow:2px 2px 6px #ddd;
+    -moz-box-shadow:2px 2px 6px #ddd;
+    box-shadow:2px 2px 6px #ddd;	      
+}
 /* layout */
 
 /* header */
@@ -444,9 +451,11 @@ table.fixed {
 
 /* footer */
 #scFoot{
-	border-style:solide;
-	border-width:1px;
-	position:relative;
+	border-style:solid none;
+	border-width:1px 0;
+	position:absolute;
+	bottom:0;
+	left:0;
 	width:100%;
 }
 #scFoot .r{
@@ -478,7 +487,21 @@ table.fixed {
 #newtag-topic{width:180px;position:relative;background:transparent;}
 
 /* media_add.html */
-#flash-upload-ui p{margin:1em 0;}
+.upload-ui{margin-top:0.5em;}
+.upload-ui p{margin:1em 0;}
+.upload-ui-progress
+{
+    margin-top:8px;
+  	-webkit-box-shadow:2px 2px 6px #ddd;
+    -moz-box-shadow:2px 2px 6px #ddd;
+    box-shadow:2px 2px 6px #ddd;	    
+}
+.upload-ui-progress .progressContainer{padding:5px;}
+.upload-ui-progress .blue
+{
+    background:#B8DBF7;    
+}
+.upload-ui-progress .progressName{font-weight:bold;margin-bottom:5px;}
 #media-items{
 	border-style:solid solid none;
 	border-width:1px;

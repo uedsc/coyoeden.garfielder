@@ -11,8 +11,9 @@ namespace Garfielder.Extension
         public static string Home(this UrlHelper url) {
             return url.Content("~/");
         }
-        public static string JS(this UrlHelper url, string jsName) {
-            return url.Content(string.Format("~/assets/js/{0}.js",jsName));
+        public static string JS(this UrlHelper url, string jsName,string version="") {
+            version = string.IsNullOrEmpty(version)?"":string.Format("?v={0}",version);
+            return url.Content(string.Format("~/assets/js/{0}.js{1}",jsName,version));
         }
         public static string Img(this UrlHelper url, string img) {
             return url.Content(string.Format("~/assets/img/{0}",img));
@@ -20,8 +21,10 @@ namespace Garfielder.Extension
         public static string ImgDefault(this UrlHelper url) {
             return Img(url, "default.jpg");
         }
-        public static string CSS(this UrlHelper url, string cssName) {
-            return url.Content(string.Format("~/assets/css/{0}.css",cssName));
+        public static string CSS(this UrlHelper url, string cssName, string version = "")
+        {
+            version = string.IsNullOrEmpty(version) ? "" : string.Format("?v={0}", version);
+            return url.Content(string.Format("~/assets/css/{0}.css{1}",cssName,version));
         }
     }
 }

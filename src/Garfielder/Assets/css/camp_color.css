@@ -459,5 +459,5 @@ a.menu_first
 }
 
 /* =====form validation style========= */
-.form-wrap .input-validation-error{background:#FFEFEF;}
-.form-wrap .field-validation-error{color:#FF0000;}
+.form-wrap .input-validation-error,.error{background:#FFEFEF;}
+.form-wrap .field-validation-error,.error{color:#FF0000;}

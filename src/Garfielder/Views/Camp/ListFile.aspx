@@ -55,7 +55,7 @@
 					<th scope="row" class="check-column"><input type="checkbox" name="md[]" value="117" /></th>
 					<td class="column-icon media-icon">				
 						<a title="Edit" href="#">
-							<img width="80" height="54" title="" alt="" class="attachment-80x60" src="<%:Url.Home()+item.Name %>"/>	
+							<img title="" alt="" class="attachment-64x64" src="<%:Url.Home()+item.Name1+"_64x64"+item.Extension %>"/>	
 						</a>
 					</td>										
 					<td class="md-title column-title">

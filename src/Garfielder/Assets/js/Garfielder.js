@@ -38,6 +38,8 @@ var Garfielder = (function ($) {
     };
     /*/private area*/
     /*public area*/
+    /* 调用Init之前,子模块可以设置Cfg将子模块的私有配置注入到Garfield.js中 */
+    pub.Cfg = null;
     /*
     Init方法
     作用:页面js逻辑的唯一入口
@@ -49,13 +51,18 @@ var Garfielder = (function ($) {
     </script> 
     */
     pub.Init = function (opts) {
+        if (Garfielder.Cfg) {
+            Garfielder.Cfg = $.extend(opts, Garfielder.Cfg);
+        } else {
+            Garfielder.Cfg = opts;
+        };
         for (var m in p._modules) {
             if ((m = p._modules[m]) && m.init) {
-                m.init(opts);
+                m.init(Garfielder.Cfg);
             };
         };
-        p.initVar(opts);
-        p.initEvents(opts);
+        p.initVar(Garfielder.Cfg);
+        p.initEvents(Garfielder.Cfg);
     };
     /**
     * 往当前页面JS逻辑注册一个功能模块.请在Init方法前调用

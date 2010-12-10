@@ -23,6 +23,7 @@ namespace Garfielder.Controllers
                     vm.FileList.Add(new VMXFileEdit
                     { 
                         Name=x.Name,
+                        Name1=x.Name.Substring(0,x.Name.Length-x.Extension.Length),
                         Title=x.Title,
                         CreatedAt=x.CreatedAt,
                         Extension=x.Extension,
@@ -70,68 +71,29 @@ namespace Garfielder.Controllers
         }
 
         [HttpGet]
-        public ActionResult AddMedia() {
+        public ActionResult AddMedia(bool flash=true) {
             var vm = CreateViewData<VMXFileEdit>();
+            vm.NoFlash = !flash;
             return View(vm);
         }
-        private string _uploadsFolder = HostingEnvironment.MapPath("~/Assets/Upload/");
+        /// <summary>
+        /// Normal upload via html form
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddMedia() {
+            var vm = XFile.SaveFile(this.Request);
+            vm.CurrentUser = this.CurrentUser;
+            return View(vm);
+        }
+
+        /// <summary>
+        /// Ajax upload via SWFUpload
+        /// </summary>
+        /// <returns></returns>
         public JsonResult SaveMedia() {
-            var vm = CreateViewData<VMXFileEdit>();
-
-            var pic = "Assets/Upload/{0}/{1}/{2}";
-
-            using (var db = new GarfielderEntities())
-            {
-                var dbm = db.XFiles.SingleOrDefault(x => x.Name ==vm.Name);
-                if (dbm == null)
-                {
-                    //save to disk
-                    vm.Name = Request.Files[0].FileName;
-
-                    var uid=Request.Params["UserID"];
-                    var uname = Request.Params["UserName"];
-                    var path=Path.Combine(_uploadsFolder,uname ,DateTime.Now.ToString("yyyyMMdd"));
-
-                    if (!Directory.Exists(path)) {
-                        Directory.CreateDirectory(path);
-                    }
-
-                    pic = string.Format(pic, uname, DateTime.Now.ToString("yyyyMMdd"),vm.Name);
-
-                    try
-                    {
-
-                        
-                        vm.Title = vm.Name;
-                        vm.Description = vm.Title;
-                        vm.Extension = vm.Name.Substring(vm.Name.LastIndexOf("."));
-                        vm.Id = Guid.NewGuid();
-                        vm.CreatedAt = DateTime.Now;
-
-                        Request.Files[0].SaveAs(path+"\\"+vm.Name);
-
-
-                        dbm = new XFile();
-                        dbm.Id = vm.Id;
-                        dbm.Name =pic;
-                        dbm.Title = vm.Title;
-                        dbm.Description = vm.Description;
-                        dbm.Extension = vm.Extension;
-                        dbm.CreatedAt = vm.CreatedAt;
-                        
-                        dbm.UserID = Guid.Parse(uid);
-                        db.CommandTimeout = 0;
-                        db.AddToXFiles(dbm);
-                        db.SaveChanges();
-                    }
-                    catch (Exception ex) { 
-                        
-                    }
-
-                };
-
-            };
-            return Json(new { pic=pic});
+            var vm = XFile.SaveFile(this.Request);
+            return Json(vm);
         }
 
     }

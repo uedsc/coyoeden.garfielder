@@ -6,3 +6,4 @@ glob:*.suo
 glob:*.DS_Store
 glob:src/Garfielder/packages.config
 glob:src/packages/*
+glob:Thumbs.db
