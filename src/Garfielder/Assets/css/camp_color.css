@@ -165,9 +165,9 @@ table.widefat span.spam a{
 
 #scTip
 {
-    background-color:#FFFBCC;
-    border-color:#E6DB55;
-    color:#555555;    
+	background-color:#FFFBCC;
+	border-color:#E6DB55;
+	color:#555555;    
 }
 
 #scMenus *{border-color:#E3E3E3;}
@@ -177,16 +177,16 @@ table.widefat span.spam a{
 #scMenus .now a,#scMenus .menu_hotSub .menu_sub_,#scMenus .menu_hotSub a{border-color:#aaa;}
 #scMenus .menu_hotSub a.menu_hotSub
 {
-    background:url("../img/menu-bits.gif") repeat-x scroll left top #E0E0E0;
-    border:1px solid #AAAAAA;
-    color:#000000;
+	background:url("../img/menu-bits.gif") repeat-x scroll left top #E0E0E0;
+	border:1px solid #AAAAAA;
+	color:#000000;
 }
 
 .menu_open .menu_first{-moz-border-radius-bottomleft:0;-moz-border-radius-bottomright:0;}
 .menu_first a.menu_first{-moz-border-radius-topleft:6px;-moz-border-radius-topright:6px;}
 a.menu_first
 {
-    background:url("../img/menu-bits.gif") repeat-x scroll left -379px #F1F1F1;
+	background:url("../img/menu-bits.gif") repeat-x scroll left -379px #F1F1F1;
 }
 .menu_hasSub:hover .menu_trigger,.menu_open .menu_trigger{background:url("../img/menu-bits.gif") no-repeat left -109px transparent;}
 .menu_hotSub:hover .menu_trigger,.menu_hotSub.menu_open .menu_trigger{background-position:left -207px;}
@@ -197,21 +197,21 @@ a.menu_first
 .menu_sub_{background:#fff;}
 .menu_sub_ li.now,.menu_sub_ li.now a
 {
-    background-color:#F5F5F5;
-    background-image:none;
-    color:#333333;
+	background-color:#F5F5F5;
+	background-image:none;
+	color:#333333;
 }
 .menu_sub_ a
 {
-    background:url("../img/menu-bits.gif") no-repeat scroll 0 -310px #FFFFFF;
+	background:url("../img/menu-bits.gif") no-repeat scroll 0 -310px #FFFFFF;
 }
 .menu_hotSub .menu_sub_ a{
 	background:url("../img/menu-dark.gif") no-repeat left bottom;
 }
 .menu_sub_ a:hover
 {
-    background-color:#eaf2fa;
-    color:#333;
+	background-color:#eaf2fa;
+	color:#333;
 }
 .menu_sub_ li.now a{
 	background:url("../img/menu-bits.gif") no-repeat scroll 0 -289px transparent;
@@ -461,3 +461,21 @@ a.menu_first
 /* =====form validation style========= */
 .form-wrap .input-validation-error,.error{background:#FFEFEF;}
 .form-wrap .field-validation-error,.error{color:#FF0000;}
+
+/* =====uploadmedia========= */
+#media-upload-header
+{
+	background-color: #f9f9f9;
+	border-bottom-color: #dfdfdf;
+}
+#sideMenu a.now
+{
+	background-color: #FFFFFF;
+	border-color: #DFDFDF #DFDFDF #FFFFFF;
+	color: #D54E21;    
+}
+#sideMenu a
+{
+	background-color: #F9F9F9;
+	border-color: #F9F9F9 #F9F9F9 #DFDFDF;    
+}

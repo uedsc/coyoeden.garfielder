@@ -1,14 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/camp.Master" Inherits="System.Web.Mvc.ViewPage<Garfielder.ViewModels.VMCampTopicEdit>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    EditTopic
+	EditTopic
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2 id="scSubhead">Add a new Topic</h2>
-    <% using (Html.BeginForm()) {%>
-    <div id="ste_root" class="metabox rsb clear">
+	<h2 id="scSubhead">Add a new Topic</h2>
+	<% using (Html.BeginForm()) {%>
+	<div id="ste_root" class="metabox rsb clear">
 		<!--#ste_sidebar-->
 		<div id="ste_sidebar" class="rsb_sb">
 			<div id="ste_sidebar_">
@@ -91,7 +91,7 @@
 						<a id="edtbtn_preview" class="edtbtn_on bd0" href="#">Preview</a>
 						<div id="edtbtn_others">
 							<span>Upload / Insert</span>
-							<a id="edtbtn_img" class="thickbox"><img alt="" src="<%:Url.Img("media-button-image.gif")%>"/></a>
+							<a id="edtbtn_img" class="thickbox" href="javascript://" rel="<%:Url.Action("UploadMedia","Camp",null) %>"><img alt="" src="<%:Url.Img("media-button-image.gif")%>"/></a>
 						</div>
 					</div>
 					<div id="edt_main" class="bd0">
@@ -101,22 +101,31 @@
 			</div>
 		</div><!--#ste_main-->
 	</div><!--#ste_root-->	
-    <% } %>
+	<% } %>
+
+	<!--overlay ui-->
+	<div id="ovl-ifr-wrap" class="ovl-apple">
+		<a class="ovl-close"></a>
+		<div class="ovl-ct">
+			<div id="ovl-ing" class="ovl-ing"><img src="<%:Url.Img("ovl-ing.gif") %>" alt="Loading..." /></div>
+			<iframe id="ovl-ifr" class="ovl-ifr" frameborder="0" scrolling="no" style="display:none;height:100%;width:100%;"></iframe>
+		</div>
+	</div>
+	<!--/overlay ui-->
 
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="cphHead" runat="server">
-    <%this.Model.PageFlag = "topic_add"; this.Context.Request.MapPath("/");%>
+	<link rel="stylesheet" type="text/css" href="<%:Url.CSS("overlay-apple") %>"></link> 
+	<%this.Model.PageFlag = "topic_add"; this.Context.Request.MapPath("/");%> 
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
 	<!--scripts-->
+	<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>
 	<script type="text/javascript" src="<%:Url.JS("jquery.vsUtils") %>"></script>
+	<script type="text/javascript" src="<%:Url.JS("jquery.vPreload")%>"></script>
 	<script type="text/javascript" src="<%:Url.JS("tiny_mce/jquery.tinymce") %>"></script>
+	<script type="text/javascript" src="<%:Url.JS("Garfielder.IFModal") %>"></script>
 	<script type="text/javascript" src="<%:Url.JS("Admin.TopicAdd") %>"></script>
-	<script type="text/javascript">
-	//<![CDATA[
-	    this$.Init({});
-	//]]>
-	</script>
 	<!--/scripts-->		
 </asp:Content>

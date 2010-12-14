@@ -56,14 +56,14 @@ namespace Garfielder.ViewModels
         public string MetaDescription { get; set; }
         #endregion
         /// <summary>
-        /// Given a function fun,if it returns true,use the trueStr,otherwise use the falseStr
+        /// Given a factor,if it is true,use the trueStr,otherwise use the falseStr
         /// </summary>
         /// <param name="fun"></param>
         /// <param name="trueStr"></param>
         /// <param name="falseStr"></param>
         /// <returns></returns>
-        public string AssertStr(Func<bool> fun, string trueStr, string falseStr="") {
-            if (fun()) {
+        public string Str(bool factor, string trueStr, string falseStr="") {
+            if (factor) {
                 return trueStr;
             };
             return falseStr;

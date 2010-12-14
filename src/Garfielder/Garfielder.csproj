@@ -100,6 +100,7 @@
     <Compile Include="ViewModels\VMCampTopicList.cs" />
     <Compile Include="ViewModels\VMHome.cs" />
     <Compile Include="ViewModels\VMTopic.cs" />
+    <Compile Include="ViewModels\VMUploadMedia.cs" />
     <Compile Include="ViewModels\VMUserEdit.cs" />
     <Compile Include="ViewModels\VMUserList.cs" />
     <Compile Include="ViewModels\VMXFileEdit.cs" />
@@ -116,6 +117,7 @@
     <Content Include="Assets\css\detail.css" />
     <Content Include="Assets\css\editor.css" />
     <Content Include="Assets\css\fonts-min.css" />
+    <Content Include="Assets\css\overlay-apple.css" />
     <Content Include="Assets\img\avatar-default.jpg" />
     <Content Include="Assets\img\bg.jpg" />
     <Content Include="Assets\img\blank.gif" />
@@ -132,6 +134,8 @@
     <Content Include="Assets\img\fav-arrow.gif" />
     <Content Include="Assets\img\gray-grad.png" />
     <Content Include="Assets\img\icons32.png" />
+    <Content Include="Assets\img\overlay-close.png" />
+    <Content Include="Assets\img\ovl-ing.gif" />
     <Content Include="Assets\img\logo.png" />
     <Content Include="Assets\img\logo_night.png" />
     <Content Include="Assets\img\logo_overnight.png" />
@@ -155,10 +159,12 @@
     <Content Include="Assets\js\Admin.SWFUploadController.js" />
     <Content Include="Assets\js\Admin.TopicAdd.js" />
     <Content Include="Assets\js\Admin.Tag.js" />
+    <Content Include="Assets\js\Garfielder.IFModal.js" />
     <Content Include="Assets\js\Garfielder.js" />
     <Content Include="Assets\js\jquery-ui-1.8.6.effects.min.js" />
     <Content Include="Assets\js\jquery.datalink.js" />
     <Content Include="Assets\js\jquery.json-2.2.min.js" />
+    <Content Include="Assets\js\jquery.vPreload.js" />
     <Content Include="Assets\js\jquery.vsUtils.js" />
     <Content Include="Assets\js\swfupload\swfupload.cookies.js" />
     <Content Include="Assets\js\swfupload\swfupload.js" />
@@ -438,6 +444,10 @@
     <Content Include="Views\Camp\ListTopic.aspx" />
     <Content Include="Views\Camp\ListUser.aspx" />
     <Content Include="Views\Camp\SelectGroup.ascx" />
+    <Content Include="Views\Camp\UM_FromLib.ascx" />
+    <Content Include="Views\Camp\UM_FromURL.ascx" />
+    <Content Include="Views\Camp\UploadMedia.aspx" />
+    <Content Include="Views\Camp\UploadUI.ascx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -477,11 +487,17 @@
       <Project>{DAB56064-5CFA-42DE-A2A5-0D939A952C75}</Project>
       <Name>Garfielder.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Garfielder.Web\Garfielder.Web.csproj">
+      <Project>{309BBAAB-B184-4E61-86EA-A80BDEB05F8C}</Project>
+      <Name>Garfielder.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Shared\nolayout.Master" />
+  </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\Garfielder.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

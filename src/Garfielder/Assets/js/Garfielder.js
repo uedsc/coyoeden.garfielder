@@ -56,12 +56,14 @@ var Garfielder = (function ($) {
         } else {
             Garfielder.Cfg = opts;
         };
+        p.initVar(Garfielder.Cfg);
+        //init modules
         for (var m in p._modules) {
             if ((m = p._modules[m]) && m.init) {
                 m.init(Garfielder.Cfg);
             };
         };
-        p.initVar(Garfielder.Cfg);
+        //init events
         p.initEvents(Garfielder.Cfg);
     };
     /**

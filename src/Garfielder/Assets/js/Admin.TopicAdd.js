@@ -1,6 +1,48 @@
-var this$ = (function ($) {
-    var p = {}, pub = {};
-    p.loadMCE = function () {
+Garfielder.AddModule("TopicAdd", {
+    init: function (opts) {
+        this.opts = opts;
+        var p = {};
+        p.initTabs = function () {
+            var hd = $("#group-tabs li"), bd = $("#catSelector .slimtab_bd");
+            $("#group-tabs a").click(function (e) {
+                var $i = $(this), $li = $i.parent();
+                if ($li.hasClass("slimtab_on")) return false;
+                bd.hide().filter($i.attr("href")).fadeIn();
+                hd.removeClass();
+                $li.addClass("slimtab_on");
+                return false;
+            });
+        };
+        p.initPreInput = function () {
+            $("#topicTitle").preInput({ val: p._lang.lblTitle });
+            $("#newtag-topic").preInput({ val: p._lang.lblTag });
+        };
+        p.initAddMedia = function () {
+            $("#edtbtn_img").click(function () {
+                IFModal.Show(this.rel, {minH:420});
+            });
+        };
+
+        //private area
+        p.initVar = function () {
+            p._lang = opts.lang || {
+                lblTitle: 'Title goes here...',
+                lblTag: 'Add New Tag'
+            };
+        };
+        p.initEvents = function () {
+            p.initTabs();
+            p.initPreInput();
+            p.initAddMedia();
+        };
+
+        //init
+        p.initVar();
+        p.initEvents();
+        //preload img
+        $.preload([Garfielder.SiteRoot + 'assets/img/overlay-white.png', Garfielder.SiteRoot + 'assets/img/overlay-close.png']);
+    },
+    onLoad: function () {
         $("#edt_hoder").tinymce({
             script_url: Garfielder.SiteRoot + 'assets/js/tiny_mce/tiny_mce.js',
             theme: 'advanced',
@@ -16,49 +58,9 @@ var this$ = (function ($) {
             theme_advanced_toolbar_align: "left",
             theme_advanced_statusbar_location: "bottom",
             theme_advanced_resizing: true,
-            content_css:Garfielder.SiteRoot+'assets/css/editor.css',
+            content_css: Garfielder.SiteRoot + 'assets/css/editor.css',
             theme_advanced_resize_horizontal: "",
             dialog_type: "modal"
         });
-    };
-    p.initTabs = function () {
-        var hd = $("#group-tabs li"), bd = $("#catSelector .slimtab_bd");
-        $("#group-tabs a").click(function (e) {
-            var $i = $(this), $li = $i.parent();
-            if ($li.hasClass("slimtab_on")) return false;
-            bd.hide().filter($i.attr("href")).fadeIn();
-            hd.removeClass();
-            $li.addClass("slimtab_on");
-            return false;
-        });
-    };
-    p.initPreInput = function () {
-        $("#topicTitle").preInput({ val: p._lang.lblTitle });
-        $("#newtag-topic").preInput({ val: p._lang.lblTag });
-    };
-    //private area
-    p.initVar = function (opts) {
-        p._lang = opts.lang || {
-            lblTitle: 'Title goes here...',
-            lblTag: 'Add New Tag'
-        };
-    };
-    p.initEvents = function (opts) {
-        p.initTabs();
-        p.initPreInput();
-    };
-    //public area
-    pub.Init = function (opts) {
-        Garfielder.AddModule("Admin.TopicAdd",{
-            init: function (opts1) {
-                opts = $.extend(opts1, opts || {});
-                p.initVar(opts);
-                p.initEvents(opts);
-            },
-            onLoad: function () {
-                p.loadMCE();
-            }
-        });
-    };
-    return pub;
-})(jQuery); 
+    } //onLoad
+}); 

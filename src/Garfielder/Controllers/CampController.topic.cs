@@ -54,7 +54,7 @@ namespace Garfielder.Controllers
             };
             return View(vm);
         }
-        [HttpPost,ValidateInput(false)]
+        [HttpPost/*,ValidateInput(false)*/]
         public ActionResult EditTopic(VMCampTopicEdit obj)
         {
             if (this.ModelState.IsValid)

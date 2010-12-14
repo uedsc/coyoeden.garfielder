@@ -33,7 +33,7 @@
                 <option value="201008">August 2010</option>
                 <option value="201007">July 2010</option>
             </select>
-            <input type="submit" class="btn" value="Filter" id="btnFilter">
+            <input type="submit" class="btn" value="Filter" id="btnFilter" />
         </div>
     </div>
 	<div class="row">

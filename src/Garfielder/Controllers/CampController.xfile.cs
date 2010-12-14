@@ -86,6 +86,17 @@ namespace Garfielder.Controllers
             vm.CurrentUser = this.CurrentUser;
             return View(vm);
         }
+        [HttpGet]
+        public ActionResult UploadMedia(string RelId="",string Src="local",bool flash=true) {
+            var vm = CreateViewData<VMUploadMedia>();
+            vm.NoFlash = !flash;
+            var rel=Guid.Empty;
+            Guid.TryParse(RelId,out rel);
+            vm.RelId = rel;
+            vm.Src = Src;
+            vm.FileList = new List<VMXFileEdit>();
+            return View(vm);
+        }
 
         /// <summary>
         /// Ajax upload via SWFUpload

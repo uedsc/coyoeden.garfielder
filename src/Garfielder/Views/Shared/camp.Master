@@ -3,18 +3,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
-    <!--css-->
-    <link rel="stylesheet" type="text/css" href="/Assets/css/reset-min.css" />
-    <link rel="stylesheet" type="text/css" href="/Assets/css/fonts-min.css" />
-    <link rel="stylesheet" type="text/css" href="/Assets/css/camp_font.css" />
-    <link rel="stylesheet" type="text/css" href="/Assets/css/camp_color.css" />
-    <link rel="stylesheet" type="text/css" href="/Assets/css/camp.css" />
-    <!--/css-->
-    <!--js-->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <!--/js-->
-    <asp:ContentPlaceHolder ID="cphHead" runat="server" />
+	<title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+	<!--css-->
+	<link rel="stylesheet" type="text/css" href="/Assets/css/reset-min.css" />
+	<link rel="stylesheet" type="text/css" href="/Assets/css/fonts-min.css" />
+	<link rel="stylesheet" type="text/css" href="/Assets/css/camp_font.css" />
+	<link rel="stylesheet" type="text/css" href="/Assets/css/camp_color.css" />
+	<link rel="stylesheet" type="text/css" href="/Assets/css/camp.css" />
+	<!--/css-->
+	<!--js-->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<!--/js-->
+	<asp:ContentPlaceHolder ID="cphHead" runat="server" />
 </head>
 <body class="<%:this.Model.PageFlag %>">
 	<!--#header-->
@@ -43,34 +43,34 @@
 	</div>
 	<!--#main-->
 	<div id="scMain" class="clear">
-        <!--#sidebar-->
-        <%Html.RenderPartial("CampMenu"); %>
-        <!--/sidebar-->
+		<!--#sidebar-->
+		<%Html.RenderPartial("CampMenu"); %>
+		<!--/sidebar-->
 		<!--#viewport-->
 		<div id="scViewport">
 			<div id="scTip">
-                Today is <span class="year"><%:DateTime.Now.Year %></span>-<span class="month"><%:DateTime.Today.ToString("MM") %></span>-<span class="date"><%:DateTime.Today.ToString("dd") %></span>, 
-                totally <a href="#"><span class="cnt_topic">10</span></a> new topics found in <a href="#"><span class="cnt_group">5</span></a> groups.
+				Today is <span class="year"><%:DateTime.Now.Year %></span>-<span class="month"><%:DateTime.Today.ToString("MM") %></span>-<span class="date"><%:DateTime.Today.ToString("dd") %></span>, 
+				totally <a href="#"><span class="cnt_topic">10</span></a> new topics found in <a href="#"><span class="cnt_group">5</span></a> groups.
 			</div>
-            <div id="scViewport_" class="clear">
-                <div class="icon32"></div>
-                <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
-            </div>
-        </div>
-    </div>
-    <!--/#scMain-->
+			<div id="scViewport_" class="clear">
+				<div class="icon32"></div>
+				<asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+			</div>
+		</div>
+	</div>
+	<!--/#scMain-->
 	<!--#scfoot-->
 	<div id="scFoot" class="bd0 clear">
 		<div class="r">Version <%:DateTime.Now.ToString("yyyy.MM.dd") %></div>
 	</div>
-    <!--common js-->
-    <script type="text/javascript" src="<%:Url.JS("Garfielder") %>"></script> 
-    <!--/common js--> 
-    <asp:ContentPlaceHolder ID="cphFoot" runat="server"></asp:ContentPlaceHolder>
-    <script type="text/javascript">
-    //<![CDATA[
-            Garfielder.Init({ siteRoot: '<%:Url.Home() %>' });
-    //]]>
-    </script>
+	<!--common js-->
+	<script type="text/javascript" src="<%:Url.JS("Garfielder") %>"></script> 
+	<!--/common js--> 
+	<asp:ContentPlaceHolder ID="cphFoot" runat="server"></asp:ContentPlaceHolder>
+	<script type="text/javascript">
+	//<![CDATA[
+			Garfielder.Init({ siteRoot: '<%:Url.Home() %>' });
+	//]]>
+	</script>
 </body>
 </html>

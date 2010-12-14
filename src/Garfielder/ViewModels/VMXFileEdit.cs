@@ -20,5 +20,6 @@ namespace Garfielder.ViewModels
         /// Name without extension
         /// </summary>
         public string Name1 { get; set; }
+
     }
 }
