@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/camp.Master" Inherits="System.Web.Mvc.ViewPage<Garfielder.ViewModels.VMCampTopicEdit>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/camp.Master" Inherits="System.Web.Mvc.ViewPage<VMCampTopicShow>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	EditTopic
@@ -24,28 +24,7 @@
 				<div id="boxGroup" class="widget">
 					<div class="w_tgl" title="click to toggle"></div>
 					<h3 class="w_hd"><span>Groups</span></h3>
-					<div class="w_ct">
-						<div id="catSelector">
-							<ul id="group-tabs" class="slimtab">
-								<li class="slimtab_on"><a href="#group-all">All groups</a></li>
-								<li class=""><a href="#group-pop">Most used</a></li>
-							</ul>
-							<div id="group-all" class="slimtab_bd">
-								<ul id="cbxlist-cat-all" class="cbxlist">
-									<li><input id="cat-1" type="checkbox" value="1"/><label for="cat-1">Group1</label></li>
-									<li><input id="cat-2" type="checkbox" value="2"/><label for="cat-2">Group2</label></li>
-									<li><input id="cat-3" type="checkbox" value="3"/><label for="cat-3">Group3</label></li>
-								</ul>
-							</div>
-							<div id="group-pop" class="slimtab_bd hide">
-								<ul id="cbxlist-cat-pop" class="cbxlist">
-									<li><input id="cat-3" type="checkbox" value="3"/><label for="cat-3">Group3</label></li>
-									<li><input id="cat-2" type="checkbox" value="2"/><label for="cat-2">Group2</label></li>
-									<li><input id="cat-1" type="checkbox" value="1"/><label for="cat-1">Group1</label></li>
-								</ul>												
-							</div>
-						</div>
-					</div>
+					<div class="w_ct"><%Html.RenderPartial("ET_GroupSelector"); %></div>
 				</div>
 				<!--/#boxGroup-->
 				<!--boxTag-->
@@ -57,13 +36,29 @@
 							<div id="tagAdder_">
 								<p>
 									<input type="text" value="" size="16" class="newtag form-input-tip" name="newtag_topic" id="newtag-topic"/>
-									<input type="button" tabindex="3" value="Add" class="btn btnAddTag"/>
+									<input type="button" tabindex="3" value="Add" class="btn btnAddTag" id="btnAddTag" />
 								</p>														
 							</div>
 							<p class="howto">Separate tags with commas</p>
+							<p id="tagsAdded" style="display:none"></p>
+							<p id="tagTip" class="error" style="display:none"></p>
 						</div>
 						<p id="tagSelector">
-							<a href="#">Choose from most used tags</a>
+							<a href="javascript://" id="btnTagSelect">Choose from most used tags</a>
+							<p class="the-tagcloud" id="tagcloud-topic">
+							<%if (Model.TagsAll == null || Model.TagsAll.Count == 0)
+							{ %>
+							 No tags found!
+							<%}
+							else
+							{%>
+							<%var tags=Model.TagsAllHot.Take(10).ToList(); %>
+							 <%for (var i = 0; i < tags.Count; i++)
+							   {%>
+							   <a class="tagitem" href="javascript://" rel="<%:tags[i].Id %>"><%:tags[i].Name %></a>
+							 <%} %>   
+							<%} %>
+							</p>
 						</p>
 					</div>
 				</div>
@@ -117,7 +112,7 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="cphHead" runat="server">
 	<link rel="stylesheet" type="text/css" href="<%:Url.CSS("overlay-apple") %>"></link> 
-	<%this.Model.PageFlag = "topic_add"; this.Context.Request.MapPath("/");%> 
+	<%this.Model.PageFlag = "topic_add";%> 
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
 	<!--scripts-->
@@ -127,5 +122,6 @@
 	<script type="text/javascript" src="<%:Url.JS("tiny_mce/jquery.tinymce") %>"></script>
 	<script type="text/javascript" src="<%:Url.JS("Garfielder.IFModal") %>"></script>
 	<script type="text/javascript" src="<%:Url.JS("Admin.TopicAdd") %>"></script>
+	<script type="text/javascript" src="<%:Url.JS("Admin.TopicAdd_Tag") %>"></script>
 	<!--/scripts-->		
 </asp:Content>

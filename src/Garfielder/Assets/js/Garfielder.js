@@ -86,6 +86,61 @@ var Garfielder = (function ($) {
     pub.GetModule = function (key) {
         return p._modules[key];
     };
+    /**
+    * 获取指定长度的随机字符串。注意：仅仅由数字和字母组成
+    * @param {Object} size 随机字符串的长度
+    * @param {Boolean} plusTimeStamp 是否加上当前时间戳
+    */
+    pub.RdStr = function (size, plusTimeStamp) {
+        var size0 = 8;
+        var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+        size = size || size0; size = size < 1 ? size0 : size; size = size > chars.length ? size0 : size;
+        var s = '';
+        for (var i = 0; i < size; i++) {
+            var rnum = Math.floor(Math.random() * chars.length);
+            s += chars.substring(rnum, rnum + 1);
+        };
+        if (plusTimeStamp) {
+            s += new Date().getTime();
+        };
+        return s;
+    };
+    /**
+    * 执行指定html模板
+    *
+    */
+    pub.EvalTpl = function (str, data) {
+    ///<summary>
+    ///simple js template parser
+    ///E.G,IF:str="<a href=/u/%uid%>%username%</a>"
+    ///data={uid:1,username:'xiami'}
+    ///Then:str = "<a href=/u/1>xiami</a>"
+    ///</summary>
+        var result;
+        var patt = new RegExp("%([a-zA-z0-9]+)%");
+        while ((result = patt.exec(str)) != null) {
+            var v = data[result[1]] || '';
+            str = str.replace(new RegExp(result[0], "g"), v);
+        };
+        return str;
+    };
+    /**
+    * 截断字符串
+    * @param {String} str		 待截断的字符串
+    * @param {int} size		   截断长,注:1个中文字符长度为2
+    * @param {String} tailStr	截断后加在末尾的小尾巴,默认"..."
+    */
+    pub.Tail = function (str, size, tailStr) {
+        str = StringUtils.trim(str);
+        var cLen = StringUtils.charLength(str);
+        size = size <= 0 ? cLen : size;
+        if (size >= cLen) return str;
+        while (StringUtils.charLength(str) > size) {
+            str = str.substr(0, str.length - 1);
+        }
+        str += (tailStr || "...");
+        return str;
+    };
     /*/public area*/
     return pub;
 })(jQuery); 

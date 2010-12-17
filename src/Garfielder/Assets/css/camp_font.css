@@ -42,6 +42,6 @@ strong,a.now,.widefat th{font-weight:bold;}
 .listView .acts1 span.cnt{font-weight:normal;}
 /* ============= topic_add.html =============== */
 .bigipt{font-size:1.7em;}
-
+#tagcloud-topic{font-size:0.85em;}
 /* --========form validation styles==========-- */
 .form-wrap .field-validation-error{font-size:0.85em;}

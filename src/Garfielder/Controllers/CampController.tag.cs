@@ -43,18 +43,24 @@ namespace Garfielder.Controllers
                 var dbm = new Tag();
                 dbm.Id = obj.Id;
                 dbm.Name = obj.Name;
-                dbm.Slug = obj.Slug;
+                
                 dbm.CreatedAt = DateTime.Now;
                 //TODO:
                 dbm.CreatedBy = "Sys";
                 using (var db = new GarfielderEntities())
                 {
+                    dbm.Slug =Tag.CheckSlug(db,obj.Slug);
                     db.CommandTimeout = 0;
                     db.AddToTags(dbm);
                     db.SaveChanges();
                 };
             };
             return Json(obj);
+        }
+        [HttpGet]
+        public JsonResult CheckTag(string tag) {
+            var vm = Tag.AddTag(tag);
+            return Json(vm);
         }
     }
 }

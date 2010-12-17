@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Garfielder.Models;
 
 namespace Garfielder.ViewModels
 {
@@ -17,7 +18,11 @@ namespace Garfielder.ViewModels
         public string UserName { get; set; }
         public DateTime CreateAt { get; set; }
         public int CntComment { get; set; }
-        public string Groups { get; set; }
-        public string Tags { get; set; }
+        public string GroupsTxt { get; set; }
+        public string TagsTxt { get; set; }
+
+        /*新建主题时需要的属性*/
+        public List<Guid> GroupID { get; set; }
+        public List<Guid> TagID { get; set; }
     }
 }

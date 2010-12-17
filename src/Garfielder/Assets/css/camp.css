@@ -485,6 +485,19 @@ table.fixed {
 #boxTag p{margin:6px 6px 8px;}
 #tagAdder p.howto{margin:0 0 6px 8px;}
 #newtag-topic{width:180px;position:relative;background:transparent;}
+#tagcloud-topic
+{
+	-moz-border-radius: 6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border-style: solid;
+	border-width: 1px;
+	line-height: 1.8em;
+	margin: 5px 0 10px;
+	padding: 8px;
+	word-spacing: 3px;
+	display:none;
+}
 
 /* media_add.html */
 .upload-ui{margin-top:0.5em;}

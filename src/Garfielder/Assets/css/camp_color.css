@@ -457,6 +457,7 @@ a.menu_first
 	color:#222222;
 	text-shadow:0 1px 0 #FFFFFF;
 }
+#tagcloud-topic{border-color:#ddd;}
 
 /* =====form validation style========= */
 .form-wrap .input-validation-error,.error{background:#FFEFEF;}

@@ -15,22 +15,8 @@ namespace Garfielder.Controllers
         {
             var vm = CreateViewData<VMGroupList>();
             //load list data
-            using (var db = new GarfielderEntities()) {
-                var items = db.Groups.ToList();
-                vm.GroupList=new List<VMGroupEdit>();
-                items.ForEach(x => {
-                    vm.GroupList.Add(new VMGroupEdit { 
-                        Name=x.Name,
-                        Slug=x.Slug,
-                        Id=x.Id,
-                        Level=x.Level,
-                        Description=x.Description,
-                        ParentID=x.ParentID,
-                        ParentName=x.Parent==null?"":x.Parent.Name,
-                        CntTopic=x.Topics.Count
-                    });
-                });
-            }
+            vm.GroupList = Group.ListAllData();
+
             return View(vm);
         }
         [HttpPost]

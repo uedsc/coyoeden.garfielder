@@ -88,8 +88,10 @@
     </Compile>
     <Compile Include="Models\Group.biz.cs" />
     <Compile Include="Models\Tag.biz.cs" />
+    <Compile Include="Models\Topic.biz.cs" />
     <Compile Include="Models\XFile.biz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\VMCampTopicShow.cs" />
     <Compile Include="ViewModels\VMTagList.cs" />
     <Compile Include="ViewModels\VMGroupList.cs" />
     <Compile Include="ViewModels\VMTagEdit.cs" />
@@ -159,6 +161,7 @@
     <Content Include="Assets\js\Admin.SWFUploadController.js" />
     <Content Include="Assets\js\Admin.TopicAdd.js" />
     <Content Include="Assets\js\Admin.Tag.js" />
+    <Content Include="Assets\js\Admin.TopicAdd_Tag.js" />
     <Content Include="Assets\js\Garfielder.IFModal.js" />
     <Content Include="Assets\js\Garfielder.js" />
     <Content Include="Assets\js\jquery-ui-1.8.6.effects.min.js" />
@@ -437,6 +440,7 @@
     <Content Include="Views\Camp\CampMenu.ascx" />
     <Content Include="Views\Camp\EditTopic.aspx" />
     <Content Include="Views\Camp\EditUser.aspx" />
+    <Content Include="Views\Camp\ET_GroupSelector.ascx" />
     <Content Include="Views\Camp\Index.aspx" />
     <Content Include="Views\Camp\ListFile.aspx" />
     <Content Include="Views\Camp\ListGroup.aspx" />

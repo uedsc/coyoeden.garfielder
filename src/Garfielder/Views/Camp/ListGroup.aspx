@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/camp.Master" Inherits="System.Web.Mvc.ViewPage<VMGroupList>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Group List
+	Group List
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -14,38 +14,38 @@
 </div>
 <div id="catAdmin-wrap" class="multiColBox clear">
 	<div id="catAdmin-wrap_L" class="l mcb_L">
-        <%using (Ajax.BeginForm("EditGroup", null, new AjaxOptions
-          {
-              HttpMethod = "Post",
-              OnSuccess = "this$.OnEdit"
-          }, new{ id="frmEdit" }))
-          { %>
+		<%using (Ajax.BeginForm("EditGroup", null, new AjaxOptions
+		  {
+			  HttpMethod = "Post",
+			  OnSuccess = "this$.OnEdit"
+		  }, new{ id="frmEdit" }))
+		  { %>
 		<div id="catAdmin-detail" class="form-wrap">
 			<h3>Add New Group</h3>
 			<div class="form-field">	
-                <label for="gr-name">Name<%:Html.ValidationMessageFor(x => x.Name)%></label>
-                <%:Html.TextBoxFor(x => x.Name, new { id = "gr-name", size = 40 })%>
+				<label for="gr-name">Name<%:Html.ValidationMessageFor(x => x.Name)%></label>
+				<%:Html.TextBoxFor(x => x.Name, new { id = "gr-name", size = 40 })%>
 				<p>The name is how it appears on your site.</p>
 			</div>	
 			<div class="form-field">
 				<label for="gr-slug">Slug<%:Html.ValidationMessageFor(x => x.Slug)%></label>
-                <%:Html.TextBoxFor(x=>x.Slug,new{id="gr-slug",size=40}) %>
+				<%:Html.TextBoxFor(x=>x.Slug,new{id="gr-slug",size=40}) %>
 				<p>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</p>
 			</div>	
 			<div class="form-field">
 				<label for="ddlGroup">Parent</label>
-                <%Html.RenderPartial("SelectGroup", new { items = Model.GroupList, name = "ParentID", level = 3 }); %>
+				<%Html.RenderPartial("SelectGroup"); %>
 				<p>Groups, unlike tags, can have a hierarchy. You might have a Jazz group, and under that have children categories for Bebop and Big Band. Totally optional.</p>
-			    <input type="hidden" id="gr-level" name="Level" value="0" />
-            </div>
+				<input type="hidden" id="gr-level" name="Level" value="0" />
+			</div>
 			<div class="form-field">
 				<label for="grDesc">Description<%:Html.ValidationMessageFor(x => x.Description)%></label>
-                <%:Html.TextAreaFor(x => x.Description, new { id = "grDesc", cols = 40, rows = 5 })%>
+				<%:Html.TextAreaFor(x => x.Description, new { id = "grDesc", cols = 40, rows = 5 })%>
 				<p>The description is not prominent by default; however, some themes may show it.</p>
 			</div>
 			<p class="submit"><input type="submit" value="Add New Group" id="gr-submit" name="grsubmit" class="button"/></p>																											
 		</div><!--detail-->
-        <%} %>
+		<%} %>
 	</div>
 	<div id="catAdmin-wrap_R" class="r mcb_R">
 		<div id="catAdmin-list">
@@ -79,27 +79,27 @@
 						</tr>
 					</tfoot>
 					<tbody>
-                        <% var item=default(VMGroupEdit); %>
-                        <% for (int i = 0; i < Model.GroupList.Count; i++)
-                           { %>
-                           <%item = Model.GroupList[i]; %>
-                           <tr id="g-<%:item.Id %>" class="<%:i%2==0?"alt":"" %>">
-                                <th class="check-column" scope="row"> 
-								    <input type="checkbox" value="<%:item.Id %>" name="delete_cats[]"/>
-							    </th>
-							    <td class="name column-name">
-								    <strong><a title="Edit [<%:item.Name %>] " href="javascript://" class="row-title"><%:item.Name %></a></strong>
-								    <div class="row-actions">
-									    <span class="edit"><a href="javascript://">Edit</a> | </span>
-									    <span class="inline"><a class="editinline" href="javascript://">Quick&nbsp;Edit</a> | </span>
-									    <span class="delete"><a href="javascript://" class="delete-tag">Delete</a></span>
-								    </div>
-							    </td>
-							    <td class="desc column-desc"><%:item.Description %></td>
-							    <td class="slug column-slug"><%:item.Slug %></td>
-							    <td class="topics column-topics num"><a href="javascript://"><%:item.CntTopic %></a></td>
-                           </tr>
-                        <%} %>											
+						<% var item=default(VMGroupEdit); %>
+						<% for (int i = 0; i < Model.GroupList.Count; i++)
+						   { %>
+						   <%item = Model.GroupList[i]; %>
+						   <tr id="g-<%:item.Id %>" class="<%:i%2==0?"alt":"" %>">
+								<th class="check-column" scope="row"> 
+									<input type="checkbox" value="<%:item.Id %>" name="delete_cats[]"/>
+								</th>
+								<td class="name column-name">
+									<strong><a title="Edit [<%:item.Name %>] " href="javascript://" class="row-title"><%:item.Name %></a></strong>
+									<div class="row-actions">
+										<span class="edit"><a href="javascript://">Edit</a> | </span>
+										<span class="inline"><a class="editinline" href="javascript://">Quick&nbsp;Edit</a> | </span>
+										<span class="delete"><a href="javascript://" class="delete-tag">Delete</a></span>
+									</div>
+								</td>
+								<td class="desc column-desc"><%:item.Description %></td>
+								<td class="slug column-slug"><%:item.Slug %></td>
+								<td class="topics column-topics num"><a href="javascript://"><%:item.CntTopic %></a></td>
+						   </tr>
+						<%} %>											
 					</tbody>
 				</table>									
 			</div>
@@ -130,22 +130,22 @@
 <script type="text/javascript" src="<%:Url.JS("jquery.datalink") %>"></script>
 <script type="text/javascript" src="<%:Url.JS("jquery-ui-1.8.6.effects.min") %>"></script>
 <script id="tpl_group" type="text/x-jquery-tmpl">
-    <tr id="g-${Id}">
-        <th class="check-column" scope="row"> 
-		    <input type="checkbox" value="${Id}" name="delete_cats[]"/>
-	    </th>
-	    <td class="name column-name">
-		    <strong><a title="Edit [${Name}] " href="javascript://" class="row-title">${Name}</a></strong>
-		    <div class="row-actions">
-			    <span class="edit"><a href="javascript://">Edit</a> | </span>
-			    <span class="inline"><a class="editinline" href="javascript://">Quick&nbsp;Edit</a> | </span>
-			    <span class="delete"><a href="javascript://" class="delete-tag">Delete</a></span>
-		    </div>
-	    </td>
-	    <td class="desc column-desc">${Description}</td>
-	    <td class="slug column-slug">${Slug}</td>
-	    <td class="topics column-topics num"><a href="javascript://">0</a></td>
-    </tr>
+	<tr id="g-${Id}">
+		<th class="check-column" scope="row"> 
+			<input type="checkbox" value="${Id}" name="delete_cats[]"/>
+		</th>
+		<td class="name column-name">
+			<strong><a title="Edit [${Name}] " href="javascript://" class="row-title">${Name}</a></strong>
+			<div class="row-actions">
+				<span class="edit"><a href="javascript://">Edit</a> | </span>
+				<span class="inline"><a class="editinline" href="javascript://">Quick&nbsp;Edit</a> | </span>
+				<span class="delete"><a href="javascript://" class="delete-tag">Delete</a></span>
+			</div>
+		</td>
+		<td class="desc column-desc">${Description}</td>
+		<td class="slug column-slug">${Slug}</td>
+		<td class="topics column-topics num"><a href="javascript://">0</a></td>
+	</tr>
 </script> 
 <script type="text/javascript" src="<%:Url.JS("jQuery.tmpl.min") %>"></script>
 <script type="text/javascript" src="<%:Url.JS("Admin.Group") %>"></script>

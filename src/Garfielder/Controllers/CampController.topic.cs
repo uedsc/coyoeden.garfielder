@@ -28,8 +28,8 @@ namespace Garfielder.Controllers
                         CntComment = x.Comments.Count
                     };
 
-                    item.Groups = String.Join(",", x.Groups.ToList().ConvertAll(y => y.Name));
-                    item.Tags = String.Join(",", x.Tags.ToList().ConvertAll(z => z.Name));
+                    item.GroupsTxt = String.Join(",", x.Groups.ToList().ConvertAll(y => y.Name));
+                    item.TagsTxt = String.Join(",", x.Tags.ToList().ConvertAll(z => z.Name));
 
                     vm.TopicList.Add(item);
                 });
@@ -41,18 +41,11 @@ namespace Garfielder.Controllers
             if (id == null || id == Guid.Empty) {
                 return NewTopic();
             };
-            var vm = CreateViewData<VMCampTopicEdit>();
-            using (var db = new GarfielderEntities()) {
-                var dbModel = db.Topics.Single(x => x.Id == id.Value);
-                vm.Id=dbModel.Id;
-                vm.Title = dbModel.Title;
-                vm.Slug = dbModel.Slug;
-                vm.Url = dbModel.Url;
-                vm.Grade = dbModel.Grade;
-                vm.Description = dbModel.Description;
-                vm.ContentX = dbModel.ContentX;
-            };
-            return View(vm);
+            var vm0 = CreateViewData<VMCampTopicShow>();
+            var vm1=Topic.GetTopic(id.Value);
+            if (vm1 == null) return NewTopic();
+            vm1.CurrentUser = vm0.CurrentUser;
+            return View(vm1);
         }
         [HttpPost/*,ValidateInput(false)*/]
         public ActionResult EditTopic(VMCampTopicEdit obj)
@@ -80,8 +73,10 @@ namespace Garfielder.Controllers
             return View(obj);
         }
         private ActionResult NewTopic() {
-            var vm = CreateViewData<VMCampTopicEdit>();
+            var vm = CreateViewData<VMCampTopicShow>();
             vm.Id=Guid.NewGuid();
+            vm.GroupsAll = Group.ListAll();
+            vm.TagsAll = Tag.ListAll();
             return View(vm);
         }
     }

@@ -25,6 +25,7 @@ namespace Garfielder.Core.Infrastructure
         /// 10 Arabic numerals
         /// </summary>
         public static char[] DIGITS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        public static char[] LETTERS_DIGITS = LETTERS.Union(DIGITS).ToArray();
         #endregion
 
         #region public methods
@@ -63,6 +64,27 @@ namespace Garfielder.Core.Infrastructure
             StringBuilder retVal = new StringBuilder();
             retVal.AppendFormat("{0}{1}{2}", (Environment.TickCount & int.MaxValue).ToString(), random.Next(1000, 9999).ToString(), LETTERS[random1.Next(LETTERS.Length)].ToString());
             return retVal.ToString();
+        }
+        /// <summary>
+        /// 生成数字和字母组成的随机数
+        /// </summary>
+        /// <param name="size">随机数长度</param>
+        /// <param name="plusTimeStamp">是否后面带上时间戳</param>
+        /// <returns></returns>
+        public static string RandomStr(int size, bool plusTimeStamp = false) { 
+            var size0=5;
+            size = size < 1 ? size0 : size;
+            size = size > LETTERS_DIGITS.Length ? size0 : size;
+            var obj = new List<string>();
+            var rd=new Random();
+            for (var i = 0; i < size; i++) {
+                var rnum = (int)Math.Floor(rd.NextDouble() * LETTERS_DIGITS.Length);
+                obj.Add(LETTERS_DIGITS[rnum].ToString());
+            };
+            if (plusTimeStamp) {
+                obj.Add(DateTime.Now.Ticks.ToString());
+            };
+            return String.Join("", obj.ToArray());
         }
         /// <summary> 
         /// 转换金额为人民币大写 

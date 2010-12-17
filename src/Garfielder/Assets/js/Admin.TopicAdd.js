@@ -3,7 +3,7 @@ Garfielder.AddModule("TopicAdd", {
         this.opts = opts;
         var p = {};
         p.initTabs = function () {
-            var hd = $("#group-tabs li"), bd = $("#catSelector .slimtab_bd");
+            var hd = $("#group-tabs li"), bd = $("#grSelector .slimtab_bd");
             $("#group-tabs a").click(function (e) {
                 var $i = $(this), $li = $i.parent();
                 if ($li.hasClass("slimtab_on")) return false;
@@ -40,7 +40,7 @@ Garfielder.AddModule("TopicAdd", {
         p.initVar();
         p.initEvents();
         //preload img
-        $.preload([Garfielder.SiteRoot + 'assets/img/overlay-white.png', Garfielder.SiteRoot + 'assets/img/overlay-close.png']);
+        $.preload([Garfielder.SiteRoot + 'assets/img/overlay-close.png']);
     },
     onLoad: function () {
         $("#edt_hoder").tinymce({
