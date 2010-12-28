@@ -37,6 +37,7 @@ namespace Garfielder.Controllers
                 dbm.Description = obj.Description;
                 dbm.CreatedAt = DateTime.Now;
                 dbm.ParentID = obj.ParentID.Equals(Guid.Empty) ? default(Guid?): obj.ParentID;
+                dbm.Level = obj.Level;
                 //TODO:
                 dbm.CreatedBy = "Sys";
                 using (var db = new GarfielderEntities())
@@ -44,6 +45,9 @@ namespace Garfielder.Controllers
                     db.CommandTimeout = 0;
                     db.AddToGroups(dbm);
                     db.SaveChanges();
+
+                    //clear cache
+                    Group.ClearCache();
 
                     if (dbm.Parent != null) {
                         obj.ParentName = dbm.Parent.Name;

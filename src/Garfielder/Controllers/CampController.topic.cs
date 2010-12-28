@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Garfielder.ViewModels;
 using Garfielder.Models;
+using Garfielder.Core.Infrastructure;
 namespace Garfielder.Controllers
 {
     public partial class CampController: BaseController
@@ -43,40 +45,88 @@ namespace Garfielder.Controllers
             };
             var vm0 = CreateViewData<VMCampTopicShow>();
             var vm1=Topic.GetTopic(id.Value);
-            if (vm1 == null) return NewTopic();
+            if (vm1 == null)
+            {
+                vm0.Error = true;
+                vm0.Msg = string.Format("Topic with id [{0}] has been deleted!", id.Value);
+                return View(vm0);
+            }
             vm1.CurrentUser = vm0.CurrentUser;
             return View(vm1);
         }
-        [HttpPost/*,ValidateInput(false)*/]
-        public ActionResult EditTopic(VMCampTopicEdit obj)
+        [HttpPost,ValidateInput(false)]/* TODO：MVC3正式版时可以将ValidateInput注释掉,因为ContentX有AllowHtml属性 */
+        public ActionResult EditTopic(VMCampTopicShow obj)
         {
             if (this.ModelState.IsValid)
             {
-                var dbm = new Topic();
-                dbm.Id = Guid.NewGuid();
-                dbm.Title = obj.Title;
-                dbm.ContentX = obj.ContentX;
-                dbm.CreatedAt = DateTime.Now;
-                //TODO:
-                dbm.Slug = dbm.Id.ToString();
-                dbm.Description = dbm.ContentX;
-                using (var db = new GarfielderEntities()) {
+                var dbm = default(Topic);
+                using(var db=new GarfielderEntities())
+                {
+                    if (obj.IsNew)
+                    {
+                        
+                        obj.CreateAt = DateTime.Now;
+                        dbm = new Topic();
+                        dbm.CreatedAt = obj.CreateAt;
+                    }
+                    else
+                    {
+                        dbm = db.Topics.SingleOrDefault(x => x.Id == obj.Id);
+                        if(dbm==null)
+                        {
+                            obj.Error = true;
+                            obj.Msg = string.Format("Topic with id [{0}] has been deleted!", obj.Id);
+                            return View(obj);
+                        }
+                    }
+                    dbm.Title = obj.Title;
+                    dbm.ContentX = obj.ContentX;
+
+                    dbm.Slug = string.IsNullOrWhiteSpace(obj.Slug) ? obj.Title.CHSToPinyin("-") : obj.Slug.CHSToPinyin("-");
+                    dbm.Description = dbm.ContentX;
+                    //save to db
+                    var msg = Topic.ValidateSlug(dbm.Slug, db);
+                    dbm.Slug = msg.Context["Slug"].ToString();
+                    //groups
+                    if (obj.GroupID != null && obj.GroupID.Count > 0)
+                    {
+                        dbm.Groups.Clear();
+                        obj.GroupID.ForEach(
+                            x => dbm.Groups.Add(Group.Get(x,db))
+                        );
+
+                    }
+
+                    //tags
+                    if (obj.TagID != null && obj.TagID.Count > 0)
+                    {
+                        dbm.Tags.Clear();
+                        obj.TagID.ForEach(x => dbm.Tags.Add(Tag.Get(x,db)));
+                    }
+
                     db.CommandTimeout = 0;
-                    //dbm.UserID = CurrentUser.Id;
-                    //db.AddToTopics(dbm);
+                    
                     db.Attach(CurrentUser);
                     dbm.User = CurrentUser;
-                    db.AddToTopics(dbm);
+                    if(obj.IsNew)
+                    {
+                        obj.Id = Guid.NewGuid();
+                        dbm.Id = obj.Id;
+                        db.AddToTopics(dbm);
+                    }
+                        
                     db.SaveChanges();
-                };
+
+                    //update tags and groups
+                    obj.Groups = dbm.Groups.ToList();
+                    obj.Tags = dbm.Tags.ToList();
+                }//using      
             };
             return View(obj);
         }
         private ActionResult NewTopic() {
             var vm = CreateViewData<VMCampTopicShow>();
-            vm.Id=Guid.NewGuid();
-            vm.GroupsAll = Group.ListAll();
-            vm.TagsAll = Tag.ListAll();
+            vm.Id = Guid.Empty;
             return View(vm);
         }
     }

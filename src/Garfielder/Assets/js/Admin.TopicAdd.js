@@ -14,12 +14,15 @@ Garfielder.AddModule("TopicAdd", {
             });
         };
         p.initPreInput = function () {
-            $("#topicTitle").preInput({ val: p._lang.lblTitle });
+            var $title = $("#topicTitle").preInput({ val: p._lang.lblTitle });
+            if (!opts.IsNew) {
+                $title.val(opts.Title);
+            };
             $("#newtag-topic").preInput({ val: p._lang.lblTag });
         };
         p.initAddMedia = function () {
             $("#edtbtn_img").click(function () {
-                IFModal.Show(this.rel, {minH:420});
+                IFModal.Show(this.rel, { minH: 420 });
             });
         };
 

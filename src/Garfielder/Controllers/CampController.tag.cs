@@ -17,15 +17,14 @@ namespace Garfielder.Controllers
             using (var db = new GarfielderEntities()) {
                 var items = db.Tags.ToList();
                 vm.TagList=new List<VMTagEdit>();
-                items.ForEach(x => {
-                    vm.TagList.Add(new VMTagEdit { 
-                        Name=x.Name,
-                        Slug=x.Slug,
-                        Id=x.Id,
-                        CntTopic=x.Topics.Count
-                    });
-                });
-            }
+                items.ForEach(x => vm.TagList.Add(
+                    new VMTagEdit { 
+                    Name=x.Name,
+                    Slug=x.Slug,
+                    Id=x.Id,
+                    CntTopic=x.Topics.Count
+                }));
+            }//using
             return View(vm);
         }
         [HttpPost]
@@ -52,12 +51,13 @@ namespace Garfielder.Controllers
                     dbm.Slug =Tag.CheckSlug(db,obj.Slug);
                     db.CommandTimeout = 0;
                     db.AddToTags(dbm);
+                    Tag.ClearCache();
                     db.SaveChanges();
                 };
             };
             return Json(obj);
         }
-        [HttpGet]
+   
         public JsonResult CheckTag(string tag) {
             var vm = Tag.AddTag(tag);
             return Json(vm);

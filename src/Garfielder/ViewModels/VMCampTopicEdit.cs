@@ -24,5 +24,13 @@ namespace Garfielder.ViewModels
         /*新建主题时需要的属性*/
         public List<Guid> GroupID { get; set; }
         public List<Guid> TagID { get; set; }
+
+        /// <summary>
+        /// whether is a new topic 
+        /// </summary>
+        public bool IsNew
+        {
+           get { return Id == Guid.Empty;}
+        }
     }
 }

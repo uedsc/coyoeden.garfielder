@@ -10,8 +10,13 @@ namespace Garfielder.Models
     /// </summary>
     public class Msg
     {
+        public Msg()
+        {
+            Context =new Dictionary<string, object>();
+        }
+
         public bool Error { get; set; }
         public string Body { get; set; }
-        public dynamic Context { get; set; }
+        public Dictionary<string,object> Context { get; set; }
     }
 }

@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/camp.Master" Inherits="System.Web.Mvc.ViewPage<VMCampTopicShow>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	EditTopic
+	Edit Topic
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-	<h2 id="scSubhead">Add a new Topic</h2>
+	<h2 id="scSubhead"><%:Model.IsNew?"Add a new Topic":"Edit topic" %></h2>
 	<% using (Html.BeginForm()) {%>
 	<div id="ste_root" class="metabox rsb clear">
 		<!--#ste_sidebar-->
@@ -40,11 +40,19 @@
 								</p>														
 							</div>
 							<p class="howto">Separate tags with commas</p>
+                            <%if (Model.IsNew){%>
 							<p id="tagsAdded" style="display:none"></p>
-							<p id="tagTip" class="error" style="display:none"></p>
+							<%}else{%>
+                            <p id="tagsAdded">
+                                <%for (var i = 0; i < Model.Tags.Count; i++){%>
+                                <span class="tag"><input type="hidden" value="<%:Model.Tags[i].Id %>" name="TagID"/><a href="javascript://" class="delTag" rel="<%:Model.Tags[i].Id %>">X</a><%:Model.Tags[i].Name %></span>
+                                <%}%>
+                            </p>
+                            <%}%>
+                            <p id="tagTip" class="error" style="display:none"></p>
 						</div>
 						<p id="tagSelector">
-							<a href="javascript://" id="btnTagSelect">Choose from most used tags</a>
+							<a href="javascript://" id="btnTagSelect">Choose from most used tags!</a>
 							<p class="the-tagcloud" id="tagcloud-topic">
 							<%if (Model.TagsAll == null || Model.TagsAll.Count == 0)
 							{ %>
@@ -69,6 +77,7 @@
 			<div id="ste_main_" class="rsb_ct_">
 				<div id="ste_title">
 					<div id="ste_title_">
+                        <input id="topicId" name="Id" type="hidden" value="<%:Model.Id %>" />
 						<input id="topicTitle" class="bigipt bd0" type="text" value="" tabindex="1" size="30" name="Title"/>
 					</div>
 					<div id="ste_slug">
@@ -90,7 +99,7 @@
 						</div>
 					</div>
 					<div id="edt_main" class="bd0">
-						<textarea id="edt_hoder" class="edt_holder" tabindex="2" name="ContentX" cols="40" rows="20"></textarea>
+						<textarea id="edt_hoder" class="edt_holder" tabindex="2" name="ContentX" cols="40" rows="20"><%:Model.ContentX %></textarea>
 					</div>
 				</div>
 			</div>
@@ -116,6 +125,12 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
 	<!--scripts-->
+    <script type="text/javascript">
+        Garfielder.Cfg = {
+            IsNew:<%:Model.IsNew.ToString().ToLower() %>,
+            Title:'<%:Model.Title %>'
+        };
+    </script>
 	<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>
 	<script type="text/javascript" src="<%:Url.JS("jquery.vsUtils") %>"></script>
 	<script type="text/javascript" src="<%:Url.JS("jquery.vPreload")%>"></script>

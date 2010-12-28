@@ -21,7 +21,7 @@
         });
 
         $("#tagsAdded .delTag").live("click", function () {
-            var idx = $.inArray(me.tagData.TagID, this.rel);
+            var idx = $.inArray(this.rel,me.tagData.TagID);
             me.tagData.TagID.splice(idx, 1);
             $(this).parent().fadeOut("slow", function () {
                 $(this).remove();
@@ -29,30 +29,32 @@
         });
 
         this.$btnTagSelect.click(function () {
-            me.$tagCloud.slideDown();
+            me.$tagCloud.toggle();
         });
 
         $("#tagcloud-topic .tagitem").live("click", function () {
-            if ($.inArray(me.tagData.TagID, this.rel) == -1) {
+            if ($.inArray(this.rel,me.tagData.TagID) == -1) {
                 me.tagData.TagID.push(this.rel);
+                me.$tagsAdded.show().append(Garfielder.EvalTpl('<span class="tag"><input type="hidden" value="%Id%" name="TagID"/><a href="javascript://" class="delTag" rel="%Id%">X</a>%Name%</span>', { Id: this.rel, Name: this.innerHTML }));
             };
-            $(this).fadeOut();
+            
         });
 
     },
     addTag: function (tag) {
         var me = this;
         $.ajax({
+            type:'POST',
             url: Garfielder.SiteRoot + "Camp/CheckTag",
             dataType: "json",
-            data: tag,
+            data: {"tag":tag},
             success: function (d) {
                 if (d.Error) {
                     me.$tagTip.html(d.Msg).fadeIn();
                 } else {
                     me.$tagTip.fadeOut();
-                    me.$tagsAdded.append(Garfielder.EvalTpl('<span class="tag"><a href="javascript://" class="delTag" rel="%Id%">X</a>%Name%</span>', d));
-                    if ($.inArray(me.tagData.TagID, d.Id) == -1)
+                    me.$tagsAdded.append(Garfielder.EvalTpl('<span class="tag"><input type="hidden" value="%Id%" name="TagID"/><a href="javascript://" class="delTag" rel="%Id%">X</a>%Name%</span>', d));
+                    if ($.inArray(d.Id,me.tagData.TagID) == -1)
                         me.tagData.TagID.push(d.Id);
                 };
             }

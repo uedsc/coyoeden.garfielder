@@ -458,6 +458,7 @@ a.menu_first
 	text-shadow:0 1px 0 #FFFFFF;
 }
 #tagcloud-topic{border-color:#ddd;}
+#tagsAdded .tag{background:pink;}
 
 /* =====form validation style========= */
 .form-wrap .input-validation-error,.error{background:#FFEFEF;}

@@ -453,7 +453,7 @@ table.fixed {
 #scFoot{
 	border-style:solid none;
 	border-width:1px 0;
-	position:absolute;
+	position:relative;
 	bottom:0;
 	left:0;
 	width:100%;
@@ -496,8 +496,9 @@ table.fixed {
 	margin: 5px 0 10px;
 	padding: 8px;
 	word-spacing: 3px;
-	display:none;
 }
+#tagsAdded .tag{margin:4px;}
+#tagsAdded .delTag{padding-right:2px;}
 
 /* media_add.html */
 .upload-ui{margin-top:0.5em;}

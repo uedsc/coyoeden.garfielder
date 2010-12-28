@@ -99,12 +99,52 @@ namespace Garfielder.Models
         {
             using (var db = new GarfielderEntities())
             {
-                var items = db.Tags.ToList();
-                items.ForEach(x => x.CntTopic = x.Topics.Count);
-                return items;
+                if (_Tags == null)
+                {
+                    lock (_SyncRoot)
+                    {
+                        if (_Tags == null)
+                        {
+                            _Tags = db.Tags.ToList();
+                            _Tags.ForEach(x => x.CntTopic = x.Topics.Count);
+                        }
+                    }
+                }
+
+                return _Tags;
             }//using
 
         }
+
+        /// <summary>
+        /// get by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dbToAttach"></param>
+        /// <returns></returns>
+        public static Tag Get(Guid id, GarfielderEntities dbToAttach = null)
+        {
+            var obj = ListAll().SingleOrDefault(x => x.Id == id);
+            if (dbToAttach != null && null != obj)
+            {
+                dbToAttach.Attach(obj);
+            }
+                
+            return obj;
+        }
+        /// <summary>
+        /// clear cache
+        /// </summary>
+        public static void ClearCache()
+        {
+            _Tags = null;
+        }
+
+        #region private properties
+        private static object _SyncRoot = new object();
+        private static List<Tag> _Tags;
+
+        #endregion
 
     }
 }

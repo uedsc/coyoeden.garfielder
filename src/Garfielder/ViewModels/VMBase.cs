@@ -58,7 +58,7 @@ namespace Garfielder.ViewModels
         /// <summary>
         /// Given a factor,if it is true,use the trueStr,otherwise use the falseStr
         /// </summary>
-        /// <param name="fun"></param>
+        /// <param name="factor"></param>
         /// <param name="trueStr"></param>
         /// <param name="falseStr"></param>
         /// <returns></returns>
