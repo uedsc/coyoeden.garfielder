@@ -37,7 +37,7 @@ namespace Garfielder.Controllers
             if (this.ModelState.IsValid)
             {
                 obj.Id = Guid.NewGuid();
-                obj.Slug = string.IsNullOrEmpty(obj.Slug) ? obj.Name.CHSToPinyin().ToLower() : obj.Slug.ToLower();
+                obj.Slug = string.IsNullOrEmpty(obj.Slug) ? obj.Name.CHSToPinyin("-").ToLower() : obj.Slug.ToLower();
 
                 var dbm = new Tag();
                 dbm.Id = obj.Id;

@@ -109,8 +109,8 @@ namespace Garfielder.Core.Infrastructure
             int i2 = 0;
             bool b = false, d = false;
             char[] nowchar = chs.ToCharArray();
-            CultureInfo ci = Thread.CurrentThread.CurrentCulture;
-            TextInfo ti = ci.TextInfo;
+            var ci = Thread.CurrentThread.CurrentCulture;
+            var ti = ci.TextInfo;
 
             for (int j = 0; j < nowchar.Length; j++)
             {

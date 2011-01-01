@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using Garfielder.Core.Infrastructure;
 using Garfielder.ViewModels;
+using System.Data;
+using System.Data.Objects;
 
 namespace Garfielder.Models
 {
@@ -18,21 +20,16 @@ namespace Garfielder.Models
             if (string.IsNullOrWhiteSpace(name))
                 return false;
 
-            var valid = true;
-            using (var db = new GarfielderEntities()) {
-                valid = db.Groups.Count(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) == 0;
-                return valid;
-            }   
+            var valid =ListAll().Count(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) == 0;
+            return valid;
         }
         public static bool ValidateSlug(string slug) {
             if (string.IsNullOrWhiteSpace(slug))
                 return false;
 
-            var valid = true;
-            using (var db = new GarfielderEntities()) {
-                valid = db.Groups.Count(x => x.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase)) == 0;
-                return valid;
-            }
+            var valid =ListAll().Count(x=>x.Slug.Equals(slug,StringComparison.OrdinalIgnoreCase))==0;
+
+            return valid;
         }
 
         /// <summary>
@@ -99,13 +96,13 @@ namespace Garfielder.Models
         /// <returns></returns>
         public static Group Get(Guid id,GarfielderEntities dbToAttach=null)
         {
-            var item=ListAll().SingleOrDefault(x => x.Id == id);
-            if(dbToAttach!=null&&null!=item)
+            var obj=ListAll().SingleOrDefault(x => x.Id == id);
+            if(dbToAttach!=null&&null!=obj)
             {
-                dbToAttach.Attach(item);
+                dbToAttach.Groups.Attach(obj);
             }
                 
-            return item;
+            return obj;
         }
 
         #region private properties

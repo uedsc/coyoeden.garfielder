@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using Garfielder.Core.Infrastructure;
 using Garfielder.ViewModels;
+using System.Data.Objects;
 namespace Garfielder.Models
 {
     public partial class Tag
@@ -16,24 +18,16 @@ namespace Garfielder.Models
             if (string.IsNullOrWhiteSpace(name))
                 return false;
 
-            var valid = true;
-            using (var db = new GarfielderEntities())
-            {
-                valid = db.Tags.Count(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) == 0;
-                return valid;
-            }
+            var valid = ListAll().Count(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) == 0;
+            return valid;
         }
         public static bool ValidateSlug(string slug)
         {
             if (string.IsNullOrWhiteSpace(slug))
                 return false;
 
-            var valid = true;
-            using (var db = new GarfielderEntities())
-            {
-                valid = db.Tags.Count(x => x.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase)) == 0;
-                return valid;
-            }
+            var valid = ListAll().Count(x => x.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase)) == 0;
+            return valid;
         }
         /// <summary>
         /// add a tag
@@ -73,6 +67,7 @@ namespace Garfielder.Models
                     db.CommandTimeout = 0;
                     db.AddToTags(dbm);
                     db.SaveChanges();
+                    ClearCache();
                 };
             };//using
             return retVal;
@@ -127,7 +122,7 @@ namespace Garfielder.Models
             var obj = ListAll().SingleOrDefault(x => x.Id == id);
             if (dbToAttach != null && null != obj)
             {
-                dbToAttach.Attach(obj);
+                dbToAttach.Tags.Attach(obj);
             }
                 
             return obj;

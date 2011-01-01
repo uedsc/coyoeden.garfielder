@@ -4,9 +4,14 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Garfielder.Data;
 using Garfielder.ViewModels;
 using Garfielder.Models;
 using Garfielder.Core.Infrastructure;
+using Group = Garfielder.Models.Group;
+using Tag = Garfielder.Models.Tag;
+using Topic = Garfielder.Models.Topic;
+
 namespace Garfielder.Controllers
 {
     public partial class CampController: BaseController
@@ -59,6 +64,7 @@ namespace Garfielder.Controllers
         {
             if (this.ModelState.IsValid)
             {
+                
                 var dbm = default(Topic);
                 using(var db=new GarfielderEntities())
                 {
@@ -66,8 +72,12 @@ namespace Garfielder.Controllers
                     {
                         
                         obj.CreateAt = DateTime.Now;
+                        obj.Id = Guid.NewGuid();
                         dbm = new Topic();
                         dbm.CreatedAt = obj.CreateAt;
+                        
+                        dbm.Id = obj.Id;
+                        db.AddToTopics(dbm);
                     }
                     else
                     {
@@ -87,40 +97,40 @@ namespace Garfielder.Controllers
                     //save to db
                     var msg = Topic.ValidateSlug(dbm.Slug, db);
                     dbm.Slug = msg.Context["Slug"].ToString();
-                    //groups
-                    if (obj.GroupID != null && obj.GroupID.Count > 0)
-                    {
-                        dbm.Groups.Clear();
-                        obj.GroupID.ForEach(
-                            x => dbm.Groups.Add(Group.Get(x,db))
-                        );
 
-                    }
+                    db.Attach(CurrentUser);
+                    dbm.User = CurrentUser;
+                    db.SaveChanges();
 
                     //tags
                     if (obj.TagID != null && obj.TagID.Count > 0)
                     {
                         dbm.Tags.Clear();
-                        obj.TagID.ForEach(x => dbm.Tags.Add(Tag.Get(x,db)));
-                    }
 
-                    db.CommandTimeout = 0;
-                    
-                    db.Attach(CurrentUser);
-                    dbm.User = CurrentUser;
-                    if(obj.IsNew)
-                    {
-                        obj.Id = Guid.NewGuid();
-                        dbm.Id = obj.Id;
-                        db.AddToTopics(dbm);
+                        obj.TagID.ForEach(x => dbm.Tags.Attach(db.Tags.Where(y=>y.Id.Equals(x))));
                     }
+                    //groups
+                    if (obj.GroupID != null && obj.GroupID.Count > 0)
+                    {
+                        dbm.Groups.Clear();
                         
+                        obj.GroupID.ForEach(
+                            x =>dbm.Groups.Attach(db.Groups.Where(y=>y.Id.Equals(x)))
+                        );
+
+                    }
+                    //保存关系表
                     db.SaveChanges();
 
                     //update tags and groups
                     obj.Groups = dbm.Groups.ToList();
                     obj.Tags = dbm.Tags.ToList();
                 }//using      
+                
+         
+                    
+
+                
             };
             return View(obj);
         }

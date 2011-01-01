@@ -4,19 +4,19 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Garfielder.Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="Garfielder.Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="GarfielderModelsStoreContainer">
-          <EntitySet Name="EntityLog" EntityType="Garfielder.Models.Store.EntityLog" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Group" EntityType="Garfielder.Models.Store.Group" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Tag" EntityType="Garfielder.Models.Store.Tag" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Topic" EntityType="Garfielder.Models.Store.Topic" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="TopicComment" EntityType="Garfielder.Models.Store.TopicComment" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="TopicFile" EntityType="Garfielder.Models.Store.TopicFile" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="TopicGroup" EntityType="Garfielder.Models.Store.TopicGroup" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="TopicTag" EntityType="Garfielder.Models.Store.TopicTag" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="User" EntityType="Garfielder.Models.Store.User" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserTag" EntityType="Garfielder.Models.Store.UserTag" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="XFile" EntityType="Garfielder.Models.Store.XFile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EntityLog" EntityType="Garfielder.Models.Store.EntityLog" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Group" EntityType="Garfielder.Models.Store.Group" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Tag" EntityType="Garfielder.Models.Store.Tag" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Topic" EntityType="Garfielder.Models.Store.Topic" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="TopicComment" EntityType="Garfielder.Models.Store.TopicComment" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="TopicFile" EntityType="Garfielder.Models.Store.TopicFile" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="TopicGroup" EntityType="Garfielder.Models.Store.TopicGroup" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="TopicTag" EntityType="Garfielder.Models.Store.TopicTag" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="User" EntityType="Garfielder.Models.Store.User" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="UserTag" EntityType="Garfielder.Models.Store.UserTag" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="XFile" EntityType="Garfielder.Models.Store.XFile" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <AssociationSet Name="FK_EntityLog_User" Association="Garfielder.Models.Store.FK_EntityLog_User">
             <End Role="User" EntitySet="User" />
             <End Role="EntityLog" EntitySet="EntityLog" />
@@ -346,8 +346,8 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Garfielder.Models" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="GarfielderEntities" annotation:LazyLoadingEnabled="true">
+      <Schema Namespace="Garfielder.Models" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="GarfielderEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <EntitySet Name="EntityLogs" EntityType="Garfielder.Models.EntityLog" />
           <EntitySet Name="Groups" EntityType="Garfielder.Models.Group" />
           <EntitySet Name="Tags" EntityType="Garfielder.Models.Tag" />
