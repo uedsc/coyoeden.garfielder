@@ -16,14 +16,37 @@ namespace Garfielder.Controllers
 {
     public partial class CampController: BaseController
     {
-        public ActionResult ListTopic() {
+        public ActionResult ListTopic(string published="0",string term="") {
             var vm = CreateViewData<VMCampTopicList>();
+            term = (term ?? "").ToLower();
+            vm.Published = published;
+            vm.Term = term;
             //get group data
             vm.GroupList = Group.ListAllData();
             //get topic data
             using (var db = new GarfielderEntities())
             {
-                var items = db.Topics.ToList();
+                //TODO:searching optimize
+                var items = new List<Topic>();
+                var q = default(IQueryable<Topic>);
+                //filter-whether is published
+                if(published=="1")
+                {
+                    q = db.Topics.Where(x => !x.Id.Equals(Guid.Empty));
+                    //TODO:add a published column
+                }else
+                {
+                    q = db.Topics;
+                }
+                //filter-searching term
+                if(!string.IsNullOrWhiteSpace(term))
+                {
+                    q = from obj in q
+                        where obj.Title.ToLower().Contains(term)
+                        select obj;
+                }
+                //sort
+                items = q.OrderByDescending(x => x.CreatedAt).ToList();
                 vm.TopicList = new List<VMCampTopicEdit>();
                 var item=default(VMCampTopicEdit);
                 items.ForEach(x =>
@@ -43,6 +66,34 @@ namespace Garfielder.Controllers
 
                     vm.TopicList.Add(item);
                 });
+            }
+            return View(vm);
+        }
+        [HttpPost]
+        public ActionResult ListTopic(VMCameTopicListFilter filter)
+        {
+            var vm = CreateViewData<VMCampTopicList>();
+            vm.Term = filter.term ?? "";
+            vm.Published = filter.published ?? "0";
+            vm.GroupList = Group.ListAllData();
+            switch (filter.Action)
+            {
+                case "trash":
+                    var msg = Topic.DeleteByID(filter.TopicIDList.ToArray());
+                    vm.Error = msg.Error;
+                    vm.Msg = msg.Body;
+                    return ListTopic(vm.Published, vm.Term);
+                    break;
+                case "edit":
+                    vm.Error = true;
+                    vm.Msg = "Not implemented";
+                    break;
+                case "-1":
+                    vm.Error = true;
+                    vm.Msg = "Not implemented";
+                    //TODO:
+                    vm.TopicList=new List<VMCampTopicEdit>();
+                    break;
             }
             return View(vm);
         }
@@ -123,16 +174,13 @@ namespace Garfielder.Controllers
 
                     }
                     //保存关系表
+                    
                     db.SaveChanges();
 
                     //update tags and groups
                     obj.Groups = dbm.Groups.ToList();
                     obj.Tags = dbm.Tags.ToList();
                 }//using      
-                
-         
-                    
-
                 
             };
             return View(obj);

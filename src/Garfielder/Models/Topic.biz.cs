@@ -73,5 +73,34 @@ namespace Garfielder.Models
 
             };
         }
+        public static Msg DeleteByID(params Guid[] id)
+        {
+            var r = new Msg();
+            if(id==null||id.Length==0)
+            {
+                r.Error = true;
+                r.Body = "No selected topics to be deleted!";
+                return r;
+            }
+            using (var db=new GarfielderEntities())
+            {
+                try
+                {
+                    var items = db.Topics.Where(x => id.Contains(x.Id)).ToList();
+                    items.ForEach(obj=> {
+                        obj.Tags.Clear();
+                        obj.Groups.Clear();
+                        db.Topics.DeleteObject(obj);
+                    });
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    r.Error = true;
+                    r.Body = ex.Message;
+                }
+            }//using
+            return r;
+        }
     }
 }
