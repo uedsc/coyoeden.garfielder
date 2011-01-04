@@ -18,6 +18,9 @@ namespace Garfielder.Controllers
     {
         public ActionResult ListTopic() {
             var vm = CreateViewData<VMCampTopicList>();
+            //get group data
+            vm.GroupList = Group.ListAllData();
+            //get topic data
             using (var db = new GarfielderEntities())
             {
                 var items = db.Topics.ToList();

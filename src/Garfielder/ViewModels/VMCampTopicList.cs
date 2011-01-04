@@ -11,5 +11,6 @@ namespace Garfielder.ViewModels
     public class VMCampTopicList:VMBase
     {
         public List<VMCampTopicEdit> TopicList { get; set; }
+        public List<VMGroupEdit> GroupList { get; set; }
     }
 }
