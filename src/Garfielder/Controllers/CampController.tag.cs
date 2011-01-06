@@ -57,10 +57,33 @@ namespace Garfielder.Controllers
             };
             return Json(obj);
         }
-   
+        /// <summary>
+        /// check a tag's existence
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
         public JsonResult CheckTag(string tag) {
             var vm = Tag.AddTag(tag);
             return Json(vm);
+        }
+        /// <summary>
+        /// delete a specified tag
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public JsonResult DeleteTag(Guid id)
+        {
+            var msg = new Msg();
+            if (id.Equals(Guid.Empty))
+            {
+                msg.Error = true;
+                msg.Body = string.Format("Invalid parameter id [{0}]", id);
+            }
+            else
+            {
+                msg = Tag.DeleteByID(id);
+            }
+            return Json(msg);
         }
     }
 }

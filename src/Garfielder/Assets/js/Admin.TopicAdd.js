@@ -16,7 +16,7 @@ Garfielder.AddModule("TopicAdd", {
         p.initPreInput = function () {
             var $title = $("#topicTitle").preInput({ val: p._lang.lblTitle });
             if (!opts.IsNew) {
-                $title.val(opts.Title);
+                $title.val(opts.Title).blur();
             };
             $("#newtag-topic").preInput({ val: p._lang.lblTag });
         };

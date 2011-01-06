@@ -105,6 +105,42 @@ namespace Garfielder.Models
             return obj;
         }
 
+        /// <summary>
+        /// delete by specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Msg DeleteByID(params Guid[] id)
+        {
+            var r = new Msg();
+            if (id == null || id.Length == 0)
+            {
+                r.Error = true;
+                r.Body = "No selected topics to be deleted!";
+                return r;
+            }
+            using (var db = new GarfielderEntities())
+            {
+                try
+                {
+                    var items = db.Groups.Where(x => id.Contains(x.Id)).ToList();
+                    items.ForEach(obj =>
+                    {
+                        obj.Topics.Clear();
+                        db.Groups.DeleteObject(obj);
+                    });
+                    db.SaveChanges();
+                    ClearCache();
+                }
+                catch (Exception ex)
+                {
+                    r.Error = true;
+                    r.Body = ex.Message;
+                }
+            }//using
+            return r;
+        }
+
         #region private properties
         private static object _SyncRoot = new object();
         private static List<Group> _Groups;

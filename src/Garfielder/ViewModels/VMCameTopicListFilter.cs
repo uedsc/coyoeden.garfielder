@@ -16,6 +16,6 @@ namespace Garfielder.ViewModels
         public string GroupID { get; set; }
 
         public string term { get; set; }
-        public string published { get; set; }
+        public bool published { get; set; }
     }
 }

@@ -11,6 +11,8 @@
             $toggleTopics1: $("#cbx-toggle-topics1")
         };
 
+        this.ACTS_TOPIC = ["trash", "pub", "unpub"];
+
     },
     onLoad: function () {
         var me = this;
@@ -35,7 +37,6 @@
             me.uiForm.$published.val(this.rel);
             me.submit("0");
         });
-
         //批量操作行为
         me.uiForm.$btnAct.click(function (e) {
             if (me.uiForm.$actType.val() == "-1") {
@@ -43,7 +44,7 @@
                 me.uiForm.$actType.focus();
                 return false;
             };
-            if (me.uiForm.$actType.val() == "trash" && $("#tb-list .cbx-topicid:checked").size() == 0) {
+            if ($.inArray(me.uiForm.$actType.val(), me.ACTS_TOPIC) && $("#tb-list .cbx-topicid:checked").size() == 0) {
                 alert("No topics selected!");
                 return false;
             };
@@ -54,12 +55,49 @@
             me.uiForm.$actType.val("-1");
             return true;
         });
+
+        //delete action
+        $("#tb-list .act-del").click(function () {
+            var $tr = $(this).parents("tr");
+            me.del(this.rel, {
+                onOK: function (msg) {
+                    $tr.fadeOut("slow", function () {
+                        $tr.remove();
+                    });
+                }
+            });
+        });
     },
     /**
-    **提交表单
+    **submit the form
     **
     **/
     submit: function (form) {
         this.uiForm["$form" + form].submit();
+    },
+    /**
+    ** delete the specified topic
+    **/
+    del: function (id, opts) {
+        if (!confirm("Are you sure to delete this topic?")) {
+            return;
+        };
+        $.ajax({
+            url: Garfielder.SiteRoot + "Camp/DeleteTopic",
+            data: { id: id },
+            type: 'POST',
+            success: function (msg) {
+                if (msg.Error) {
+                    alert(msg.Body);
+                    return;
+                };
+                if (opts.onOK) {
+                    opts.onOK(msg);
+                };
+            },
+            error: function (xhr, txtStatus) {
+                alert("Server hanged!Please try again later!");
+            }
+        });
     }
 });

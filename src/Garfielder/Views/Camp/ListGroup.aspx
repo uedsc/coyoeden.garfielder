@@ -21,11 +21,12 @@
 		  }, new{ id="frmEdit" }))
 		  { %>
 		<div id="catAdmin-detail" class="form-wrap">
-			<h3>Add New Group</h3>
+			<h3><a id="form-title0" class="form-tab form-tab-cur" href="javascript://">Add New Group</a><span id="form-title1" class="form-tab">Edit Group</span></h3>
 			<div class="form-field">	
 				<label for="gr-name">Name<%:Html.ValidationMessageFor(x => x.Name)%></label>
 				<%:Html.TextBoxFor(x => x.Name, new { id = "gr-name", size = 40 })%>
 				<p>The name is how it appears on your site.</p>
+                <input type="hidden" name="Id" id="gr-id"/>
 			</div>	
 			<div class="form-field">
 				<label for="gr-slug">Slug<%:Html.ValidationMessageFor(x => x.Slug)%></label>
@@ -39,8 +40,8 @@
 				<input type="hidden" id="gr-level" name="Level" value="0" />
 			</div>
 			<div class="form-field">
-				<label for="grDesc">Description<%:Html.ValidationMessageFor(x => x.Description)%></label>
-				<%:Html.TextAreaFor(x => x.Description, new { id = "grDesc", cols = 40, rows = 5 })%>
+				<label for="gr-desc">Description<%:Html.ValidationMessageFor(x => x.Description)%></label>
+				<%:Html.TextAreaFor(x => x.Description, new { id = "gr-desc", cols = 40, rows = 5 })%>
 				<p>The description is not prominent by default; however, some themes may show it.</p>
 			</div>
 			<p class="submit"><input type="submit" value="Add New Group" id="gr-submit" name="grsubmit" class="button"/></p>																											
@@ -59,19 +60,19 @@
 				</div>								
 			</div>
 			<div class="row">
-				<table id="tbGroupList" cellspacing="0" class="widefat cat fixed">
+				<table id="tbItemList" cellspacing="0" class="widefat cat fixed">
 					<thead>
 						<tr>
-							<th class="manage-column column-cb check-column" id="col-cb" scope="col"><input type="checkbox"/></th>
-							<th class="manage-column column-name" id="col-cat-name" scope="col">Name</th>
-							<th class="manage-column column-desc" id="col-cat-desc" scope="col">Description</th>
-							<th class="manage-column column-slug" id="col-cat-slug" scope="col">Slug</th>
-							<th class="manage-column column-topics num" id="col-cat-topics" scope="col">Topics</th>
+							<th class="manage-column column-cb check-column" scope="col"><input id="cbx-toggle-all0" type="checkbox"/></th>
+							<th class="manage-column column-name" scope="col">Name</th>
+							<th class="manage-column column-desc" scope="col">Description</th>
+							<th class="manage-column column-slug" scope="col">Slug</th>
+							<th class="manage-column column-topics num" scope="col">Topics</th>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
-							<th class="manage-column column-cb check-column" scope="col"><input type="checkbox"/></th>
+							<th class="manage-column column-cb check-column" scope="col"><input id="cbx-toggle-all1" type="checkbox"/></th>
 							<th class="manage-column column-name" scope="col">Name</th>
 							<th class="manage-column column-desc" scope="col">Description</th>
 							<th class="manage-column column-slug" scope="col">Slug</th>
@@ -85,14 +86,13 @@
 						   <%item = Model.GroupList[i]; %>
 						   <tr id="g-<%:item.Id %>" class="<%:i%2==0?"alt":"" %>">
 								<th class="check-column" scope="row"> 
-									<input type="checkbox" value="<%:item.Id %>" name="delete_cats[]"/>
+									<input type="checkbox" class="cbx-objid" value="<%:item.Id %>" name="ObjIDList"/>
 								</th>
 								<td class="name column-name">
 									<strong><a title="Edit [<%:item.Name %>] " href="javascript://" class="row-title"><%:item.Name %></a></strong>
 									<div class="row-actions">
-										<span class="edit"><a href="javascript://">Edit</a> | </span>
-										<span class="inline"><a class="editinline" href="javascript://">Quick&nbsp;Edit</a> | </span>
-										<span class="delete"><a href="javascript://" class="delete-tag">Delete</a></span>
+										<span class="edit"><a href="javascript://" class="act-edit" rel='{"i":"<%:item.Id %>","n":"<%:item.Name %>","s":"<%:item.Slug %>","d":"<%:item.Description %>","p":"<%:item.ParentID %>","l":"<%:item.Level %>"}'>Edit</a> | </span>
+										<span class="delete"><a href="javascript://" class="act-del" rel="<%:item.Id %>">Delete</a></span>
 									</div>
 								</td>
 								<td class="desc column-desc"><%:item.Description %></td>
@@ -127,19 +127,18 @@
 <script src="<%:Url.Content("~/Scripts/jquery.unobtrusive-ajax.js") %>" type="text/javascript"></script>
 <script src="<%:Url.Content("~/Scripts/jquery.validate.js") %>" type="text/javascript"></script>
 <script src="<%:Url.Content("~/Scripts/jquery.validate.unobtrusive.js") %>" type="text/javascript"></script>
-<script type="text/javascript" src="<%:Url.JS("jquery.datalink") %>"></script>
 <script type="text/javascript" src="<%:Url.JS("jquery-ui-1.8.6.effects.min") %>"></script>
-<script id="tpl_group" type="text/x-jquery-tmpl">
+<script type="text/javascript" src="<%:Url.JS("jquery.json-2.2.min") %>"></script>
+<script id="tpl_item" type="text/x-jquery-tmpl">
 	<tr id="g-${Id}">
 		<th class="check-column" scope="row"> 
-			<input type="checkbox" value="${Id}" name="delete_cats[]"/>
+			<input type="checkbox" value="${Id}" name="ObjIDList"/>
 		</th>
 		<td class="name column-name">
 			<strong><a title="Edit [${Name}] " href="javascript://" class="row-title">${Name}</a></strong>
 			<div class="row-actions">
-				<span class="edit"><a href="javascript://">Edit</a> | </span>
-				<span class="inline"><a class="editinline" href="javascript://">Quick&nbsp;Edit</a> | </span>
-				<span class="delete"><a href="javascript://" class="delete-tag">Delete</a></span>
+				<span class="edit"><a href="javascript://" class="act-edit">Edit</a> | </span>
+				<span class="delete"><a href="javascript://" class="act-del">Delete</a></span>
 			</div>
 		</td>
 		<td class="desc column-desc">${Description}</td>
@@ -149,11 +148,6 @@
 </script> 
 <script type="text/javascript" src="<%:Url.JS("jQuery.tmpl.min") %>"></script>
 <script type="text/javascript" src="<%:Url.JS("Admin.Group") %>"></script>
-<script type="text/javascript">
-//<![CDATA[
-	this$.Init({});
-//]]>
-</script>
 <!--/scripts-->	
 </asp:Content>
 

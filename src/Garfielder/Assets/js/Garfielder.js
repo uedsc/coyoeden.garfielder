@@ -87,6 +87,20 @@ var Garfielder = (function ($) {
         return p._modules[key];
     };
     /**
+    * Shortcut for GetModule and AddModule!
+    * @param {String} module key
+    * @param {module} module instance
+    */
+    pub.M = function (key, module) {
+        if (arguments.length === 1) {
+            return pub.GetModule(key);
+        };
+        if (arguments.length === 2) {
+            return pub.AddModule(key,module);
+        };
+        return null;
+    };
+    /**
     * 获取指定长度的随机字符串。注意：仅仅由数字和字母组成
     * @param {Object} size 随机字符串的长度
     * @param {Boolean} plusTimeStamp 是否加上当前时间戳
@@ -110,12 +124,12 @@ var Garfielder = (function ($) {
     *
     */
     pub.EvalTpl = function (str, data) {
-    ///<summary>
-    ///simple js template parser
-    ///E.G,IF:str="<a href=/u/%uid%>%username%</a>"
-    ///data={uid:1,username:'xiami'}
-    ///Then:str = "<a href=/u/1>xiami</a>"
-    ///</summary>
+        ///<summary>
+        ///simple js template parser
+        ///E.G,IF:str="<a href=/u/%uid%>%username%</a>"
+        ///data={uid:1,username:'xiami'}
+        ///Then:str = "<a href=/u/1>xiami</a>"
+        ///</summary>
         var result;
         var patt = new RegExp("%([a-zA-z0-9]+)%");
         while ((result = patt.exec(str)) != null) {
