@@ -15,9 +15,9 @@ namespace Garfielder.ViewModels
 
         //筛选条件
         /// <summary>
-        /// 主题状态是否发布-0表示全部1表示已发布
+        /// 主题状态是否发布
         /// </summary>
-        public string Published { get; set; }
+        public bool Published { get; set; }
 
         public string Term { get; set; }
     }

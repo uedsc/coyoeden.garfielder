@@ -137,6 +137,7 @@ table.widefat span.spam a{
 	background-color:#FFFFFF;
 	border-color:#DFDFDF;
 }
+.widefat tr.cur{background:#999;}
 
 #scHead {
 	border-bottom:#c6c6c6 1px solid;

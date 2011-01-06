@@ -57,5 +57,24 @@ namespace Garfielder.Controllers
             };
             return Json(obj);
         }
+        /// <summary>
+        /// delete a specified item
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public JsonResult DeleteGroup(Guid id)
+        {
+            var msg = new Msg();
+            if (id.Equals(Guid.Empty))
+            {
+                msg.Error = true;
+                msg.Body = string.Format("Invalid parameter id [{0}]", id);
+            }
+            else
+            {
+                msg = Group.DeleteByID(id);
+            }
+            return Json(msg);
+        }
     }
 }

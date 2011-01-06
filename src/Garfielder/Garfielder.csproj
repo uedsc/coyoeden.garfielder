@@ -127,6 +127,7 @@
     <Content Include="App_Data\GarfielderDB_log.ldf">
       <DependentUpon>GarfielderDB.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\TODO.txt" />
     <Content Include="Assets\css\camp.css" />
     <Content Include="Assets\css\camp_color.css" />
     <Content Include="Assets\css\camp_font.css" />
