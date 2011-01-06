@@ -19,8 +19,8 @@ namespace Garfielder.Controllers
         public string List(string id) {
             return "TODO:显示指定组的主题";        
         }
-        public string Show(int id) {
-            return "TODO：显示指定ID的主题";
+        public string Show(Guid id) {
+            return "TODO：显示指定ID的主题"+id;
         }
     }
 }

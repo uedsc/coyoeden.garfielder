@@ -4,19 +4,15 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Garfielder.Data;
 using Garfielder.ViewModels;
 using Garfielder.Models;
 using Garfielder.Core.Infrastructure;
-using Group = Garfielder.Models.Group;
-using Tag = Garfielder.Models.Tag;
-using Topic = Garfielder.Models.Topic;
 
 namespace Garfielder.Controllers
 {
     public partial class CampController: BaseController
     {
-        public ActionResult ListTopic(string published="0",string term="") {
+        public ActionResult ListTopic(bool published=false,string term="") {
             var vm = CreateViewData<VMCampTopicList>();
             term = (term ?? "").ToLower();
             vm.Published = published;
@@ -30,7 +26,7 @@ namespace Garfielder.Controllers
                 var items = new List<Topic>();
                 var q = default(IQueryable<Topic>);
                 //filter-whether is published
-                if(published=="1")
+                if(published)
                 {
                     q = db.Topics.Where(x => !x.Id.Equals(Guid.Empty));
                     //TODO:add a published column
@@ -74,7 +70,7 @@ namespace Garfielder.Controllers
         {
             var vm = CreateViewData<VMCampTopicList>();
             vm.Term = filter.term ?? "";
-            vm.Published = filter.published ?? "0";
+            vm.Published = filter.published;
             vm.GroupList = Group.ListAllData();
             switch (filter.Action)
             {
@@ -84,18 +80,43 @@ namespace Garfielder.Controllers
                     vm.Msg = msg.Body;
                     return ListTopic(vm.Published, vm.Term);
                     break;
-                case "edit":
+                case "pub":
+                    //TODO:batch publish
                     vm.Error = true;
                     vm.Msg = "Not implemented";
+                    return ListTopic(vm.Published, vm.Term);
+                    break;
+                case "unpub":
+                    //TODO:batch unpublish
+                    vm.Error = true;
+                    vm.Msg = "Not implemented!";
+                    return ListTopic(vm.Published, vm.Term);
                     break;
                 case "-1":
-                    vm.Error = true;
-                    vm.Msg = "Not implemented";
-                    //TODO:
-                    vm.TopicList=new List<VMCampTopicEdit>();
+                    //no action,just render the default list
+                    return ListTopic(vm.Published, vm.Term);
                     break;
             }
             return View(vm);
+        }
+        /// <summary>
+        /// delete a specified topic via ajax
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult DeleteTopic(Guid id)
+        {
+            var msg = new Msg();
+            if(id.Equals(Guid.Empty))
+            {
+                msg.Error = true;
+                msg.Body = string.Format("Invalid parameter id [{0}]", id);
+            }else
+            {
+                msg = Topic.DeleteByID(id);
+            }
+            return Json(msg);
         }
         [HttpGet]
         public ActionResult EditTopic(Guid? id) {
@@ -161,7 +182,7 @@ namespace Garfielder.Controllers
                     {
                         dbm.Tags.Clear();
 
-                        obj.TagID.ForEach(x => dbm.Tags.Attach(db.Tags.Where(y=>y.Id.Equals(x))));
+                        obj.TagID.ForEach(x => dbm.Tags.Add(db.Tags.Single(y=>y.Id.Equals(x))));
                     }
                     //groups
                     if (obj.GroupID != null && obj.GroupID.Count > 0)
@@ -169,7 +190,7 @@ namespace Garfielder.Controllers
                         dbm.Groups.Clear();
                         
                         obj.GroupID.ForEach(
-                            x =>dbm.Groups.Attach(db.Groups.Where(y=>y.Id.Equals(x)))
+                            x => dbm.Groups.Add(db.Groups.Single(y => y.Id.Equals(x)))
                         );
 
                     }

@@ -80,7 +80,11 @@
 				})
 				.blur(function() {
 					var val =this.value;
-					if (needEmpty(defaultVal, val)) { $i.val(defaultVal).addClass(opts.cssDefault); };
+					if (needEmpty(defaultVal, val)) { 
+                        $i.val(defaultVal).addClass(opts.cssDefault); 
+                    }else{
+                        $i.removeClass(opts.cssDefault);
+                    };
 					if (opts.afterblur) { opts.afterblur($i); };
 				});
 				if(needEmpty(defaultVal,this.value)){

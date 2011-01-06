@@ -102,5 +102,27 @@ namespace Garfielder.Models
             }//using
             return r;
         }
+        /// <summary>
+        /// topic statistics
+        /// </summary>
+        /// <returns></returns>
+        public static dynamic TopicStat()
+        {
+            using(var db=new GarfielderEntities())
+            {
+                var sdate = DateTime.Today;
+                var edate = sdate.AddDays(1);
+                return new{
+                    CntTopic = db.Topics.Count(),
+                    CntTopicToday = db.Topics.Count(x => x.CreatedAt>=sdate||x.CreatedAt<edate),
+                    CntGroup = Group.ListAll().Count,
+                    CntComment = db.TopicComments.Count(),
+                    CntTag = Tag.ListAll().Count
+                };
+
+
+            }
+            
+        }
     }
 }

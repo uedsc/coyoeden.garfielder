@@ -17,11 +17,12 @@
         <%using (Ajax.BeginForm("EditTag", null, new AjaxOptions
           {
               HttpMethod = "Post",
-              OnSuccess = "this$.OnEdit"
+              OnSuccess = "Garfielder.M('AdminTag').OnEdit"
           }, new { id = "frmEdit" }))
           { %>
 		<div id="tagAdmin-detail" class="form-wrap">
-			<h3>Add New Tag</h3>
+            <input type="hidden" name="Id" value="" id="obj-id" />
+			<h3><a id="form-title0" class="form-tab form-tab-cur" href="javascript://">Add New Tag</a><span id="form-title1" class="form-tab">Edit Tag</span></h3>
 			<div class="form-field form-required">
                 <label for="obj-name">Name<%:Html.ValidationMessageFor(x => x.Name)%></label>
                 <%:Html.TextBoxFor(x => x.Name, new { id = "obj-name", size = 40 })%>
@@ -49,22 +50,22 @@
 						<option selected="selected" value="">Bulk Actions</option>
 						<option value="delete">Delete</option>
 					</select>
-					<input type="submit" class="btn action" id="doaction" name="doaction" value="Apply"/>
+					<input type="button" class="btn action" id="doaction" name="doaction" value="Apply"/>
 				</div>								
 			</div>
 			<div class="row">
 				<table id="tbItemList" cellspacing="0" class="widefat tag fixed">
 					<thead>
 						<tr>
-							<th class="manage-column column-cb check-column" id="col-cb" scope="col"><input type="checkbox"/></th>
-							<th class="manage-column column-name" id="col-cat-name" scope="col">Name</th>
-							<th class="manage-column column-slug" id="col-cat-slug" scope="col">Slug</th>
-							<th class="manage-column column-topics num" id="col-cat-topics" scope="col">Topics</th>
+							<th class="manage-column column-cb check-column" scope="col"><input id="cbx-toggle-all0" type="checkbox"/></th>
+							<th class="manage-column column-name" scope="col">Name</th>
+							<th class="manage-column column-slug" scope="col">Slug</th>
+							<th class="manage-column column-topics num" scope="col">Topics</th>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
-							<th class="manage-column column-cb check-column" scope="col"><input type="checkbox"/></th>
+							<th class="manage-column column-cb check-column" scope="col"><input  id="cbx-toggle-all1" type="checkbox"/></th>
 							<th class="manage-column column-name" scope="col">Name</th>
 							<th class="manage-column column-slug" scope="col">Slug</th>
 							<th class="manage-column column-topics num" scope="col">Topics</th>
@@ -77,14 +78,13 @@
                            <%item = Model.TagList[i]; %>
                            <tr id="tag-<%:item.Id %>" class="<%:i%2==0?"alt":"" %>">
                                 <th class="check-column" scope="row"> 
-								    <input type="checkbox" value="<%:item.Id %>" name="delete_tags[]"/>
+								    <input class="cbx-objid" type="checkbox" value="<%:item.Id %>" name="ObjIDList"/>
 							    </th>
 							    <td class="name column-name">
 								    <strong><a title="Edit [<%:item.Name %>] " href="javascript://" class="row-title"><%:item.Name %></a></strong>
 								    <div class="row-actions">
-									    <span class="edit"><a href="javascript://">Edit</a> | </span>
-									    <span class="inline"><a class="editinline" href="javascript://">Quick&nbsp;Edit</a> | </span>
-									    <span class="delete"><a href="javascript://" class="delete-tag">Delete</a></span>
+									    <span class="edit"><a href="javascript://" class="act-edit" rel='{"i":"<%:item.Id %>","n":"<%:item.Name %>","s":"<%:item.Slug %>"}'>Edit</a> | </span> 
+									    <span class="delete"><a href="javascript://" class="act-del" rel="<%:item.Id %>">Delete</a></span>
 								    </div>
 							    </td>
 							    <td class="slug column-slug"><%:item.Slug %></td>
@@ -100,7 +100,7 @@
 						<option selected="selected" value="">Bulk Actions</option>
 						<option value="delete">Delete</option>
 					</select>
-					<input type="submit" class="btn action" id="doaction1" name="doaction" value="Apply"/>
+					<input type="button" class="btn action" id="doaction1" name="doaction" value="Apply"/>
 				</div>								
 			</div>								
 		</div><!--#tagAdmin-list-->
@@ -118,17 +118,17 @@
 <script src="<%:Url.Content("~/Scripts/jquery.validate.js") %>" type="text/javascript"></script>
 <script src="<%:Url.Content("~/Scripts/jquery.validate.unobtrusive.js") %>" type="text/javascript"></script>
 <script type="text/javascript" src="<%:Url.JS("jquery-ui-1.8.6.effects.min") %>"></script>
+<script type="text/javascript" src="<%:Url.JS("jquery.json-2.2.min") %>"></script>
 <script id="tpl_item" type="text/x-jquery-tmpl">
     <tr id="tag-${Id}">
         <th class="check-column" scope="row"> 
-			<input type="checkbox" value="${Id}" name="delete_tags[]"/>
+			<input type="checkbox" value="${Id}" name="ObjIDList"/>
 		</th>
 		<td class="name column-name">
 			<strong><a title="Edit [${Name}] " href="javascript://" class="row-title">${Name}</a></strong>
 			<div class="row-actions">
-				<span class="edit"><a href="javascript://">Edit</a> | </span>
-				<span class="inline"><a class="editinline" href="javascript://">Quick&nbsp;Edit</a> | </span>
-				<span class="delete"><a href="javascript://" class="delete-tag">Delete</a></span>
+				<span class="edit"><a href="javascript://" class="act-edit">Edit</a> | </span>
+				<span class="delete"><a href="javascript://" class="act-del">Delete</a></span>
 			</div>
 		</td>
 		<td class="slug column-slug">${Slug}</td>
@@ -137,10 +137,5 @@
 </script> 
 <script type="text/javascript" src="<%:Url.JS("jQuery.tmpl.min") %>"></script>
 <script type="text/javascript" src="<%:Url.JS("Admin.Tag") %>"></script>
-<script type="text/javascript">
-//<![CDATA[
-    this$.Init({});
-//]]>
-</script>
 <!--/scripts-->	
 </asp:Content>

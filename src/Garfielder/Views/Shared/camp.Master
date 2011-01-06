@@ -49,8 +49,7 @@
 		<!--#viewport-->
 		<div id="scViewport">
 			<div id="scTip">
-				Today is <span class="year"><%:DateTime.Now.Year %></span>-<span class="month"><%:DateTime.Today.ToString("MM") %></span>-<span class="date"><%:DateTime.Today.ToString("dd") %></span>, 
-				totally <a href="#"><span class="cnt_topic">10</span></a> new topics found in <a href="#"><span class="cnt_group">5</span></a> groups.
+				Today is <span class="year"><%:DateTime.Now.Year %></span>-<span class="month"><%:DateTime.Today.ToString("MM") %></span>-<span class="date"><%:DateTime.Today.ToString("dd") %></span>
 			</div>
 			<div id="scViewport_" class="clear">
 				<div class="icon32"></div>

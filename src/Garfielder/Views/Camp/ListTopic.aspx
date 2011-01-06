@@ -12,14 +12,14 @@
         <form id="frm-search" name="frmSearch" action="" method="get">
 		<div class="row acts1">
 			<ul class="l">
-				<li><a id="btnShowAll" href="javascript://" rel="0" <%:Html.Raw(Model.Str(Model.Published=="0","class=\"now\"")) %>>All<span class="cnt">&nbsp;(<%:Model.TopicList.Count %>)&nbsp;</span></a> | </li>
-				<li><a id="btnShowPublished" href="javascript://" rel="1" <%:Html.Raw(Model.Str(Model.Published=="1","class=\"now\"")) %>>Published<span class="cnt">&nbsp;(<%:Model.TopicList.Count %>)&nbsp;</span></a></li>
+				<li><a id="btnShowAll" href="javascript://" rel="False" <%:Html.Raw(Model.Str(!Model.Published,"class=\"now\"")) %>>All<span class="cnt">&nbsp;(<%:Model.TopicList.Count %>)&nbsp;</span></a> | </li>
+				<li><a id="btnShowPublished" href="javascript://" rel="True" <%:Html.Raw(Model.Str(Model.Published,"class=\"now\"")) %>>Published<span class="cnt">&nbsp;(<%:Model.TopicList.Count %>)&nbsp;</span></a></li>
 			</ul>
 			<div class="r sbox">
 				<label for="txtTopicSearch" class="txtForScreen">Search Topics</label>
 				<input type="text" id="txtTopicSearch" name="term" value="<%:Model.Term %>"/>
 				<input type="submit" class="btn" value="Search Topics"/>
-                <input id="t-published" name="published" type="hidden" value="0" />	
+                <input id="t-published" name="published" type="hidden" value="False" />	
 			</div>
 		</div>
         </form>
@@ -28,8 +28,9 @@
 			<div class="actions">
 				<select  class="act-type" name="Action">
 					<option selected="selected" value="-1">Bulk Actions</option>
-					<option value="edit">Edit</option>
 					<option value="trash">Move to Trash</option>
+                    <option value="pub">Publish</option>
+					<option value="unpub">Unpublish</option>
 				</select>
 				<input type="submit" class="btn action" id="do-action0" name="doaction" value="Apply"/>
 				<select name="Date">
@@ -71,8 +72,12 @@
 					<tr id='topic-<%:item.Id %>' class='<%:i%2==0?"alt":"" %> status-publish iedit' valign="top">
 						<th scope="row" class="check-column"><input class="cbx-topicid" type="checkbox" name="TopicIDList" value="<%:item.Id %>" /></th>
 						<td class="post-title column-title">
-							<a class="row-title" href="#" title=""><strong><%:item.Title %></strong></a>
-						</td>
+							<a class="row-title" href="<%:Url.Action("EditTopic","Camp",new{id=item.Id}) %>" title="Click to edit!"><strong><%:item.Title %></strong></a>
+						    <p class="acts1">
+                                <a href="<%:Url.Action("Show","Topic",new{id=item.Id}) %>" target="_blank">Preview</a> | 
+                                <a href="javascript://" class="act-del" title="Delete this topic" rel="<%:item.Id %>">Delete</a>
+                            </p>
+                        </td>
 						<td class="author column-author"><a href="#"><%:item.UserName %></a></td>
 						<td class="groups column-groups"><a href='#'><%:item.GroupsTxt %></a></td>
 						<td class="tags column-tags"><a href='#'><%:item.TagsTxt %></a></td>
