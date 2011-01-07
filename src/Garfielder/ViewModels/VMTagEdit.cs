@@ -11,5 +11,13 @@ namespace Garfielder.ViewModels
         public string Name { get; set; }
         public string Slug { get; set; }
         public int CntTopic { get; set; }
+
+        public bool IsNew
+        {
+            get
+            {
+                return Id.Equals(Guid.Empty);
+            }
+        }
     }
 }

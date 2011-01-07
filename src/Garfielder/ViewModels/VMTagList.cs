@@ -14,9 +14,10 @@ namespace Garfielder.ViewModels
         //edit view data
         [Required]
         [StringLength(50)]
-        [Remote("TagName", "FBI", HttpMethod = "Post")]
+        [Remote("TagName", "FBI", HttpMethod = "Post",AdditionalFields="Id")]
         public string Name { get; set; }
-        [Remote("TagSlug", "FBI", HttpMethod = "Post")]
+        [Remote("TagSlug", "FBI", HttpMethod = "Post",AdditionalFields = "Id")]
         public string Slug { get; set; }
+        public Guid Id { get; set; }
     }
 }

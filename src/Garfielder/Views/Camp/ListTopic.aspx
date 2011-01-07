@@ -70,7 +70,7 @@
 					<% for (var i = 0; i < Model.TopicList.Count; i++){ %>
 					<% item = Model.TopicList[i]; %>
 					<tr id='topic-<%:item.Id %>' class='<%:i%2==0?"alt":"" %> status-publish iedit' valign="top">
-						<th scope="row" class="check-column"><input class="cbx-topicid" type="checkbox" name="TopicIDList" value="<%:item.Id %>" /></th>
+						<th scope="row" class="check-column"><input class="cbx-topicid" type="checkbox" name="ObjIDList" value="<%:item.Id %>" /></th>
 						<td class="post-title column-title">
 							<a class="row-title" href="<%:Url.Action("EditTopic","Camp",new{id=item.Id}) %>" title="Click to edit!"><strong><%:item.Title %></strong></a>
 						    <p class="acts1">

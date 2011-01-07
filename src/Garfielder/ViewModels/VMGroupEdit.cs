@@ -22,5 +22,13 @@ namespace Garfielder.ViewModels
         public string ParentName { get; set; }
 
         public int CntTopic { get; set; }
+
+        public bool IsNew
+        {
+            get
+            {
+                return Id.Equals(Guid.Empty);
+            }
+        }
     }
 }

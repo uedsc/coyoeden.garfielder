@@ -10,13 +10,18 @@ Garfielder.M("AdminGroup", {
             form0: {//detail form
                 $title0: $("#form-title0"),
                 $title1: $("#form-title1"),
-                $id: $("#gr-id"),
+                $id: $("#obj-id"),
                 $name: $("#gr-name"),
                 $slug: $("#gr-slug"),
                 $ddlGroup: $("#ddlGroup"),
                 $level: $("#gr-level"),
                 $desc: $("#gr-desc"),
-                $optsGroup: this.$ddlGroup.children()
+                $optsGroup: $("#ddlGroup").children(),
+                $submit: $("#btn-submit")
+            },
+            form1: {//filter form
+                $btnAct: $("#do-action0"),
+                $actType: $("#frm-filter .act-type")
             }
         };
         //i18 resources
@@ -29,11 +34,14 @@ Garfielder.M("AdminGroup", {
         //add new tag
         this.ui.form0.$title0.click(function () {
             me.addView();
+            me.mode = "add";
         });
         this.ui.form0.$ddlGroup.change(function () {
             var level = parseInt(me.ui.form0.$optsGroup.filter(":selected").data("level"));
             me.ui.form0.$level.val(level + 1);
         });
+        //mode
+        this.mode = "add";
     },
     onLoad: function () {
         var me = this;
@@ -66,25 +74,49 @@ Garfielder.M("AdminGroup", {
         });
         //edit event
         $("#tbItemList .act-edit").live("click", function (e) {
-            var $tr = $(this).parents("tr");
+            var $i=$(this), $tr = $i.parents("tr");
             $("#tbItemList tr").removeClass("cur");
             $tr.addClass("cur");
-            me.editView($.evalJSON(this.rel));
+            if (this.rel != "") {
+                me.editView($.evalJSON(this.rel));
+            } else {
+                me.editView($i.data("data"));
+            };
+            me.mode = "edit";
+        });
+        //batch operation event
+        me.ui.form1.$btnAct.click(function (e) {
+            if (me.ui.form1.$actType.val() == "-1") {
+                alert("No action selected!");
+                me.ui.form1.$actType.focus();
+                return false;
+            };
+            if ($("#tbItemList .cbx-objid:checked").size() == 0) {
+                alert("No items selected!");
+                return false;
+            };
+            return true;
         });
     },
     OnEdit: function (d) {
-        if (!d) {
-            alert("Error!Please try again later!"); return;
+        if (d.Error) {
+            Garfielder.AdminCommon.ShowTip(d.Body, true, 3000); return;
         };
-        var $d = this.ui.$tpl.tmpl(d);
-        this.ui.$tb.find("tbody").append($d);
-        if (!$d.prev().is(".alt")) {
+        //delete the old row
+        $("#g-" + d.Id).remove();
+        var $d = Garfielder.AdminGroup.ui.$tpl.tmpl(d), $btnEdit = $d.find(".act-edit");
+        $btnEdit.data("data", d);
+        Garfielder.AdminGroup.ui.$tb.find("tbody").prepend($d);
+        if (!$d.next().is(".alt")) {
             $d.addClass("alt");
         };
         $d.effect("highlight", 1000);
+        if (Garfielder.AdminGroup.mode == "edit") {
+            $btnEdit.trigger("click");
+        };
     },
     Delete: function (id, opts) {
-        if (!confirm("Are you sure to delete this tag [" + id + "]?")) return;
+        if (!confirm("Are you sure to delete this Group [" + id + "]?")) return;
         $.ajax({
             url: Garfielder.SiteRoot + "Camp/DeleteGroup",
             type: 'POST',
@@ -106,18 +138,26 @@ Garfielder.M("AdminGroup", {
 
     },
     addView: function () {
-        this.ui.form0.$id.val("");
-        this.ui.form0.$title1[0].className = "";
-        this.ui.form0.$title0[0].className = "cur";
+        this.ui.form0.$id.val("00000000-0000-0000-0000-000000000000");
+        this.ui.form0.$name.val("");
+        this.ui.form0.$slug.val("");
+        this.ui.form0.$level.val(1);
+        this.ui.form0.$ddlGroup.val(-1);
+        this.ui.form0.$desc.val("");
+        this.ui.form0.$title1.removeClass("form-tab-cur");
+        this.ui.form0.$title0.addClass("form-tab-cur");
+        this.ui.form0.$submit.val("Add new Group");
+        $("#tbItemList tr").removeClass("cur");
     },
     editView: function (obj) {
-        this.ui.form0.$id.val(obj.i);
-        this.ui.form0.$name.val(obj.n);
-        this.ui.form0.$slug.val(obj.s);
-        this.ui.form0.$level.val(obj.l);
-        this.ui.form0.$ddlGroup.val(obj.p);
-        this.ui.form0.$desc.val(obj.d);
-        this.ui.form0.$title1[0].className = "cur";
-        this.ui.form0.$title0[0].className = "";
+        this.ui.form0.$id.val(obj.i || obj.Id);
+        this.ui.form0.$name.val(obj.n || obj.Name);
+        this.ui.form0.$slug.val(obj.s || obj.Slug);
+        this.ui.form0.$level.val(obj.l || obj.Level);
+        this.ui.form0.$ddlGroup.val(obj.p || obj.ParentID);
+        this.ui.form0.$desc.val(obj.d || obj.Description);
+        this.ui.form0.$title1.addClass("form-tab-cur");
+        this.ui.form0.$title0.removeClass("form-tab-cur");
+        this.ui.form0.$submit.val("Edit Group");
     }
 });

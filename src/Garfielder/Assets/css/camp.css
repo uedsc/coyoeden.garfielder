@@ -178,14 +178,16 @@ table.fixed {
 	height:100%;
 }
 
-#scViewport{
+#scViewport
+{
+    position:relative;
 	float:left;
 	width:100%;
 	min-height:300px;
 	height:auto !important;
 	height:300px;
 }
-#scTip
+.site-tip
 {
 	-moz-border-radius:0 0 6px 6px;
 	border-style:none solid solid;
@@ -195,6 +197,7 @@ table.fixed {
 	padding:5px 0;
 	text-align:center;   
 }
+#scTip-dynamic{display:none;position:absolute;top:0;left:0;width:100%}
 
 /* menus */
 #scMenus{

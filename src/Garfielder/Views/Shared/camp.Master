@@ -48,8 +48,11 @@
 		<!--/sidebar-->
 		<!--#viewport-->
 		<div id="scViewport">
-			<div id="scTip">
+			<div id="scTip" class="site-tip">
 				Today is <span class="year"><%:DateTime.Now.Year %></span>-<span class="month"><%:DateTime.Today.ToString("MM") %></span>-<span class="date"><%:DateTime.Today.ToString("dd") %></span>
+			</div>
+            <div id="scTip-dynamic">
+				<div class="site-tip site-tip-ct<%:Model.Error?" site-tip-error":""%>"><%:Model.Msg %></div>
 			</div>
 			<div id="scViewport_" class="clear">
 				<div class="icon32"></div>
@@ -63,12 +66,13 @@
 		<div class="r">Version <%:DateTime.Now.ToString("yyyy.MM.dd") %></div>
 	</div>
 	<!--common js-->
-	<script type="text/javascript" src="<%:Url.JS("Garfielder") %>"></script> 
+	<script type="text/javascript" src="<%:Url.JS("Garfielder") %>"></script>
+    <script type="text/javascript" src="<%:Url.JS("Admin.Common") %>"></script> 
 	<!--/common js--> 
 	<asp:ContentPlaceHolder ID="cphFoot" runat="server"></asp:ContentPlaceHolder>
 	<script type="text/javascript">
 	//<![CDATA[
-			Garfielder.Init({ siteRoot: '<%:Url.Home() %>' });
+			Garfielder.Init({ siteRoot: '<%:Url.Home() %>',tip:<%:(!String.IsNullOrEmpty(Model.Msg)).ToString().ToLower() %> });
 	//]]>
 	</script>
 </body>

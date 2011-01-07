@@ -17,7 +17,7 @@
 		<%using (Ajax.BeginForm("EditGroup", null, new AjaxOptions
 		  {
 			  HttpMethod = "Post",
-			  OnSuccess = "this$.OnEdit"
+			  OnSuccess = "Garfielder.AdminGroup.OnEdit"
 		  }, new{ id="frmEdit" }))
 		  { %>
 		<div id="catAdmin-detail" class="form-wrap">
@@ -26,8 +26,8 @@
 				<label for="gr-name">Name<%:Html.ValidationMessageFor(x => x.Name)%></label>
 				<%:Html.TextBoxFor(x => x.Name, new { id = "gr-name", size = 40 })%>
 				<p>The name is how it appears on your site.</p>
-                <input type="hidden" name="Id" id="gr-id"/>
-			</div>	
+			    <%:Html.HiddenFor(x => x.Id, new { id = "obj-id", value = "00000000-0000-0000-0000-000000000000" })%>
+            </div>	
 			<div class="form-field">
 				<label for="gr-slug">Slug<%:Html.ValidationMessageFor(x => x.Slug)%></label>
 				<%:Html.TextBoxFor(x=>x.Slug,new{id="gr-slug",size=40}) %>
@@ -44,20 +44,22 @@
 				<%:Html.TextAreaFor(x => x.Description, new { id = "gr-desc", cols = 40, rows = 5 })%>
 				<p>The description is not prominent by default; however, some themes may show it.</p>
 			</div>
-			<p class="submit"><input type="submit" value="Add New Group" id="gr-submit" name="grsubmit" class="button"/></p>																											
+			<p class="submit"><input type="submit" value="Add New Group" id="btn-submit" name="grsubmit" class="btn"/></p>																											
 		</div><!--detail-->
 		<%} %>
 	</div>
 	<div id="catAdmin-wrap_R" class="r mcb_R">
+        <form id="frm-filter" name="frmFilter" method="post" action="">
 		<div id="catAdmin-list">
 			<div class="row tablenav">
 				<div class="actions">
-					<select name="action">
-						<option selected="selected" value="">Bulk Actions</option>
-						<option value="delete">Delete</option>
+					<select class="act-type" name="Action">
+						<option selected="selected" value="-1">Bulk Actions</option>
+						<option value="trash">Delete</option>
 					</select>
-					<input type="submit" class="btn action" id="doaction" name="doaction" value="Apply"/>
-				</div>								
+					<input type="submit" class="btn action" id="do-action0" name="doaction" value="Apply"/>
+				    <span class="tip">Click the Name field to edit!</span>
+                </div>								
 			</div>
 			<div class="row">
 				<table id="tbItemList" cellspacing="0" class="widefat cat fixed">
@@ -89,9 +91,8 @@
 									<input type="checkbox" class="cbx-objid" value="<%:item.Id %>" name="ObjIDList"/>
 								</th>
 								<td class="name column-name">
-									<strong><a title="Edit [<%:item.Name %>] " href="javascript://" class="row-title"><%:item.Name %></a></strong>
+									<strong><a title="Edit [<%:item.Name %>] " href="javascript://" class="row-title act-edit"  rel='{"i":"<%:item.Id %>","n":"<%:item.Name %>","s":"<%:item.Slug %>","d":"<%:item.Description %>","p":"<%:item.ParentID %>","l":"<%:item.Level %>"}'><%:item.Name %></a></strong>
 									<div class="row-actions">
-										<span class="edit"><a href="javascript://" class="act-edit" rel='{"i":"<%:item.Id %>","n":"<%:item.Name %>","s":"<%:item.Slug %>","d":"<%:item.Description %>","p":"<%:item.ParentID %>","l":"<%:item.Level %>"}'>Edit</a> | </span>
 										<span class="delete"><a href="javascript://" class="act-del" rel="<%:item.Id %>">Delete</a></span>
 									</div>
 								</td>
@@ -102,17 +103,9 @@
 						<%} %>											
 					</tbody>
 				</table>									
-			</div>
-			<div class="row tablenav">
-				<div class="actions">
-					<select name="action">
-						<option selected="selected" value="">Bulk Actions</option>
-						<option value="delete">Delete</option>
-					</select>
-					<input type="submit" class="btn action" id="doaction1" name="doaction" value="Apply"/>
-				</div>								
 			</div>								
 		</div><!--#catAdmin-list-->
+        </form>
 	</div><!--#catAdmin-wrap_R-->
 </div>	
 
@@ -132,12 +125,11 @@
 <script id="tpl_item" type="text/x-jquery-tmpl">
 	<tr id="g-${Id}">
 		<th class="check-column" scope="row"> 
-			<input type="checkbox" value="${Id}" name="ObjIDList"/>
+			<input class="cbx-objid" type="checkbox" value="${Id}" name="ObjIDList"/>
 		</th>
 		<td class="name column-name">
-			<strong><a title="Edit [${Name}] " href="javascript://" class="row-title">${Name}</a></strong>
+			<strong><a title="Edit [${Name}] " href="javascript://" class="row-title act-edit">${Name}</a></strong>
 			<div class="row-actions">
-				<span class="edit"><a href="javascript://" class="act-edit">Edit</a> | </span>
 				<span class="delete"><a href="javascript://" class="act-del">Delete</a></span>
 			</div>
 		</td>

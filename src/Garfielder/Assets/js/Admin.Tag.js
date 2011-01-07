@@ -12,7 +12,12 @@ Garfielder.M("AdminTag", {
                 $title1: $("#form-title1"),
                 $id: $("#obj-id"),
                 $name: $("#obj-name"),
-                $slug: $("#obj-slug")
+                $slug: $("#obj-slug"),
+                $submit: $("#btn-submit")
+            },
+            form1: {//filter form
+                $btnAct: $("#do-action0"),
+                $actType: $("#frm-filter .act-type")
             }
         };
         //i18 resources
@@ -25,7 +30,9 @@ Garfielder.M("AdminTag", {
         //add new tag
         this.ui.form0.$title0.click(function () {
             me.addView();
+            me.mode = "add";
         });
+        this.mode = "add";
     },
     onLoad: function () {
         var me = this;
@@ -58,22 +65,49 @@ Garfielder.M("AdminTag", {
         });
         //edit event
         $("#tbItemList .act-edit").live("click", function (e) {
-            var $tr = $(this).parents("tr");
+            var $i = $(this);
+            var $tr = $i.parents("tr");
             $("#tbItemList tr").removeClass("cur");
             $tr.addClass("cur");
-            me.editView($.evalJSON(this.rel));
+            if (this.rel != "") {
+                me.editView($.evalJSON(this.rel));
+            } else {
+                me.editView($i.data("data"));
+            };
+            me.mode = "edit";
+
+        });
+        //batch operation event
+        me.ui.form1.$btnAct.click(function (e) {
+            if (me.ui.form1.$actType.val() == "-1") {
+                alert("No action selected!");
+                me.ui.form1.$actType.focus();
+                return false;
+            };
+            if ($("#tbItemList .cbx-objid:checked").size() == 0) {
+                alert("No items selected!");
+                return false;
+            };
+            return true;
         });
     },
     OnEdit: function (d) {
-        if (!d) {
-            alert("Error!Please try again later!"); return;
+        //keyword this is referenced to the ajax xmlhttprequest object!
+        if (d.Error) {
+            Garfielder.AdminCommon.ShowTip(d.Body, true, 3000); return;
         };
-        var $d = this.ui.$tpl.tmpl(d);
-        this.ui.$tb.find("tbody").append($d);
-        if (!$d.prev().is(".alt")) {
+        //delete the old row
+        $("#tag-" + d.Id).remove();
+        var $d = Garfielder.AdminTag.ui.$tpl.tmpl(d), $btnEdit = $d.find(".act-edit");
+        $btnEdit.data("data", d);
+        Garfielder.AdminTag.ui.$tb.find("tbody").prepend($d);
+        if (!$d.next().is(".alt")) {
             $d.addClass("alt");
         };
         $d.effect("highlight", 1000);
+        if (Garfielder.AdminTag.mode == "edit") {
+            $btnEdit.trigger("click");
+        };
     },
     Delete: function (id, opts) {
         if (!confirm("Are you sure to delete this tag [" + id + "]?")) return;
@@ -98,15 +132,20 @@ Garfielder.M("AdminTag", {
 
     },
     addView: function () {
-        this.ui.form0.$id.val("");
+        this.ui.form0.$id.val("00000000-0000-0000-0000-000000000000");
+        this.ui.form0.$name.val("");
+        this.ui.form0.$slug.val("");
         this.ui.form0.$title1.removeClass("form-tab-cur");
         this.ui.form0.$title0.addClass("form-tab-cur");
+        this.ui.form0.$submit.val("Add new Tag");
+        $("#tbItemList tr").removeClass("cur");
     },
     editView: function (obj) {
-        this.ui.form0.$id.val(obj.i);
-        this.ui.form0.$name.val(obj.n);
-        this.ui.form0.$slug.val(obj.s);
+        this.ui.form0.$id.val(obj.i || obj.Id);
+        this.ui.form0.$name.val(obj.n || obj.Name);
+        this.ui.form0.$slug.val(obj.s || obj.Slug);
         this.ui.form0.$title1.addClass("form-tab-cur");
         this.ui.form0.$title0.removeClass("form-tab-cur");
+        this.ui.form0.$submit.val("Edit Tag");
     }
 });

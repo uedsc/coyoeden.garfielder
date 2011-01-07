@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Garfielder.Models;
 using Garfielder.ViewModels;
+using System.Text;
 namespace Garfielder.Controllers
 {
     public abstract class BaseController : Controller
@@ -66,6 +67,21 @@ namespace Garfielder.Controllers
             };
 
             return viewData;
+        }
+        /// <summary>
+        /// Get summary model errors
+        /// </summary>
+        /// <returns></returns>
+        public string ModelErrors()
+        {
+            if (ModelState.IsValid) return null;
+            var error =new StringBuilder();
+            ModelState.Values.ToList().ForEach(x => {
+                if (x.Errors.Count > 0) {
+                    error.AppendFormat("<p>{0}</p>",x.Errors[0].ErrorMessage);
+                }
+            });
+            return error.ToString();
         }
     }
 }
