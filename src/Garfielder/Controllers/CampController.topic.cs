@@ -66,7 +66,7 @@ namespace Garfielder.Controllers
             return View(vm);
         }
         [HttpPost]
-        public ActionResult ListTopic(VMCameTopicListFilter filter)
+        public ActionResult ListTopic(VMCampTopicListFilter filter)
         {
             var vm = CreateViewData<VMCampTopicList>();
             vm.Term = filter.term ?? "";
@@ -75,7 +75,7 @@ namespace Garfielder.Controllers
             switch (filter.Action)
             {
                 case "trash":
-                    var msg = Topic.DeleteByID(filter.TopicIDList.ToArray());
+                    var msg = Topic.DeleteByID(filter.ObjIDList.ToArray());
                     vm.Error = msg.Error;
                     vm.Msg = msg.Body;
                     return ListTopic(vm.Published, vm.Term);

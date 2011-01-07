@@ -61,7 +61,7 @@ namespace Garfielder.Models
         /// <returns></returns>
         public static List<VMGroupEdit> ListAllData()
         {
-            var items = ListAll();
+            var items = ListAll().OrderByDescending(x=>x.CreatedAt).ToList();
             var r = new List<VMGroupEdit>();
             items.ForEach(x => r.Add(
                     new VMGroupEdit
@@ -139,6 +139,83 @@ namespace Garfielder.Models
                 }
             }//using
             return r;
+        }
+        /// <summary>
+        /// check the specified slug whether exists.if it exists we provide a new one 
+        /// </summary>
+        /// <param name="db"></param>
+        /// <param name="slug"></param>
+        /// <returns></returns>
+        public static string CheckSlug(GarfielderEntities db, string slug)
+        {
+            var tag = db.Groups.SingleOrDefault(x => x.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
+            if (null == tag)
+            {
+                return slug;
+            }
+            return string.Format("{0}{1}", slug, Utils.RandomStr(5));
+        }
+        /// <summary>
+        /// save a item.update if exists
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static dynamic Save(VMGroupEdit obj) {
+            var msg = new Msg();
+            var dbm = default(Group);
+            obj.Slug = string.IsNullOrEmpty(obj.Slug) ? obj.Name.CHSToPinyin().ToLower() : obj.Slug.ToLower();
+            
+            //validate name existence
+            if (!ValidateName(obj.Name)) {
+                msg.Error = true;
+                msg.Body = string.Format("Name [{0}] exists,please choose another one!",obj.Name);
+                return msg;
+            };
+            
+            using (var db = new GarfielderEntities())
+            {
+                if (obj.IsNew)//add new
+                {
+                    obj.Id = Guid.NewGuid();
+                    dbm = new Group();
+                    dbm.Id = obj.Id;
+                    dbm.CreatedAt = DateTime.Now;
+                    //TODO
+                    dbm.CreatedBy = "Sys";
+                    db.AddToGroups(dbm);
+                }
+                else
+                { //update
+                    dbm = db.Groups.SingleOrDefault(x => x.Id.Equals(obj.Id));
+                    if (dbm == null)
+                    { //has been deleted!
+                        msg.Error = true;
+                        msg.Body = string.Format("Obj {0} has been deleted!", obj.Id);
+                        return msg;
+                    }
+                }//if
+
+                dbm.Name = obj.Name;
+                dbm.Slug = Group.CheckSlug(db, obj.Slug);
+                dbm.Description = obj.Description;
+
+                dbm.ParentID = obj.ParentID.Equals(Guid.Empty) ? default(Guid?) : obj.ParentID;
+                dbm.Level = obj.Level;
+
+
+                db.CommandTimeout = 0;
+                db.SaveChanges();
+
+                //clear cache
+                ClearCache();
+
+                if (dbm.Parent != null)
+                {
+                    obj.ParentName = dbm.Parent.Name;
+                }
+
+            };//using
+            return obj;
         }
 
         #region private properties

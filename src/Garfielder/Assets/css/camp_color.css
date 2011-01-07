@@ -15,9 +15,9 @@ h2{text-shadow:0 1px 0 #FFFFFF;}
 /* cl-#999 */
 .cmt_meta,#edtbtn_html,#edtbtn_preview{color:#999;}
 /* cl-green */
-.widget a.approved,#scTip .cnt_group{color:green;}
+.widget a.approved,.site-tip .cnt_group{color:green;}
 /* cl-#E66F00 */
-.widget a.pending,#scTip .cnt_topic,.unapprove{color:#E66F00;}
+.widget a.pending,.site-tip .cnt_topic,.unapprove{color:#E66F00;}
 /* cl-#BC0B0B */
 .cmt_acts .trash,.cmt_acts .spam{color:#BC0B0B;}
 /* cl-#777 */
@@ -164,11 +164,21 @@ table.widefat span.spam a{
 	background: transparent url(../img/fav-arrow.gif) no-repeat 0 -4px;
 }
 
-#scTip
+.site-tip
 {
 	background-color:#FFFBCC;
 	border-color:#E6DB55;
 	color:#555555;    
+}
+.site-tip-ct
+{
+    color:#88C32B;    
+}
+.site-tip-error
+{
+    background-color:#333;
+    border-color:#eee;
+    color:Red;
 }
 
 #scMenus *{border-color:#E3E3E3;}
@@ -439,6 +449,7 @@ a.menu_first
 /* =============== listView ================= */
 .listView .acts1 span.cnt,.listView a.now{color:#999;}
 .listView a.now{color:#000;}
+.listView .act-del{color:#BC0B0B}
 
 /* footer */
 #scFoot{
@@ -458,6 +469,7 @@ a.menu_first
 	color:#222222;
 	text-shadow:0 1px 0 #FFFFFF;
 }
+.form-wrap .form-tab{color:#999}
 #tagcloud-topic{border-color:#ddd;}
 #tagsAdded .tag{background:pink;}
 

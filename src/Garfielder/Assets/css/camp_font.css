@@ -18,14 +18,14 @@ strong,a.now,.widefat th{font-weight:bold;}
 .cmt blockquote,.btn,.tip{font-size:85%;}
 #scSubhead a{font-size:55%;}
 /* 12px */
-#scTip,.widget .w_ct,.widget h3,#scFoot,.widefat{font-size:93%;}
+.site-tip,.widget .w_ct,.widget h3,#scFoot,.widefat{font-size:93%;}
 /* 13px */
-#scTip span{font-size:108%;}
+.site-tip span{font-size:108%;}
 /* bold */
 .menu_sub_ li.now a,
 	.widget h3,
 	#scSubhead,
-	#scTip span{font-weight:bold;}
+	.site-tip span{font-weight:bold;}
 
 /* font-italic */
 #scSubhead,.widget .tbl .txtth,#scFoot,.howto,.form-wrap p,.tip{font-style:italic;}

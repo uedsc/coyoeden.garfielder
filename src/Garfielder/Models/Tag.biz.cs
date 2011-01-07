@@ -30,12 +30,12 @@ namespace Garfielder.Models
             return valid;
         }
         /// <summary>
-        /// add a tag
+        /// add a simple tag 
         /// </summary>
         /// <param name="name"></param>
         /// <param name="slug"></param>
         /// <returns></returns>
-        public static VMTagEdit AddTag(string name,string slug=null,string user="Sys") {
+        public static VMTagEdit QuickAddTag(string name,string slug=null,string user="Sys") {
             var retVal = new VMTagEdit();
             if (string.IsNullOrWhiteSpace(name)) {
                 retVal.Error = true;
@@ -63,16 +63,64 @@ namespace Garfielder.Models
                     dbm.CreatedAt = DateTime.Now;
                     //TODO:
                     dbm.CreatedBy =user;
+                    db.AddToTags(dbm);
                     //persist
                     db.CommandTimeout = 0;
-                    db.AddToTags(dbm);
                     db.SaveChanges();
                     ClearCache();
                 };
+
             };//using
             return retVal;
         }
+        /// <summary>
+        /// save a tag object.Update if exists
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static dynamic Save(VMTagEdit obj) {
+            var dbm = default(Tag);
+            obj.Slug = string.IsNullOrEmpty(obj.Slug) ? obj.Name.CHSToPinyin("-").ToLower() : obj.Slug.ToLower();
+            var msg = new Msg();
+            //validate name
+            if (!ValidateName(obj.Name)) {
+                msg.Error = true;
+                msg.Body = string.Format("Name [{0}] exists!Please choose another one!",obj.Name);
+                return msg;
+            };
+            using (var db = new GarfielderEntities())
+            {
+                if (obj.IsNew)//add new
+                {
+                    obj.Id = Guid.NewGuid();
+                    dbm = new Tag();
+                    dbm.Id = obj.Id;
+                    dbm.CreatedAt = DateTime.Now;
+                    //TODO
+                    dbm.CreatedBy = "Sys";
+                    db.AddToTags(dbm);
+                }
+                else
+                { //update
+                    dbm = db.Tags.SingleOrDefault(x => x.Id.Equals(obj.Id));
+                    if (dbm == null)
+                    { //has been deleted!
+                        msg.Error = true;
+                        msg.Body = string.Format("Obj {0} has been deleted!", obj.Id);
+                        return msg;
+                    }
+                }//if
 
+
+
+                dbm.Name = obj.Name;
+                dbm.Slug = Tag.CheckSlug(db, obj.Slug);
+                db.CommandTimeout = 0;
+                db.SaveChanges();
+                ClearCache();
+            };//using
+            return obj;
+        }
         /// <summary>
         /// check the specified slug whether exists.if it exists we provide a new one 
         /// </summary>
@@ -110,7 +158,25 @@ namespace Garfielder.Models
             }//using
 
         }
+        /// <summary>
+        /// list all tag data.TODO:Don't use VMTagEdit!You should define an interface type such as IGroupData
+        /// </summary>
+        /// <returns></returns>
+        public static List<VMTagEdit> ListAllData()
+        {
+            var items = ListAll().OrderByDescending(x => x.CreatedAt).ToList();
+            var r = new List<VMTagEdit>();
+            items.ForEach(x => r.Add(
+                new VMTagEdit
+                {
+                    Name = x.Name,
+                    Slug = x.Slug,
+                    Id = x.Id,
+                    CntTopic = x.Topics.Count
+                }));
+            return r;
 
+        }
         /// <summary>
         /// get by id
         /// </summary>

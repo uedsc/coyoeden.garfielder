@@ -104,7 +104,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\VMCameTopicListFilter.cs" />
+    <Compile Include="ViewModels\VMCampCommonFilter.cs" />
+    <Compile Include="ViewModels\VMCampTopicListFilter.cs" />
     <Compile Include="ViewModels\VMCampTopicShow.cs" />
     <Compile Include="ViewModels\VMTagList.cs" />
     <Compile Include="ViewModels\VMGroupList.cs" />
@@ -172,6 +173,7 @@
     <Content Include="Assets\img\XPButtonNoText_160x22.png" />
     <Content Include="Assets\img\zerobyte.gif" />
     <Content Include="Assets\js\Admin.AddMedia.js" />
+    <Content Include="Assets\js\Admin.Common.js" />
     <Content Include="Assets\js\Admin.Group.js" />
     <Content Include="Assets\js\Admin.SWFUploadController.js" />
     <Content Include="Assets\js\Admin.TopicAdd.js" />

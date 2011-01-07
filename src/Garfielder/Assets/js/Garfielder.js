@@ -77,6 +77,8 @@ var Garfielder = (function ($) {
             return;
         };
         p._modules[key] = module;
+        //register the key as second level namespace
+        pub[key] = module;
         return pub;
     };
     /**
@@ -96,7 +98,7 @@ var Garfielder = (function ($) {
             return pub.GetModule(key);
         };
         if (arguments.length === 2) {
-            return pub.AddModule(key,module);
+            return pub.AddModule(key, module);
         };
         return null;
     };

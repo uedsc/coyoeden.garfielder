@@ -11,59 +11,59 @@ namespace Garfielder.Controllers
 {
     public partial class CampController
     {
-        public ActionResult ListTag()
+        public ActionResult ListTag(string siteTip=null)
         {
             var vm = CreateViewData<VMTagList>();
-            using (var db = new GarfielderEntities()) {
-                var items = db.Tags.ToList();
-                vm.TagList=new List<VMTagEdit>();
-                items.ForEach(x => vm.TagList.Add(
-                    new VMTagEdit { 
-                    Name=x.Name,
-                    Slug=x.Slug,
-                    Id=x.Id,
-                    CntTopic=x.Topics.Count
-                }));
-            }//using
+            vm.TagList = Tag.ListAllData();
+            vm.Msg = siteTip;
+            return View(vm);
+        }
+        /// <summary>
+        /// list items by specified filter
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ListTag(VMCampCommonFilter filter)
+        {
+            var vm = CreateViewData<VMTagList>();
+            switch (filter.Action)
+            {
+                case "trash":
+                    var msg = Tag.DeleteByID(filter.ObjIDList.ToArray());
+                    if (!msg.Error) return ListTag(string.Format("Items with id [{0}] have been deleted!", String.Join(",", filter.ObjIDList)));
+                    vm.Error = msg.Error;
+                    vm.Msg = msg.Body;
+                    vm.TagList = Tag.ListAllData();
+                    
+                    break;
+                default:
+                    //no action,just render the default list
+                    return ListTag();
+                    break;
+            }
             return View(vm);
         }
         [HttpPost]
         public JsonResult EditTag(VMTagEdit obj)
         {
-            if (!TryUpdateModel(obj))
+            var msg = new Msg();
+            if (!TryUpdateModel(obj)||!ModelState.IsValid)
             {
-                return new JsonResult() { Data = false };
+                msg.Error = true;
+                msg.Body = ModelErrors();
+                return Json(msg);
             }
-            if (this.ModelState.IsValid)
-            {
-                obj.Id = Guid.NewGuid();
-                obj.Slug = string.IsNullOrEmpty(obj.Slug) ? obj.Name.CHSToPinyin("-").ToLower() : obj.Slug.ToLower();
-
-                var dbm = new Tag();
-                dbm.Id = obj.Id;
-                dbm.Name = obj.Name;
-                
-                dbm.CreatedAt = DateTime.Now;
-                //TODO:
-                dbm.CreatedBy = "Sys";
-                using (var db = new GarfielderEntities())
-                {
-                    dbm.Slug =Tag.CheckSlug(db,obj.Slug);
-                    db.CommandTimeout = 0;
-                    db.AddToTags(dbm);
-                    Tag.ClearCache();
-                    db.SaveChanges();
-                };
-            };
-            return Json(obj);
+            var obj1 = Tag.Save(obj);
+            return Json(obj1);
         }
         /// <summary>
-        /// check a tag's existence
+        /// check a tag's existence,if not exists,we will add a new one!
         /// </summary>
         /// <param name="tag"></param>
         /// <returns></returns>
         public JsonResult CheckTag(string tag) {
-            var vm = Tag.AddTag(tag);
+            var vm = Tag.QuickAddTag(tag);
             return Json(vm);
         }
         /// <summary>

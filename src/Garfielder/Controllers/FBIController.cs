@@ -13,15 +13,17 @@ namespace Garfielder.Controllers
     public class FBIController : Controller
     {
         #region Group validation
-        public JsonResult GroupName(string Name)
+        public JsonResult GroupName(string Name,Guid Id)
         {
+            if (!Id.Equals(Guid.Empty)) return Json(true);
             dynamic r = Group.ValidateName(Name);
             if (r == false)
                 r = string.Format("Name [{0}] exists,please choose another one", Name);
 
             return Json(r);
         }
-        public JsonResult GroupSlug(string Slug) {
+        public JsonResult GroupSlug(string Slug,Guid Id) {
+            if (!Id.Equals(Guid.Empty)) return Json(true);
             dynamic r = Group.ValidateSlug(Slug);
             if(r==false)
                 r = string.Format("Slug [{0}] exists,please choose another one", Slug);
@@ -30,16 +32,18 @@ namespace Garfielder.Controllers
         #endregion
 
         #region Tag validation
-        public JsonResult TagName(string Name)
+        public JsonResult TagName(string Name,Guid Id)
         {
+            if (!Id.Equals(Guid.Empty)) return Json(true);
             dynamic r = Tag.ValidateName(Name);
             if (r == false)
                 r = string.Format("Name [{0}] exists,please choose another one", Name);
 
             return Json(r);
         }
-        public JsonResult TagSlug(string Slug)
+        public JsonResult TagSlug(string Slug,Guid Id)
         {
+            if (!Id.Equals(Guid.Empty)) return Json(true);
             dynamic r = Tag.ValidateSlug(Slug);
             if (r == false)
                 r = string.Format("Slug [{0}] exists,please choose another one", Slug);

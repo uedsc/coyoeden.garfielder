@@ -11,51 +11,50 @@ namespace Garfielder.Controllers
 {
     public partial class CampController
     {
-        public ActionResult ListGroup()
+        public ActionResult ListGroup(string siteTip=null)
         {
             var vm = CreateViewData<VMGroupList>();
             //load list data
             vm.GroupList = Group.ListAllData();
-
+            vm.Msg = siteTip;
+            return View(vm);
+        }
+        /// <summary>
+        /// list items by specified filter
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ListGroup(VMCampCommonFilter filter)
+        {
+            var vm = CreateViewData<VMGroupList>();
+            switch (filter.Action)
+            {
+                case "trash":
+                    var msg = Group.DeleteByID(filter.ObjIDList.ToArray());
+                    if (!msg.Error) return ListGroup(string.Format("Items with id [{0}] have been deleted!",String.Join(",",filter.ObjIDList)));
+                    vm.Error = msg.Error;
+                    vm.Msg = msg.Body;
+                    vm.GroupList = Group.ListAllData();
+                    break;
+                default:
+                    //no action,just render the default list
+                    return ListGroup();
+                    break;
+            }
             return View(vm);
         }
         [HttpPost]
         public JsonResult EditGroup(VMGroupEdit obj)
         {
-            if (!TryUpdateModel(obj)) {
-                return new JsonResult() { Data=false};
+            var msg = new Msg();
+            if (!TryUpdateModel(obj)||!ModelState.IsValid) {
+                msg.Error = true;
+                msg.Body =String.Format("Fields [{0}] are invalid!",string.Join(",",ModelState.Keys));
+                return Json(msg);
             }
-            if (this.ModelState.IsValid)
-            {
-                obj.Id = Guid.NewGuid();
-                obj.Slug=string.IsNullOrEmpty(obj.Slug)?obj.Name.CHSToPinyin().ToLower():obj.Slug.ToLower();
-
-                var dbm = new Group();
-                dbm.Id =obj.Id;
-                dbm.Name = obj.Name;
-                dbm.Slug = obj.Slug;
-                dbm.Description = obj.Description;
-                dbm.CreatedAt = DateTime.Now;
-                dbm.ParentID = obj.ParentID.Equals(Guid.Empty) ? default(Guid?): obj.ParentID;
-                dbm.Level = obj.Level;
-                //TODO:
-                dbm.CreatedBy = "Sys";
-                using (var db = new GarfielderEntities())
-                {
-                    db.CommandTimeout = 0;
-                    db.AddToGroups(dbm);
-                    db.SaveChanges();
-
-                    //clear cache
-                    Group.ClearCache();
-
-                    if (dbm.Parent != null) {
-                        obj.ParentName = dbm.Parent.Name;
-                    }
-
-                };
-            };
-            return Json(obj);
+            var obj1 = Group.Save(obj);
+            return Json(obj1);
         }
         /// <summary>
         /// delete a specified item
