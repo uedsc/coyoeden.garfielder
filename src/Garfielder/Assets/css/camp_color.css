@@ -457,6 +457,7 @@ a.menu_first
 }
 
 /* =============== topic_add.html =============== */
+#ste_slug,#ste_slug_auto{background:#ddd;}
 #ste_slug_{color:#666;}
 
 #edt_toolbar .edtbtn_on{

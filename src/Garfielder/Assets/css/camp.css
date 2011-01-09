@@ -377,7 +377,7 @@ table.fixed {
 #ste_sidebar_{min-height:300px;height:auto !important;height:300px;width:280px;}
 .rsb #ste_main{float:left;margin-right:-340px;width:100%;}
 .rsb #ste_main_{margin-right:300px;}
-.richedt,#ste_title{margin-bottom:20px;position:relative;}
+.richedt,#ste_title{margin-bottom:15px;position:relative;}
 .bigipt{
 	-moz-border-radius:6px 6px 6px 6px;
 	border-style:solid;
@@ -502,7 +502,9 @@ table.fixed {
 /* alternate color for weight #FFDA06 #C5C4CC #CE700E #DA0116 */
 /*=========== topic_add.html=============== */
 #ste_sidebar_ .widget .w_ct{margin:6px 6px 0;}
-#ste_slug_{height:1em;margin-top:8px;padding:0 7px;}
+#ste_slug_{margin-top:8px;padding:0 7px;}
+#ste_slug_auto{border:none;}
+#ste_slug_auto_holder{visibility:hidden;}
 #edtbtn_others{cursor:default;padding:8px 8px 0;}
 #edtbtn_others a{cursor:pointer;padding:0 0 5px 10px;}
 #edtbtn_others img{vertical-align:middle;}

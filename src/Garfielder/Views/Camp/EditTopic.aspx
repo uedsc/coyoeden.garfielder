@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/camp.Master" Inherits="System.Web.Mvc.ViewPage<VMCampTopicShow>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Edit Topic
+	Edit Topic-<%:Model.IsNew?"Add a new Topic":"Edit an existing topic" %>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -81,11 +81,11 @@
 						<input id="topicTitle" class="bigipt bd0" type="text" value="" tabindex="1" size="30" name="Title"/>
 					</div>
 					<div id="ste_slug">
-						<div id="ste_slug_">
-							<!--
+						<div id="ste_slug_" style="display:<%:Model.IsNew?"none":"block"%>">
 							<strong>Permanent link</strong>
-							<span id="ste_slug_auto"></span>
-							-->
+                            <em><%:Url.Action("View","Topic") %>/</em>
+							<input id="ste_slug_auto" name="Slug" value="<%:Model.Slug %>"/>
+                            <span id="ste_slug_auto_holder"></span>
 						</div>
 					</div>
 				</div>
@@ -95,7 +95,7 @@
 						<a id="edtbtn_preview" class="edtbtn_on bd0" href="#">Preview</a>
 						<div id="edtbtn_others">
 							<span>Upload / Insert</span>
-							<a id="edtbtn_img" class="thickbox" href="javascript://" rel="<%:Url.Action("UploadMedia","Camp",null) %>"><img alt="" src="<%:Url.Img("media-button-image.gif")%>"/></a>
+							<a id="edtbtn_img" title="Add an image" class="thickbox" href="javascript://" rel="<%:Url.Action("UploadMedia","Camp",null) %>"><img alt="" src="<%:Url.Img("media-button-image.gif")%>"/></a>
 						</div>
 					</div>
 					<div id="edt_main" class="bd0">
