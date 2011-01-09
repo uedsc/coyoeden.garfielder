@@ -562,8 +562,7 @@ table.fixed {
 }
 
 /* --========form validation styles==========-- */
-.form-wrap .field-validation-error{margin-left:8px;}
-
+.form-wrap .field-validation-error,.form-wrap span.validate-error{margin-left:8px;}
 /* --========uploadmedia===========--- */
 .media_upload
 {

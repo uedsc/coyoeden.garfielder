@@ -12,21 +12,48 @@ namespace Garfielder.Models
     {
 
         public int CntTopic { get; set; }
-
-        public static bool ValidateName(string name)
+        /// <summary>
+        /// validate name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool ValidateName(string name, string id = "00000000-0000-0000-0000-000000000000")
         {
             if (string.IsNullOrWhiteSpace(name))
                 return false;
 
-            var valid = ListAll().Count(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) == 0;
+            var id1 = Guid.Parse(id);
+            var valid = false;
+            if (id1.Equals(Guid.Empty))
+            {
+                valid = ListAll().Count(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) == 0;
+            }else
+            {
+                valid = ListAll().Count(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && x.Id != id1) ==0;
+            }
             return valid;
         }
-        public static bool ValidateSlug(string slug)
+        /// <summary>
+        /// validate slug
+        /// </summary>
+        /// <param name="slug"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool ValidateSlug(string slug, string id = "00000000-0000-0000-0000-000000000000")
         {
             if (string.IsNullOrWhiteSpace(slug))
                 return false;
-
-            var valid = ListAll().Count(x => x.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase)) == 0;
+            var id1 = Guid.Parse(id);
+            var valid = false;
+            if(id1.Equals(Guid.Empty))
+            {
+                valid = ListAll().Count(x => x.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase)) == 0;
+            }else
+            {
+                valid = ListAll().Count(x => x.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase)&&x.Id!=id1) == 0;
+            }
+            
             return valid;
         }
         /// <summary>
@@ -83,7 +110,7 @@ namespace Garfielder.Models
             obj.Slug = string.IsNullOrEmpty(obj.Slug) ? obj.Name.CHSToPinyin("-").ToLower() : obj.Slug.ToLower();
             var msg = new Msg();
             //validate name
-            if (!ValidateName(obj.Name)) {
+            if (!ValidateName(obj.Name,obj.Id.ToString())) {
                 msg.Error = true;
                 msg.Body = string.Format("Name [{0}] exists!Please choose another one!",obj.Name);
                 return msg;

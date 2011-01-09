@@ -15,16 +15,14 @@ namespace Garfielder.Controllers
         #region Group validation
         public JsonResult GroupName(string Name,Guid Id)
         {
-            if (!Id.Equals(Guid.Empty)) return Json(true);
-            dynamic r = Group.ValidateName(Name);
+            dynamic r = Group.ValidateName(Name, Id.ToString());
             if (r == false)
                 r = string.Format("Name [{0}] exists,please choose another one", Name);
 
             return Json(r);
         }
         public JsonResult GroupSlug(string Slug,Guid Id) {
-            if (!Id.Equals(Guid.Empty)) return Json(true);
-            dynamic r = Group.ValidateSlug(Slug);
+            dynamic r = Group.ValidateSlug(Slug, Id.ToString());
             if(r==false)
                 r = string.Format("Slug [{0}] exists,please choose another one", Slug);
             return Json(r);
@@ -34,8 +32,7 @@ namespace Garfielder.Controllers
         #region Tag validation
         public JsonResult TagName(string Name,Guid Id)
         {
-            if (!Id.Equals(Guid.Empty)) return Json(true);
-            dynamic r = Tag.ValidateName(Name);
+            dynamic r = Tag.ValidateName(Name,Id.ToString());
             if (r == false)
                 r = string.Format("Name [{0}] exists,please choose another one", Name);
 
@@ -43,8 +40,7 @@ namespace Garfielder.Controllers
         }
         public JsonResult TagSlug(string Slug,Guid Id)
         {
-            if (!Id.Equals(Guid.Empty)) return Json(true);
-            dynamic r = Tag.ValidateSlug(Slug);
+            dynamic r = Tag.ValidateSlug(Slug, Id.ToString());
             if (r == false)
                 r = string.Format("Slug [{0}] exists,please choose another one", Slug);
             return Json(r);

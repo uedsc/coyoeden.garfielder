@@ -185,6 +185,7 @@
     <Content Include="Assets\js\jquery-ui-1.8.6.effects.min.js" />
     <Content Include="Assets\js\jquery.datalink.js" />
     <Content Include="Assets\js\jquery.json-2.2.min.js" />
+    <Content Include="Assets\js\jquery.validate.min.js" />
     <Content Include="Assets\js\jquery.vPreload.js" />
     <Content Include="Assets\js\jquery.vsUtils.js" />
     <Content Include="Assets\js\swfupload\swfupload.cookies.js" />
@@ -480,9 +481,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -517,9 +515,6 @@
       <Project>{309BBAAB-B184-4E61-86EA-A80BDEB05F8C}</Project>
       <Name>Garfielder.Web</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\nolayout.Master" />

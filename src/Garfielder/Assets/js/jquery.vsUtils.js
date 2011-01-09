@@ -91,7 +91,52 @@
 					$i.addClass(opts.cssDefault);
 				};
 			});
-		}//endof preInput plugin
+		},//endof preInput plugin
+        serializeX: function(opts) {
+        ///<summary>serialize selected elements to a json object.用选定元素的name||id和value||innerHTML构造一个匿名json对象</summary>
+        ///<param>默认为{useid:false,prefix:""}，即使用id做匿名对象的属性</param>
+        ///<return>匿名json对象.{} if no selected elements</return>
+            var retVal = {};
+            var defaultOpts = { useid: false, prefix: "" };
+            opts = $.extend(defaultOpts, opts);
+            var isRadioOrCheckbox = function(elem) { if (elem.nodeType != 1) { return false; }; return /radio|checkbox/.test(elem.type); };
+            var isSelect = function(elem) { if (elem.nodeType != 1) { return false; }; return /select/.test(elem.type); };
+            this.each(function() {
+                var nowVal =isSelect(this)?$(this).val(): this.value || (this.innerHTML || "");
+                if (opts.useid) {
+                        if ((!this.id) || $.string(this.id).blank()) return true;
+                        if (!$.string(opts.prefix).blank()) {
+                                if (!$.string(this.id).startsWith(opts.prefix)) {
+                                        return true; //continue
+                                };
+                        };
+
+                        retVal[this.id] = isRadioOrCheckbox(this) ? [nowVal] : nowVal;
+                } else {
+                        if ((!this.name) || $.trim(this.name)=="") return true;
+                        if (opts.prefix!="") {
+                                if (!this.name.startsWith(opts.prefix)) {
+                                        return true; //continue
+                                };
+                        };
+                        //we may have multiple objects with same name.like checkbox and radio
+                        var lastVal = retVal[this.name];
+                        if (!lastVal) {
+                                retVal[this.name] = isRadioOrCheckbox(this) ? [nowVal] : nowVal;
+                        } else {
+                                if ($.isArray(lastVal)) {
+                                        lastVal.push(nowVal);
+                                        retVal[this.name] = lastVal;
+                                } else if (typeof lastVal == 'string') {
+                                        var tempArr = []; tempArr.push(lastVal); tempArr.push(nowVal);
+                                        retVal[this.name] = tempArr;
+                                };
+                        };
+                };
+        }); //endof this.each
+        return retVal;
+} //endof serializeX
+
 	}); //endof $.fn.extend
 
 	//Static methods

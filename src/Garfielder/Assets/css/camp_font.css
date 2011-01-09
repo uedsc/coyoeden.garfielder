@@ -44,4 +44,4 @@ strong,a.now,.widefat th{font-weight:bold;}
 .bigipt{font-size:1.7em;}
 #tagcloud-topic,#tagsAdded{font-size:0.95em;}
 /* --========form validation styles==========-- */
-.form-wrap .field-validation-error{font-size:0.85em;}
+.form-wrap .field-validation-error,.form-wrap span.validate-error{font-size:0.85em;}
