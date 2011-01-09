@@ -474,8 +474,8 @@ a.menu_first
 #tagsAdded .tag{background:pink;}
 
 /* =====form validation style========= */
-.form-wrap .input-validation-error,.error{background:#FFEFEF;}
-.form-wrap .field-validation-error,.error{color:#FF0000;}
+.form-wrap .input-validation-error,.form-wrap input.validate-error,.error{background:#FFEFEF;}
+.form-wrap .field-validation-error,.form-wrap .validate-error,.error{color:#FF0000;}
 
 /* =====uploadmedia========= */
 #media-upload-header

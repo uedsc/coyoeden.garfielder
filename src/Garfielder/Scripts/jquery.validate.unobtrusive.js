@@ -274,13 +274,15 @@
             setValidationValues(options, "required", true);
         }
     });
-    adapters.add("remote", ["url", "type", "fields"], function (options) {
+    adapters.add("remote", ["url", "type", "additionalfields"], function (options) {
         var value = {
             url: options.params.url,
             type: options.params.type || "GET",
             data: {}
         };
-        $.each(splitAndTrim(options.params.fields || options.element.name), function (i, fieldName) {
+        $.each(splitAndTrim(options.params.additionalfields || options.element.name), function (i, fieldName) {
+            //RC2bug:addtionalfields has prefix '*.' 
+            fieldName = fieldName.replace("*.", "");
             value.data[fieldName] = function () {
                 return $(options.form).find(":input[name='" + fieldName + "']").val();
             };
@@ -292,4 +294,4 @@
     $(function () {
         $jQval.unobtrusive.parse(document);
     });
-}(jQuery));
+} (jQuery));

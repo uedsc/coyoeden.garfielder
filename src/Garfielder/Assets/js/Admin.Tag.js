@@ -8,6 +8,7 @@ Garfielder.M("AdminTag", {
             $toggleAll0: $("#cbx-toggle-all0"),
             $toggleAll1: $("#cbx-toggle-all1"),
             form0: {//detail form
+                $layout: $("#frmEdit"),
                 $title0: $("#form-title0"),
                 $title1: $("#form-title1"),
                 $id: $("#obj-id"),
@@ -90,6 +91,53 @@ Garfielder.M("AdminTag", {
             };
             return true;
         });
+        //ajax detail form
+        me.ui.form0.$layout.validate({
+            rules: {
+                Name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 20,
+                    remote: {
+                        url: me.ui.form0.$name.data("ajax-remote"),
+                        type: 'post',
+                        data: {
+                            Id: function () {
+                                return me.ui.form0.$id.val();
+                            }
+                        }
+                    }
+                },
+                Slug: {
+                    minlength: 2,
+                    remote: {
+                        url: me.ui.form0.$slug.data("ajax-remote"),
+                        type: 'post',
+                        data: {
+                            Id: function () {
+                                return me.ui.form0.$id.val();
+                            }
+                        }
+                    }
+                }
+            },
+            success: 'validate-valid',
+            errorClass: 'validate-error',
+            validClass: 'validate-valid',
+            errorElement: 'span',
+            errorPlacement: function (error, elem) {
+                elem.prev().append(error);
+            },
+            submitHandler: function (form) {
+                me.AjaxEdit(form);
+            }
+        });
+    },
+    /**
+    * submit the edit form in the ajax way
+    */
+    AjaxEdit: function (form) {
+        $.post(form.action, $(form).find(".obj-field").serializeX(), this.OnEdit);
     },
     OnEdit: function (d) {
         //keyword this is referenced to the ajax xmlhttprequest object!
