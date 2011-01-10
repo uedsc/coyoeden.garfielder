@@ -152,6 +152,8 @@
     <Content Include="Assets\img\fav-arrow.gif" />
     <Content Include="Assets\img\gray-grad.png" />
     <Content Include="Assets\img\icons32.png" />
+    <Content Include="Assets\img\loading16x16.gif" />
+    <Content Include="Assets\img\loading16x16_2.gif" />
     <Content Include="Assets\img\overlay-close.png" />
     <Content Include="Assets\img\ovl-ing.gif" />
     <Content Include="Assets\img\logo.png" />
@@ -173,6 +175,7 @@
     <Content Include="Assets\img\XPButtonNoText_160x22.png" />
     <Content Include="Assets\img\zerobyte.gif" />
     <Content Include="Assets\js\Admin.AddMedia.js" />
+    <Content Include="Assets\js\Admin.AutoSlug.js" />
     <Content Include="Assets\js\Admin.Common.js" />
     <Content Include="Assets\js\Admin.Group.js" />
     <Content Include="Assets\js\Admin.SWFUploadController.js" />

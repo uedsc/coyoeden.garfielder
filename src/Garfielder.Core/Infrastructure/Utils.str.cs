@@ -258,7 +258,7 @@ namespace Garfielder.Core.Infrastructure
         private static readonly Regex REGEX_BETWEEN_TAGS = new Regex(@">\s+", RegexOptions.Compiled);
         private static readonly Regex REGEX_LINE_BREAKS = new Regex(@"\n\s+", RegexOptions.Compiled);
         private static readonly Regex REGEX_ALPHANUMBERUNDERLINE = new Regex(@"^[A-Za-z0-9_]+$", RegexOptions.Compiled);
-
+        private static readonly Regex REGEX_WHITESPACE=new Regex(@"\s+",RegexOptions.Compiled);
         /// <summary>
         /// Removes the HTML whitespace.
         /// </summary>
@@ -272,6 +272,17 @@ namespace Garfielder.Core.Infrastructure
             html = REGEX_LINE_BREAKS.Replace(html, string.Empty);
 
             return html.Trim();
+        }
+        /// <summary>
+        /// remove white spaces.
+        /// </summary>
+        /// <param name="str">specified str</param>
+        /// <returns></returns>
+        public static string RemoveWhitespace(this string str)
+        {
+            if (string.IsNullOrWhiteSpace(str)) return "";
+            str = REGEX_WHITESPACE.Replace(str, "");
+            return str.Trim();
         }
         /// <summary>
         /// the string is consisted of alpha\number\underline

@@ -1,6 +1,17 @@
-Garfielder.AddModule("TopicAdd", {
+Garfielder.M("TopicAdd", {
     init: function (opts) {
+        var me = this;
         this.opts = opts;
+        this.ui = {
+            $title: $("#topicTitle"),
+            slug: {
+                $d: $("#ste_slug"),
+                $input: $("#ste_slug_auto"),
+                $lbl: $("#ste_slug_auto_holder"),
+                $loading: $("#loading-slug")
+            }
+
+        };
         var p = {};
         p.initTabs = function () {
             var hd = $("#group-tabs li"), bd = $("#grSelector .slimtab_bd");
@@ -14,12 +25,56 @@ Garfielder.AddModule("TopicAdd", {
             });
         };
         p.initPreInput = function () {
-            var $title = $("#topicTitle").preInput({ val: p._lang.lblTitle });
+            me.ui.$title.preInput({ val: p._lang.lblTitle });
             if (!opts.IsNew) {
                 $title.val(opts.Title).blur();
             };
             $("#newtag-topic").preInput({ val: p._lang.lblTag });
         };
+        p.initAutoSlug = function () {
+            if (opts.IsNew) {
+                //title input
+                Garfielder.AutoSlug.Slug(me.ui.$title, {
+                    data: {
+                        type: 'topic'
+                    },
+                    begin: function () {
+                        //invalid title
+                        if (me.ui.$title.hasClass("ipt_default")) return false;
+                        //slug has been generated
+                        if ($.trim(me.ui.slug.$input.val()) !== "") return false;
+                        me.ui.slug.$loading.css("visibility", "visible");
+                        return true;
+                    },
+                    success: function (d) {
+                        me.ui.slug.$loading.css("visibility", "hidden");
+                        me.ui.slug.$lbl.html(d.slug);
+                        me.ui.slug.$input.val(d.slug).width(me.ui.slug.$lbl.width() + 10);
+                        me.ui.slug.$d.fadeIn();
+                    }
+                });
+            };
+            //slug input 
+            Garfielder.AutoSlug.Slug(me.ui.slug.$input, {
+                data: {
+                    type: 'topic'
+                },
+                begin: function () {
+                    me.ui.slug.$loading.css("visibility", "visible");
+                    return true;
+                },
+                success: function (d) {
+                    me.ui.slug.$loading.css("visibility", "hidden");
+                    me.ui.slug.$lbl.html(d.slug);
+                    me.ui.slug.$input.val(d.slug).width(me.ui.slug.$lbl.width() + 10);
+                }
+            });
+            //edit slug input directly
+            me.ui.slug.$input.keyup(function (e) {
+                me.ui.slug.$lbl.html(this.value);
+                me.ui.slug.$input.width(me.ui.slug.$lbl.width() + 10);
+            });
+        }
         p.initAddMedia = function () {
             $("#edtbtn_img").click(function () {
                 IFModal.Show(this.rel, { minH: 420 });
@@ -36,6 +91,7 @@ Garfielder.AddModule("TopicAdd", {
         p.initEvents = function () {
             p.initTabs();
             p.initPreInput();
+            p.initAutoSlug();
             p.initAddMedia();
         };
 
