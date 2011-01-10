@@ -4,6 +4,7 @@
 */
 var IFModal = (function ($) {
     var pub = {}, p = {};
+    p.opts = {minH:200};
     p.init = function () {
         p.$if = $("#ovl-ifr").load(function () {
             p.$loading.hide();

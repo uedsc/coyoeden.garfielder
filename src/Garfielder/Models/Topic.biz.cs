@@ -123,6 +123,46 @@ namespace Garfielder.Models
 
             }
             
+        }//TopicStat
+        /// <summary>
+        /// check the specified slug whether exists.if it exists we provide a new one 
+        /// </summary>
+        /// <param name="slug"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public static string AutoSlug(string slug,GarfielderEntities db=null)
+        {
+            if (string.IsNullOrWhiteSpace(slug)) return Utils.RandomStr(8);
+            slug = slug.Trim().CHSToPinyin("-").ToLower().RemoveWhitespace();
+            //slug length limit
+            slug = slug.Length > 45 ? slug.Substring(0, 45) : slug;
+            var needDispose = false;
+            try
+            {
+                if (db == null)
+                {
+                    db = new GarfielderEntities();
+                    needDispose = true;
+                }
+                    
+
+                var obj = db.Topics.SingleOrDefault(x => x.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
+                if (null != obj)
+                {
+                    slug = string.Format("{0}{1}", slug, Utils.RandomStr(5));
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO:log the exception
+                slug=string.Format("{0}{1}", slug, Utils.RandomStr(5));
+            }finally
+            {
+                if(needDispose)
+                    db.Dispose();
+            }//try
+
+            return slug;
         }
     }
 }

@@ -54,6 +54,8 @@ input[type="text"], input[type="password"], textarea {
 	-moz-box-sizing:border-box;
 }
 label{vertical-align:middle;cursor:pointer;}
+/* loading */
+.loading-16 span{display:inline-block;width:16px;height:16px;background:url(../img/loading16x16_2.gif) no-repeat;vertical-align:middle;}
 /* table style */
 table{border-collapse:separate;}
 table.fixed {
@@ -502,8 +504,8 @@ table.fixed {
 /* alternate color for weight #FFDA06 #C5C4CC #CE700E #DA0116 */
 /*=========== topic_add.html=============== */
 #ste_sidebar_ .widget .w_ct{margin:6px 6px 0;}
-#ste_slug_{margin-top:8px;padding:0 7px;}
-#ste_slug_auto{border:none;}
+#ste_slug_{margin-top:8px;padding:0 7px;overflow:hidden;}
+#ste_slug_auto{border:none;margin-left:-4px;}
 #ste_slug_auto_holder{visibility:hidden;}
 #edtbtn_others{cursor:default;padding:8px 8px 0;}
 #edtbtn_others a{cursor:pointer;padding:0 0 5px 10px;}

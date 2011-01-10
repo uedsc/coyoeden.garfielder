@@ -206,10 +206,13 @@ namespace Garfielder.Controllers
             };
             return View(obj);
         }
+
+        #region helper methods
         private ActionResult NewTopic() {
             var vm = CreateViewData<VMCampTopicShow>();
             vm.Id = Guid.Empty;
             return View(vm);
         }
+        #endregion
     }
 }

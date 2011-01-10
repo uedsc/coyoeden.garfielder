@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/camp.Master" Inherits="System.Web.Mvc.ViewPage<VMCampTopicShow>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Edit Topic-<%:Model.IsNew?"Add a new Topic":"Edit an existing topic" %>
+	Edit Topic-<%:Model.IsNew?"Create":"Update" %>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -81,8 +81,9 @@
 						<input id="topicTitle" class="bigipt bd0" type="text" value="" tabindex="1" size="30" name="Title"/>
 					</div>
 					<div id="ste_slug">
-						<div id="ste_slug_" style="display:<%:Model.IsNew?"none":"block"%>">
+						<div id="ste_slug_">
 							<strong>Permanent link</strong>
+                            <span id="loading-slug" class="loading-16" style="visibility:hidden"><span></span></span>
                             <em><%:Url.Action("View","Topic") %>/</em>
 							<input id="ste_slug_auto" name="Slug" value="<%:Model.Slug %>"/>
                             <span id="ste_slug_auto_holder"></span>
@@ -128,7 +129,8 @@
     <script type="text/javascript">
         Garfielder.Cfg = {
             IsNew:<%:Model.IsNew.ToString().ToLower() %>,
-            Title:'<%:Model.Title %>'
+            Title:'<%:Model.Title %>',
+            URL_AUTOSLUG:'<%:Url.Action("AutoSlug","Camp") %>'
         };
     </script>
 	<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>
@@ -136,6 +138,7 @@
 	<script type="text/javascript" src="<%:Url.JS("jquery.vPreload")%>"></script>
 	<script type="text/javascript" src="<%:Url.JS("tiny_mce/jquery.tinymce") %>"></script>
 	<script type="text/javascript" src="<%:Url.JS("Garfielder.IFModal") %>"></script>
+    <script type="text/javascript" src="<%:Url.JS("Admin.AutoSlug") %>"></script>
 	<script type="text/javascript" src="<%:Url.JS("Admin.TopicAdd") %>"></script>
 	<script type="text/javascript" src="<%:Url.JS("Admin.TopicAdd_Tag") %>"></script>
 	<!--/scripts-->		
