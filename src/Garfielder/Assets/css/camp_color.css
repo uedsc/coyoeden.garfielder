@@ -452,7 +452,9 @@ a.menu_first
 .listView .act-del{color:#BC0B0B}
 
 /* footer */
-#scFoot{
+#scFoot
+{
+    background:#D7D7D7;
 	background:-moz-linear-gradient(center bottom , #D7D7D7, #E4E4E4) repeat scroll 0 0 transparent;
 }
 
