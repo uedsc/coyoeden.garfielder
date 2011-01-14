@@ -19,7 +19,7 @@ namespace Garfielder.Models
         const string FILE_STR = "Assets/Upload/{0}/{1}/{2}";
 
         #region private area
-        private static string _uploadsFolder = HostingEnvironment.MapPath("~/Assets/Upload/");
+        private static readonly string _uploadsFolder = HostingEnvironment.MapPath("~/Assets/Upload/");
         /// <summary>
         /// get full file name
         /// </summary>
@@ -126,6 +126,7 @@ namespace Garfielder.Models
                         db.CommandTimeout = 0;
                         db.AddToXFiles(dbm);
                         db.SaveChanges();
+                        ClearCache();
                     }
                     catch (Exception ex)
                     {
@@ -144,5 +145,68 @@ namespace Garfielder.Models
             return vm;
 
         }//SaveFile
+        /// <summary>
+        /// list all items
+        /// </summary>
+        /// <returns></returns>
+        public static List<XFile> ListAll()
+        {
+            using (var db = new GarfielderEntities())
+            {
+                if (_Items == null)
+                {
+                    lock (_SyncRoot)
+                    {
+                        if (_Items == null)
+                        {
+                            _Items = db.XFiles.ToList();
+                            _Items.ForEach(x=>x.UserName=x.User.Name);
+                        }
+                    }
+                }
+
+                return _Items;
+            }//using
+
+        }
+        /// <summary>
+        /// list all data
+        /// </summary>
+        /// <returns></returns>
+        public static List<VMXFileEdit> ListAllData()
+        {
+            var items = ListAll().OrderByDescending(x => x.CreatedAt).ToList();
+            var r = new List<VMXFileEdit>();
+            items.ForEach(x => r.Add(
+                new VMXFileEdit
+                {
+                    Name = x.Name,
+                    Name1 = x.Name.Substring(0, x.Name.Length - x.Extension.Length),
+                    Title = x.Title,
+                    CreatedAt = x.CreatedAt,
+                    Extension = x.Extension,
+                    Id = x.Id,
+                    UserName = x.UserName
+                }));
+            return r;
+
+        }
+        /// <summary>
+        /// clear cache
+        /// </summary>
+        public static void ClearCache()
+        {
+            _Items = null;
+        }
+
+        #region private properties
+        private static object _SyncRoot = new object();
+        private static List<XFile> _Items;
+        #endregion
+
+        #region extra public properties
+
+        public string UserName { get; set; }
+        #endregion
     }
 }

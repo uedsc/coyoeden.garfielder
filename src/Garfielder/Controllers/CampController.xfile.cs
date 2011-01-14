@@ -15,39 +15,20 @@ namespace Garfielder.Controllers
         public ActionResult ListFile()
         {
             var vm = CreateViewData<VMXFileList>();
-            using (var db = new GarfielderEntities()) {
-                var items = db.XFiles.ToList();
-                vm.FileList=new List<VMXFileEdit>();
-                items.ForEach(x =>
-                {
-                    vm.FileList.Add(new VMXFileEdit
-                    { 
-                        Name=x.Name,
-                        Name1=x.Name.Substring(0,x.Name.Length-x.Extension.Length),
-                        Title=x.Title,
-                        CreatedAt=x.CreatedAt,
-                        Extension=x.Extension,
-                        Id=x.Id,
-                        UserName=x.User.Name
-                    });
-                });
-            }
+            vm.FileList = XFile.ListAllData();
             return View(vm);
         }
         [HttpGet]
         public ActionResult EditFile(Guid id)
         {
             var vm = CreateViewData<VMXFileEdit>();
-            using (var db = new GarfielderEntities())
-            {
-                var dbModel = db.XFiles.Single(x => x.Id == id);
-                vm.Id = dbModel.Id;
-                vm.Name = dbModel.Name;
-                vm.Title = dbModel.Title;
-                vm.Extension = dbModel.Extension;
-                vm.CreatedAt = dbModel.CreatedAt;
-                vm.Description = dbModel.Description;
-            };
+            var dbModel = XFile.ListAll().SingleOrDefault(x => x.Id == id);
+            vm.Id = dbModel.Id;
+            vm.Name = dbModel.Name;
+            vm.Title = dbModel.Title;
+            vm.Extension = dbModel.Extension;
+            vm.CreatedAt = dbModel.CreatedAt;
+            vm.Description = dbModel.Description;
             return View(vm);
         }
         [HttpPost, ValidateInput(false)]
@@ -87,14 +68,15 @@ namespace Garfielder.Controllers
             return View(vm);
         }
         [HttpGet]
-        public ActionResult UploadMedia(string RelId="",string Src="local",bool flash=true) {
+        public ActionResult UploadMedia(string RelId="",string Src="local",bool flash=true,string mode="list") {
             var vm = CreateViewData<VMUploadMedia>();
             vm.NoFlash = !flash;
             var rel=Guid.Empty;
             Guid.TryParse(RelId,out rel);
             vm.RelId = rel;
             vm.Src = Src;
-            vm.FileList = new List<VMXFileEdit>();
+            vm.ViewMode = mode;
+            vm.FileList = XFile.ListAllData();
             return View(vm);
         }
 

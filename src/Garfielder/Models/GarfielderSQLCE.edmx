@@ -1,0 +1,773 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Garfielder.Models.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="GarfielderModelsStoreContainer">
+          <EntitySet Name="Group" EntityType="Garfielder.Models.Store.Group" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Garfielder.Models.Store.Tag" store:Type="Tables" />
+          <EntitySet Name="Topic" EntityType="Garfielder.Models.Store.Topic" store:Type="Tables" />
+          <EntitySet Name="TopicComment" EntityType="Garfielder.Models.Store.TopicComment" store:Type="Tables" />
+          <EntitySet Name="TopicElected" EntityType="Garfielder.Models.Store.TopicElected" store:Type="Tables" />
+          <EntitySet Name="TopicFile" EntityType="Garfielder.Models.Store.TopicFile" store:Type="Tables" />
+          <EntitySet Name="TopicGroup" EntityType="Garfielder.Models.Store.TopicGroup" store:Type="Tables" />
+          <EntitySet Name="TopicTag" EntityType="Garfielder.Models.Store.TopicTag" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Garfielder.Models.Store.User" store:Type="Tables" />
+          <EntitySet Name="XFile" EntityType="Garfielder.Models.Store.XFile" store:Type="Tables" />
+          <EntitySet Name="XFileComment" EntityType="Garfielder.Models.Store.XFileComment" store:Type="Tables" />
+          <AssociationSet Name="FK_Group_Group" Association="Garfielder.Models.Store.FK_Group_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Group1" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_User" Association="Garfielder.Models.Store.FK_Topic_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Topic" EntitySet="Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicComment_Topic" Association="Garfielder.Models.Store.FK_TopicComment_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="TopicComment" EntitySet="TopicComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicElected_Topic" Association="Garfielder.Models.Store.FK_TopicElected_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="TopicElected" EntitySet="TopicElected" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicFile_File" Association="Garfielder.Models.Store.FK_TopicFile_File">
+            <End Role="XFile" EntitySet="XFile" />
+            <End Role="TopicFile" EntitySet="TopicFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicFile_Topic" Association="Garfielder.Models.Store.FK_TopicFile_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="TopicFile" EntitySet="TopicFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicGroup_Group" Association="Garfielder.Models.Store.FK_TopicGroup_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="TopicGroup" EntitySet="TopicGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicGroup_Topic" Association="Garfielder.Models.Store.FK_TopicGroup_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="TopicGroup" EntitySet="TopicGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicTag_Tag" Association="Garfielder.Models.Store.FK_TopicTag_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="TopicTag" EntitySet="TopicTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicTag_Topic" Association="Garfielder.Models.Store.FK_TopicTag_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="TopicTag" EntitySet="TopicTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_XFile_User" Association="Garfielder.Models.Store.FK_XFile_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="XFile" EntitySet="XFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_XFileComment_XFile" Association="Garfielder.Models.Store.FK_XFileComment_XFile">
+            <End Role="XFile" EntitySet="XFile" />
+            <End Role="XFileComment" EntitySet="XFileComment" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Slug" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="ParentID" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Slug" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Slug" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Url" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="ContentX" Type="ntext" />
+          <Property Name="Grade" Type="real" Nullable="false" />
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" Nullable="false" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="PublishedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TopicComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TopicID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TopicElected">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateBegin" Type="datetime" Nullable="false" />
+          <Property Name="DateEnd" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TopicFile">
+          <Key>
+            <PropertyRef Name="TopicID" />
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="TopicID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TopicGroup">
+          <Key>
+            <PropertyRef Name="TopicID" />
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="TopicID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GroupID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TopicTag">
+          <Key>
+            <PropertyRef Name="TopicID" />
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TopicID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TagID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Nickname" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="XFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Url" Type="nvarchar" MaxLength="50" />
+          <Property Name="Extension" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="XFileComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Group_Group">
+          <End Role="Group" Type="Garfielder.Models.Store.Group" Multiplicity="0..1" />
+          <End Role="Group1" Type="Garfielder.Models.Store.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_User">
+          <End Role="User" Type="Garfielder.Models.Store.User" Multiplicity="1" />
+          <End Role="Topic" Type="Garfielder.Models.Store.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicComment_Topic">
+          <End Role="Topic" Type="Garfielder.Models.Store.Topic" Multiplicity="1" />
+          <End Role="TopicComment" Type="Garfielder.Models.Store.TopicComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicComment">
+              <PropertyRef Name="TopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicElected_Topic">
+          <End Role="Topic" Type="Garfielder.Models.Store.Topic" Multiplicity="1" />
+          <End Role="TopicElected" Type="Garfielder.Models.Store.TopicElected" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicElected">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicFile_File">
+          <End Role="XFile" Type="Garfielder.Models.Store.XFile" Multiplicity="1" />
+          <End Role="TopicFile" Type="Garfielder.Models.Store.TopicFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XFile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicFile">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicFile_Topic">
+          <End Role="Topic" Type="Garfielder.Models.Store.Topic" Multiplicity="1" />
+          <End Role="TopicFile" Type="Garfielder.Models.Store.TopicFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicFile">
+              <PropertyRef Name="TopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicGroup_Group">
+          <End Role="Group" Type="Garfielder.Models.Store.Group" Multiplicity="1" />
+          <End Role="TopicGroup" Type="Garfielder.Models.Store.TopicGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicGroup">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicGroup_Topic">
+          <End Role="Topic" Type="Garfielder.Models.Store.Topic" Multiplicity="1" />
+          <End Role="TopicGroup" Type="Garfielder.Models.Store.TopicGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicGroup">
+              <PropertyRef Name="TopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicTag_Tag">
+          <End Role="Tag" Type="Garfielder.Models.Store.Tag" Multiplicity="1" />
+          <End Role="TopicTag" Type="Garfielder.Models.Store.TopicTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicTag">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicTag_Topic">
+          <End Role="Topic" Type="Garfielder.Models.Store.Topic" Multiplicity="1" />
+          <End Role="TopicTag" Type="Garfielder.Models.Store.TopicTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicTag">
+              <PropertyRef Name="TopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_XFile_User">
+          <End Role="User" Type="Garfielder.Models.Store.User" Multiplicity="1" />
+          <End Role="XFile" Type="Garfielder.Models.Store.XFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="XFile">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_XFileComment_XFile">
+          <End Role="XFile" Type="Garfielder.Models.Store.XFile" Multiplicity="1" />
+          <End Role="XFileComment" Type="Garfielder.Models.Store.XFileComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XFile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="XFileComment">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Garfielder.Models" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="GarfielderEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Groups" EntityType="Garfielder.Models.Group" />
+          <EntitySet Name="Tags" EntityType="Garfielder.Models.Tag" />
+          <EntitySet Name="Topics" EntityType="Garfielder.Models.Topic" />
+          <EntitySet Name="TopicComments" EntityType="Garfielder.Models.TopicComment" />
+          <EntitySet Name="Users" EntityType="Garfielder.Models.User" />
+          <EntitySet Name="XFiles" EntityType="Garfielder.Models.XFile" />
+          <EntitySet Name="XFileComments" EntityType="Garfielder.Models.XFileComment" />
+          <AssociationSet Name="FK_Group_Group" Association="Garfielder.Models.FK_Group_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Group1" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_User" Association="Garfielder.Models.FK_Topic_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Topic" EntitySet="Topics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopicComment_Topic" Association="Garfielder.Models.FK_TopicComment_Topic">
+            <End Role="Topic" EntitySet="Topics" />
+            <End Role="TopicComment" EntitySet="TopicComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_XFile_User" Association="Garfielder.Models.FK_XFile_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="XFile" EntitySet="XFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_XFileComment_XFile" Association="Garfielder.Models.FK_XFileComment_XFile">
+            <End Role="XFile" EntitySet="XFiles" />
+            <End Role="XFileComment" EntitySet="XFileComments" />
+          </AssociationSet>
+          <AssociationSet Name="TopicFile" Association="Garfielder.Models.TopicFile">
+            <End Role="XFile" EntitySet="XFiles" />
+            <End Role="Topic" EntitySet="Topics" />
+          </AssociationSet>
+          <AssociationSet Name="TopicGroup" Association="Garfielder.Models.TopicGroup">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Topic" EntitySet="Topics" />
+          </AssociationSet>
+          <AssociationSet Name="TopicTag" Association="Garfielder.Models.TopicTag">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="Topic" EntitySet="Topics" />
+          </AssociationSet>
+          <EntitySet Name="TopicElecteds" EntityType="Garfielder.Models.TopicElected" />
+          <AssociationSet Name="FK_TopicElected_Topic" Association="Garfielder.Models.FK_TopicElected_Topic">
+            <End Role="Topic" EntitySet="Topics" />
+            <End Role="TopicElected" EntitySet="TopicElecteds" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Slug" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="ParentID" Type="Guid" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="SubGroups" Relationship="Garfielder.Models.FK_Group_Group" FromRole="Group" ToRole="Group1" />
+          <NavigationProperty Name="Parent" Relationship="Garfielder.Models.FK_Group_Group" FromRole="Group1" ToRole="Group" />
+          <NavigationProperty Name="Topics" Relationship="Garfielder.Models.TopicGroup" FromRole="Group" ToRole="Topic" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Slug" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Topics" Relationship="Garfielder.Models.TopicTag" FromRole="Tag" ToRole="Topic" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Slug" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="ContentX" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Grade" Type="Single" Nullable="false" />
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Garfielder.Models.FK_Topic_User" FromRole="Topic" ToRole="User" />
+          <NavigationProperty Name="Comments" Relationship="Garfielder.Models.FK_TopicComment_Topic" FromRole="Topic" ToRole="TopicComment" />
+          <NavigationProperty Name="XFiles" Relationship="Garfielder.Models.TopicFile" FromRole="Topic" ToRole="XFile" />
+          <NavigationProperty Name="Groups" Relationship="Garfielder.Models.TopicGroup" FromRole="Topic" ToRole="Group" />
+          <NavigationProperty Name="Tags" Relationship="Garfielder.Models.TopicTag" FromRole="Topic" ToRole="Tag" />
+          <Property Type="DateTime" Name="ModifiedAt" Nullable="false" />
+          <Property Type="Boolean" Name="Published" Nullable="false" />
+          <Property Type="DateTime" Name="PublishedAt" Nullable="false" />
+          <NavigationProperty Name="TopicElected" Relationship="Garfielder.Models.FK_TopicElected_Topic" FromRole="Topic" ToRole="TopicElected" />
+        </EntityType>
+        <EntityType Name="TopicComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TopicID" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Topic" Relationship="Garfielder.Models.FK_TopicComment_Topic" FromRole="TopicComment" ToRole="Topic" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Nickname" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Topics" Relationship="Garfielder.Models.FK_Topic_User" FromRole="User" ToRole="Topic" />
+          <NavigationProperty Name="XFiles" Relationship="Garfielder.Models.FK_XFile_User" FromRole="User" ToRole="XFile" />
+        </EntityType>
+        <EntityType Name="XFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Url" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Extension" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Garfielder.Models.FK_XFile_User" FromRole="XFile" ToRole="User" />
+          <NavigationProperty Name="Comments" Relationship="Garfielder.Models.FK_XFileComment_XFile" FromRole="XFile" ToRole="XFileComment" />
+          <NavigationProperty Name="Topics" Relationship="Garfielder.Models.TopicFile" FromRole="XFile" ToRole="Topic" />
+        </EntityType>
+        <EntityType Name="XFileComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="FileID" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="XFile" Relationship="Garfielder.Models.FK_XFileComment_XFile" FromRole="XFileComment" ToRole="XFile" />
+        </EntityType>
+        <Association Name="FK_Group_Group">
+          <End Role="Group" Type="Garfielder.Models.Group" Multiplicity="0..1" />
+          <End Role="Group1" Type="Garfielder.Models.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_User">
+          <End Role="User" Type="Garfielder.Models.User" Multiplicity="1" />
+          <End Role="Topic" Type="Garfielder.Models.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopicComment_Topic">
+          <End Role="Topic" Type="Garfielder.Models.Topic" Multiplicity="1" />
+          <End Role="TopicComment" Type="Garfielder.Models.TopicComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicComment">
+              <PropertyRef Name="TopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_XFile_User">
+          <End Role="User" Type="Garfielder.Models.User" Multiplicity="1" />
+          <End Role="XFile" Type="Garfielder.Models.XFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="XFile">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_XFileComment_XFile">
+          <End Role="XFile" Type="Garfielder.Models.XFile" Multiplicity="1" />
+          <End Role="XFileComment" Type="Garfielder.Models.XFileComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XFile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="XFileComment">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TopicFile">
+          <End Role="XFile" Type="Garfielder.Models.XFile" Multiplicity="*" />
+          <End Role="Topic" Type="Garfielder.Models.Topic" Multiplicity="*" />
+        </Association>
+        <Association Name="TopicGroup">
+          <End Role="Group" Type="Garfielder.Models.Group" Multiplicity="*" />
+          <End Role="Topic" Type="Garfielder.Models.Topic" Multiplicity="*" />
+        </Association>
+        <Association Name="TopicTag">
+          <End Role="Tag" Type="Garfielder.Models.Tag" Multiplicity="*" />
+          <End Role="Topic" Type="Garfielder.Models.Topic" Multiplicity="*" />
+        </Association>
+        <EntityType Name="TopicElected">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="DateBegin" Nullable="false" />
+          <Property Type="DateTime" Name="DateEnd" Nullable="false" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedAt" Nullable="false" />
+          <NavigationProperty Name="Topic" Relationship="Garfielder.Models.FK_TopicElected_Topic" FromRole="TopicElected" ToRole="Topic" />
+        </EntityType>
+        <Association Name="FK_TopicElected_Topic">
+          <End Type="Garfielder.Models.Topic" Role="Topic" Multiplicity="1" />
+          <End Type="Garfielder.Models.TopicElected" Role="TopicElected" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TopicElected">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GarfielderModelsStoreContainer" CdmEntityContainer="GarfielderEntities">
+          <EntitySetMapping Name="Groups"><EntityTypeMapping TypeName="Garfielder.Models.Group"><MappingFragment StoreEntitySet="Group">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Slug" ColumnName="Slug" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="Level" ColumnName="Level" />
+            <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+            <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Tags"><EntityTypeMapping TypeName="Garfielder.Models.Tag"><MappingFragment StoreEntitySet="Tag">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Slug" ColumnName="Slug" />
+            <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Topics"><EntityTypeMapping TypeName="Garfielder.Models.Topic"><MappingFragment StoreEntitySet="Topic">
+            <ScalarProperty Name="PublishedAt" ColumnName="PublishedAt" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Slug" ColumnName="Slug" />
+            <ScalarProperty Name="Url" ColumnName="Url" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="ContentX" ColumnName="ContentX" />
+            <ScalarProperty Name="Grade" ColumnName="Grade" />
+            <ScalarProperty Name="UserID" ColumnName="UserID" />
+            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TopicComments"><EntityTypeMapping TypeName="Garfielder.Models.TopicComment"><MappingFragment StoreEntitySet="TopicComment">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="TopicID" ColumnName="TopicID" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="Garfielder.Models.User"><MappingFragment StoreEntitySet="User">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="XFiles"><EntityTypeMapping TypeName="Garfielder.Models.XFile"><MappingFragment StoreEntitySet="XFile">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Url" ColumnName="Url" />
+            <ScalarProperty Name="Extension" ColumnName="Extension" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="UserID" ColumnName="UserID" />
+            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="XFileComments"><EntityTypeMapping TypeName="Garfielder.Models.XFileComment"><MappingFragment StoreEntitySet="XFileComment">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="FileID" ColumnName="FileID" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="TopicFile" TypeName="Garfielder.Models.TopicFile" StoreEntitySet="TopicFile">
+            <EndProperty Name="XFile">
+              <ScalarProperty Name="Id" ColumnName="FileID" />
+            </EndProperty>
+            <EndProperty Name="Topic">
+              <ScalarProperty Name="Id" ColumnName="TopicID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TopicGroup" TypeName="Garfielder.Models.TopicGroup" StoreEntitySet="TopicGroup">
+            <EndProperty Name="Group">
+              <ScalarProperty Name="Id" ColumnName="GroupID" />
+            </EndProperty>
+            <EndProperty Name="Topic">
+              <ScalarProperty Name="Id" ColumnName="TopicID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TopicTag" TypeName="Garfielder.Models.TopicTag" StoreEntitySet="TopicTag">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="Id" ColumnName="TagID" />
+            </EndProperty>
+            <EndProperty Name="Topic">
+              <ScalarProperty Name="Id" ColumnName="TopicID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="TopicElecteds">
+            <EntityTypeMapping TypeName="Garfielder.Models.TopicElected">
+              <MappingFragment StoreEntitySet="TopicElected">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="GarfielderSQLCE">
+        <EntityTypeShape EntityType="Garfielder.Models.Group" Width="1.5" PointX="3" PointY="1.875" Height="2.7427376302083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="Garfielder.Models.Tag" Width="1.5" PointX="3" PointY="11.375" Height="1.9210009765624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Garfielder.Models.Topic" Width="1.5" PointX="5.25" PointY="3" Height="3.2357796223958335" IsExpanded="true" />
+        <EntityTypeShape EntityType="Garfielder.Models.TopicComment" Width="1.5" PointX="7.5" PointY="3.5" Height="2.0853483072916656" IsExpanded="true" />
+        <EntityTypeShape EntityType="Garfielder.Models.User" Width="1.5" PointX="0.75" PointY="3.375" Height="2.4140429687499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Garfielder.Models.XFile" Width="1.5" PointX="3" PointY="7.125" Height="2.7427376302083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="Garfielder.Models.XFileComment" Width="1.5" PointX="5.25" PointY="7.5" Height="2.0853483072916674" IsExpanded="true" />
+        <AssociationConnector Association="Garfielder.Models.FK_Group_Group" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.5319230769230767" PointY="4.6177376302083335" />
+          <ConnectorPoint PointX="3.5319230769230767" PointY="4.8677376302083335" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="4.8677376302083335" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="4.6177376302083335" />
+        </AssociationConnector>
+        <AssociationConnector Association="Garfielder.Models.FK_Topic_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="5.3908902994791665" />
+          <ConnectorPoint PointX="4.854166666666667" PointY="5.3908902994791656" />
+          <ConnectorPoint PointX="5.020833333333333" PointY="5.3908902994791665" />
+          <ConnectorPoint PointX="5.25" PointY="5.3908902994791665" />
+        </AssociationConnector>
+        <AssociationConnector Association="Garfielder.Models.FK_TopicComment_Topic" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="4.5426741536458328" />
+          <ConnectorPoint PointX="7.5" PointY="4.5426741536458328" />
+        </AssociationConnector>
+        <AssociationConnector Association="Garfielder.Models.FK_XFile_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="5.78904296875" />
+          <ConnectorPoint PointX="1.5" PointY="8.4963688151041659" />
+          <ConnectorPoint PointX="3" PointY="8.4963688151041659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Garfielder.Models.FK_XFileComment_XFile" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="8.5426741536458337" />
+          <ConnectorPoint PointX="4.854166666666667" PointY="8.5426741536458337" />
+          <ConnectorPoint PointX="5.020833333333333" PointY="8.5426741536458337" />
+          <ConnectorPoint PointX="5.25" PointY="8.5426741536458337" />
+        </AssociationConnector>
+        <AssociationConnector Association="Garfielder.Models.TopicFile" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="7.125" />
+          <ConnectorPoint PointX="4.875" PointY="6.75" />
+          <ConnectorPoint PointX="4.875" PointY="7.2681689453125" />
+          <ConnectorPoint PointX="4.8785744349011209" PointY="7.2645945104113778" />
+          <ConnectorPoint PointX="4.9964255650988791" PointY="7.14674338021362" />
+          <ConnectorPoint PointX="5.25" PointY="6.8931689453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="Garfielder.Models.TopicGroup" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="3.8088688151041667" />
+          <ConnectorPoint PointX="5.25" PointY="3.8088688151041667" />
+        </AssociationConnector>
+        <AssociationConnector Association="Garfielder.Models.TopicTag" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="11.438460538461539" />
+          <ConnectorPoint PointX="4.9375" PointY="11.000960538461539" />
+          <ConnectorPoint PointX="4.9375" PointY="4.5998795572916666" />
+          <ConnectorPoint PointX="5.25" PointY="4.5998795572916666" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Garfielder.Models.TopicElected" Width="1.5" PointX="7.5" PointY="7" Height="1.9210009765624996" />
+        <AssociationConnector Association="Garfielder.Models.FK_TopicElected_Topic" >
+          <ConnectorPoint PointX="6.75" PointY="6.8931689453125" />
+          <ConnectorPoint PointX="7.125" PointY="7.2681689453125" />
+          <ConnectorPoint PointX="7.125" PointY="6.625" />
+          <ConnectorPoint PointX="7.5" PointY="7" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

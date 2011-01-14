@@ -1,7 +1,1 @@
-﻿1，Topic表加字段
-	ModifiedAt
-	Published
-2，加RecTopic表，用来维护置顶的主题
-	Id
-	DateStart
-	DateEnd
+﻿

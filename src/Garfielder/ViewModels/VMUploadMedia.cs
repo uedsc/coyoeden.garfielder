@@ -17,5 +17,9 @@ namespace Garfielder.ViewModels
         public string Src { get; set; }
 
         public List<VMXFileEdit> FileList { get; set; }
+        /// <summary>
+        /// list view mode
+        /// </summary>
+        public string ViewMode { get; set; }
     }
 }
