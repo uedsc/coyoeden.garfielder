@@ -193,6 +193,8 @@ table.fixed {
 .site-tip
 {
 	-moz-border-radius:0 0 6px 6px;
+	-webkit-border-radius:0 0 6px 6px;
+	border-radius:0 0 6px 6px;
 	border-style:none solid solid;
 	border-width:0 1px 1px;
 	line-height:19px;
@@ -313,7 +315,9 @@ table.fixed {
 	min-width:255px;
 	position:relative;
 	width:99.5%;
-	-moz-border-radius:6px 6px 6px 6px;
+	-moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
 	border-style:solid;
 	border-width:1px;
 	margin-bottom:20px;	
@@ -382,7 +386,9 @@ table.fixed {
 .rsb #ste_main_{margin-right:300px;}
 .richedt,#ste_title{margin-bottom:15px;position:relative;}
 .bigipt{
-	-moz-border-radius:6px 6px 6px 6px;
+	-moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
 	border-style:solid;
 	border-width:1px;
 	line-height:100%;
@@ -397,11 +403,19 @@ table.fixed {
 	line-height:150%;	
 	padding:6px;
 }
-#edt_main{
+#edt_main,#topic-files{	
 	-moz-border-radius:6px 6px 0 0;
+    -webkit-border-radius:6px 6px 0 0;
+    border-radius:6px 6px 0 0;
 	border-collapse:separate;
 	border-style:solid;
 	border-width:1px;
+}
+#topic-files
+{
+    min-height:390px;
+    height:auto !important;
+    height:390px;    
 }
 
 
@@ -512,8 +526,10 @@ table.fixed {
 #edtbtn_others{cursor:default;padding:8px 8px 0;}
 #edtbtn_others a{cursor:pointer;padding:0 0 5px 10px;}
 #edtbtn_others img{vertical-align:middle;}
-#edtbtn_html,#edtbtn_preview{
+.richedt-tab{
 	-moz-border-radius:3px 3px 0 0;
+	-webkit-border-radius:3px 3px 0 0;
+	border-radius:3px 3px 0 0;
 	border-style:solid;
 	border-width:1px;
 	float:right;
@@ -521,7 +537,6 @@ table.fixed {
 	margin:5px 5px 0 0;
 	padding:4px 5px 2px;
 }
-#edtbtn_html{margin-right:15px;}
 #btnPublish{width:80px;}
 #boxTag p{margin:6px 6px 8px;}
 #tagAdder p.howto{margin:0 0 6px 8px;}

@@ -92,8 +92,9 @@
 				</div>
 				<div id="ste_richedt" class="richedt bd0">
 					<div id="edt_toolbar" class="clear">
-						<a id="edtbtn_html" class="bd0" href="#">HTML</a>
-						<a id="edtbtn_preview" class="edtbtn_on bd0" href="#">Preview</a>
+                        <a id="E-edtbtn_files" class="richedt-tab bd0" href="javascript://">Attachments</a>
+						<a id="E-edtbtn_html" class="richedt-tab bd0" href="javascript://">HTML</a>
+						<a id="E-edtbtn_preview" class="richedt-tab bd0 edtbtn_on" href="javascript://">Preview</a>
 						<div id="edtbtn_others">
 							<span>Upload / Insert</span>
 							<a id="edtbtn_img" title="Add an image" class="thickbox" href="javascript://" rel="<%:Url.Action("UploadMedia","Camp",null) %>"><img alt="" src="<%:Url.Img("media-button-image.gif")%>"/></a>
@@ -102,6 +103,9 @@
 					<div id="edt_main" class="bd0">
 						<textarea id="edt_hoder" class="edt_holder" tabindex="2" name="ContentX" cols="40" rows="20"><%:Model.ContentX %></textarea>
 					</div>
+                    <div id="topic-files" class="bd0">
+                        <iframe id="ifTopicFiles" name="ifTopicFiles" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+                    </div>
 				</div>
 			</div>
 		</div><!--#ste_main-->

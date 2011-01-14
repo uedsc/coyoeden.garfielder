@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -83,10 +84,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Garfielder.Designer.cs">
-      <DependentUpon>Garfielder.edmx</DependentUpon>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Models\GarfielderSQLCE.Designer.cs">
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GarfielderSQLCE.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Group.biz.cs">
       <SubType>Code</SubType>
@@ -124,6 +125,7 @@
     <Compile Include="ViewModels\VMXFileList.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Garfielder.sdf" />
     <Content Include="App_Data\GarfielderDB.mdf" />
     <Content Include="App_Data\GarfielderDB_log.ldf">
       <DependentUpon>GarfielderDB.mdf</DependentUpon>
@@ -465,12 +467,12 @@
     <Content Include="Views\Camp\ET_GroupSelector.ascx" />
     <Content Include="Views\Camp\Index.aspx" />
     <Content Include="Views\Camp\ListFile.aspx" />
+    <Content Include="Views\Camp\ListFileView.ascx" />
     <Content Include="Views\Camp\ListGroup.aspx" />
     <Content Include="Views\Camp\ListTag.aspx" />
     <Content Include="Views\Camp\ListTopic.aspx" />
     <Content Include="Views\Camp\ListUser.aspx" />
     <Content Include="Views\Camp\SelectGroup.ascx" />
-    <Content Include="Views\Camp\UM_FromLib.ascx" />
     <Content Include="Views\Camp\UM_FromURL.ascx" />
     <Content Include="Views\Camp\UploadMedia.aspx" />
     <Content Include="Views\Camp\UploadUI.ascx" />
@@ -523,13 +525,13 @@
     <Content Include="Views\Shared\nolayout.Master" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\Garfielder.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Garfielder.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <EntityDeploy Include="Models\GarfielderSQLCE.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GarfielderSQLCE.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

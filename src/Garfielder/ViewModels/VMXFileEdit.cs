@@ -14,7 +14,9 @@ namespace Garfielder.ViewModels
         public DateTime CreatedAt { get; set; }
         public string Description { get; set; }
         public string UserName { get; set; }
-
+        /// <summary>
+        /// No need flash upload control on the page
+        /// </summary>
         public bool NoFlash { get; set; }
         /// <summary>
         /// Name without extension

@@ -19,7 +19,7 @@
 
 <%}else if (Model.Src == "lib"){%>
 <!--lib ui-->
-<% Html.RenderPartial("UM_FromLib"); %>
+<% Html.RenderPartial("ListFileView",new{mode=Model.ViewMode,files=Model.FileList}); %>
 
 <%}else{%>
 <!--local ui-->

@@ -455,7 +455,8 @@ a.menu_first
 #scFoot
 {
     background:#D7D7D7;
-	background:-moz-linear-gradient(center bottom , #D7D7D7, #E4E4E4) repeat scroll 0 0 transparent;
+	background:-moz-linear-gradient(center bottom , #D7D7D7, #E4E4E4);
+	background:-webkit-gradient(linear, 0 0, 0 100%, from(#d7d7d7), to(#E4E4E4));
 }
 
 /* =============== topic_add.html =============== */
