@@ -41,6 +41,7 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
+<script type="text/javascript" src="<%:Url.JS("jquery.tmpl.min") %>"></script>
 <script type="text/javascript" src="<%:Url.JS("Admin.UploadMedia","2") %>"></script>
 <script type="text/javascript">
 	Garfielder.Cfg={

@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="/Assets/css/fonts-min.css" />
 	<!--/css-->
 	<!--js-->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="<%:Url.JS("jquery-1.4.4.min") %>"></script>
 	<!--/js-->
 	<asp:ContentPlaceHolder ID="cphHead" runat="server" />
 </head>
@@ -22,7 +22,7 @@
 	<asp:ContentPlaceHolder ID="cphFoot" runat="server"></asp:ContentPlaceHolder>
 	<script type="text/javascript">
 	//<![CDATA[
-	    Garfielder.Init({ siteRoot: '<%:Url.Home() %>' });
+	    Garfielder.Init({ siteRoot: '<%:Url.Home(true) %>' });
 	//]]>
 	</script>
 </body>

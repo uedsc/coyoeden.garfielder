@@ -11,7 +11,7 @@ Garfielder.M("SWFUpload", {
             post_params: null,
             // File Upload Settings
             file_size_limit: "2 MB",
-            file_types: "*.jpg,*.gif",
+            file_types: "*.jpg;*.gif;*.png",
             file_types_description: "Images",
             file_upload_limit: 0,    // Zero means unlimited
 
@@ -66,13 +66,12 @@ Garfielder.M("SWFUpload", {
                 p.fadeIn(obj[0], 0);
                 return;
             };
-            var newImg = $("<img/>", { css: {opacity: 0} }).load(function () {
+            var newImg = $("<img/>", { css: { opacity: 0} }).load(function () {
                 p.fadeIn(this, 0);
             });
-            obj.append(newImg);
-            newImg.wrap('<div class="media-item"/>')
-                .attr("data-raw", Garfielder.SiteRoot + data.Name)
-                .attr("data-meta",data.Meta);
+            var $div = $('<div class="media-item" data-id="' + data.Id + '"/>');
+            $div.attr("data-meta", $.toJSON(data.MetaData)).append(newImg);
+            obj.append($div);
             newImg[0].src = Garfielder.SiteRoot + src;
             obj.removeClass("error");
         }; //addImage
