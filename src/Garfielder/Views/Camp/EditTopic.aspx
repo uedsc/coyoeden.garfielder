@@ -92,18 +92,18 @@
 				</div>
 				<div id="ste_richedt" class="richedt bd0">
 					<div id="edt_toolbar" class="clear">
-                        <a id="E-edtbtn_files" class="richedt-tab bd0" href="javascript://">Attachments</a>
-						<a id="E-edtbtn_html" class="richedt-tab bd0" href="javascript://">HTML</a>
-						<a id="E-edtbtn_preview" class="richedt-tab bd0 edtbtn_on" href="javascript://">Preview</a>
+                        <a id="E-edtbtn_files" class="richedt-tab bd0" href="javascript://" rel="topic-files">Attachments</a>
+						<a id="E-edtbtn_html" class="richedt-tab bd0" href="javascript://" rel="edt_main">HTML</a>
+						<a id="E-edtbtn_preview" class="richedt-tab bd0 edtbtn_on" href="javascript://" rel="edt_main">Preview</a>
 						<div id="edtbtn_others">
 							<span>Upload / Insert</span>
-							<a id="edtbtn_img" title="Add an image" class="thickbox" href="javascript://" rel="<%:Url.Action("UploadMedia","Camp",null) %>"><img alt="" src="<%:Url.Img("media-button-image.gif")%>"/></a>
+							<a id="edtbtn_img" title="Add an image" class="thickbox" href="javascript://" rel="<%:Url.Action("UploadMedia","Camp",new {RefId=Model.Id}) %>"><img alt="" src="<%:Url.Img("media-button-image.gif")%>"/></a>
 						</div>
 					</div>
-					<div id="edt_main" class="bd0">
+					<div id="edt_main" class="richedt-tab-ct bd0">
 						<textarea id="edt_hoder" class="edt_holder" tabindex="2" name="ContentX" cols="40" rows="20"><%:Model.ContentX %></textarea>
 					</div>
-                    <div id="topic-files" class="bd0">
+                    <div id="topic-files" class="richedt-tab-ct bd0">
                         <iframe id="ifTopicFiles" name="ifTopicFiles" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
                     </div>
 				</div>
@@ -133,8 +133,10 @@
     <script type="text/javascript">
         Garfielder.Cfg = {
             IsNew:<%:Model.IsNew.ToString().ToLower() %>,
+            ObjID:'<%:Model.Id%>',
             Title:'<%:Model.Title %>',
-            URL_AUTOSLUG:'<%:Url.Action("AutoSlug","Camp") %>'
+            URL_AUTOSLUG:'<%:Url.Action("AutoSlug","Camp") %>',
+            URL_FILES:'<%:Url.Action("ListTopicFile","Camp") %>'
         };
     </script>
 	<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>

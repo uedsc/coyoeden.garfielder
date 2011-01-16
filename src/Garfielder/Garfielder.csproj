@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SubSonic.Core">
-      <HintPath>..\..\libs\SubSonic 3.0.0.4\Binaries\SubSonic.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
@@ -92,6 +89,9 @@
     <Compile Include="Models\Group.biz.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\ImageFlags.cs" />
+    <Compile Include="Models\ImageMetaData.cs" />
+    <Compile Include="Models\ImageThumbData.cs" />
     <Compile Include="Models\Msg.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -126,10 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Garfielder.sdf" />
-    <Content Include="App_Data\GarfielderDB.mdf" />
-    <Content Include="App_Data\GarfielderDB_log.ldf">
-      <DependentUpon>GarfielderDB.mdf</DependentUpon>
-    </Content>
     <Content Include="App_Data\TODO.txt" />
     <Content Include="Assets\css\camp.css" />
     <Content Include="Assets\css\camp_color.css" />
@@ -184,7 +180,9 @@
     <Content Include="Assets\js\Admin.TopicAdd.js" />
     <Content Include="Assets\js\Admin.Tag.js" />
     <Content Include="Assets\js\Admin.TopicAdd_Tag.js" />
+    <Content Include="Assets\js\Admin.TopicFileList.js" />
     <Content Include="Assets\js\Admin.TopicList.js" />
+    <Content Include="Assets\js\Admin.UploadMedia.js" />
     <Content Include="Assets\js\Garfielder.IFModal.js" />
     <Content Include="Assets\js\Garfielder.js" />
     <Content Include="Assets\js\jquery-ui-1.8.6.effects.min.js" />
@@ -471,6 +469,7 @@
     <Content Include="Views\Camp\ListGroup.aspx" />
     <Content Include="Views\Camp\ListTag.aspx" />
     <Content Include="Views\Camp\ListTopic.aspx" />
+    <Content Include="Views\Camp\ListTopicFile.aspx" />
     <Content Include="Views\Camp\ListUser.aspx" />
     <Content Include="Views\Camp\SelectGroup.ascx" />
     <Content Include="Views\Camp\UM_FromURL.ascx" />
@@ -511,10 +510,6 @@
     <ProjectReference Include="..\Garfielder.Core\Garfielder.Core.csproj">
       <Project>{DAB56064-5CFA-42DE-A2A5-0D939A952C75}</Project>
       <Name>Garfielder.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Garfielder.Data\Garfielder.Data.csproj">
-      <Project>{93991070-8601-4776-B6EE-383A2CF753FF}</Project>
-      <Name>Garfielder.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Garfielder.Web\Garfielder.Web.csproj">
       <Project>{309BBAAB-B184-4E61-86EA-A80BDEB05F8C}</Project>

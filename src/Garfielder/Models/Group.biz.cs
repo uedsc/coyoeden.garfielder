@@ -191,7 +191,7 @@ namespace Garfielder.Models
         public static dynamic Save(VMGroupEdit obj) {
             var msg = new Msg();
             var dbm = default(Group);
-            obj.Slug = string.IsNullOrEmpty(obj.Slug) ? obj.Name.CHSToPinyin().ToLower() : obj.Slug.ToLower();
+            obj.Slug = string.IsNullOrEmpty(obj.Slug) ? obj.Name.CHSToPinyin("-").ToLower() : obj.Slug.ToLower();
             
             //validate name existence
             if (!ValidateName(obj.Name, obj.Id.ToString()))

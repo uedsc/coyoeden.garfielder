@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Garfielder.Web;
 
 namespace Garfielder.Extension
 {
     public static class UrlHelperX
     {
-        public static string Home(this UrlHelper url) {
-            return url.Content("~/");
+        public static string Home(this UrlHelper url,bool absolute=false) {
+            if(!absolute)
+                return url.Content("~/");
+
+            return Utils.AbsoluteWebRoot.ToString();
         }
         public static string JS(this UrlHelper url, string jsName,string version="") {
             version = string.IsNullOrEmpty(version)?"":string.Format("?v={0}",version);

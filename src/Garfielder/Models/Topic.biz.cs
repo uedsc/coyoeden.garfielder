@@ -163,6 +163,32 @@ namespace Garfielder.Models
             }//try
 
             return slug;
+        }//autoslug
+        /// <summary>
+        /// list topic files for specified topic
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static VMXFileList ListFileData(Guid id)
+        {
+            var r = new VMXFileList();
+            r.FileList=new List<VMXFileEdit>();
+            if (id == Guid.Empty) return r;
+            using(var db=new GarfielderEntities())
+            {
+                var obj = db.Topics.SingleOrDefault(x => x.Id.Equals(id));
+                if (obj == null) return r;
+                obj.XFiles.ToList().ForEach(x => r.FileList.Add(new VMXFileEdit
+                                                           {
+                                                               Id = x.Id,
+                                                               Title = x.Title,
+                                                               Extension = x.Extension,
+                                                               Description = x.Description,
+                                                               UserName = x.User.Name
+                                                           }));
+                r.RefTopic = obj;
+            }//using
+            return r;
         }
     }
 }

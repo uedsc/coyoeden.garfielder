@@ -20,9 +20,9 @@ namespace Garfielder.Extension
         {
             if (context.RequestContext.HttpContext.Request.IsAjaxRequest())
             {
-                string destinationUrl = UrlHelper.GenerateContentUrl(Url, context.HttpContext);
+                var destinationUrl = UrlHelper.GenerateContentUrl(Url, context.HttpContext);
 
-                JavaScriptResult result = new JavaScriptResult()
+                var result = new JavaScriptResult()
                 {
                     Script = "window.location='" + destinationUrl + "';"
                 };

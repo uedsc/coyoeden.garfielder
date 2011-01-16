@@ -1,7 +1,7 @@
 /**
 * JS logic for adding media files
 */
-Garfielder.AddModule("AddMedia", {
+Garfielder.M("AddMedia", {
     init: function (opts) {
         this.opts = opts;
         this.$items = $("#media-items");
@@ -10,5 +10,6 @@ Garfielder.AddModule("AddMedia", {
         if (this.opts.noFlash) {
             this.$items.css("opacity", 0.3).animate({ opacity: 1 }, 1500);
         }; //if
+
     } //onload
 });

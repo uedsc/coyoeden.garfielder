@@ -72,7 +72,7 @@
 	<asp:ContentPlaceHolder ID="cphFoot" runat="server"></asp:ContentPlaceHolder>
 	<script type="text/javascript">
 	//<![CDATA[
-			Garfielder.Init({ siteRoot: '<%:Url.Home() %>',tip:<%:(!String.IsNullOrEmpty(Model.Msg)).ToString().ToLower() %> });
+			Garfielder.Init({ siteRoot: '<%:Url.Home(true) %>',tip:<%:(!String.IsNullOrEmpty(Model.Msg)).ToString().ToLower() %> });
 	//]]>
 	</script>
 </body>

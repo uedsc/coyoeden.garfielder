@@ -100,6 +100,20 @@ namespace Garfielder.Controllers
             return View(vm);
         }
         /// <summary>
+        /// list attachements for specified topic
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ListTopicFile(Guid id)
+        {
+            var vm = CreateViewData<VMXFileList>();
+            var vm1 = Topic.ListFileData(id);
+            vm.FileList=vm1.FileList;
+            vm.RefTopic = vm1.RefTopic;
+            
+            return View(vm);
+        }
+        /// <summary>
         /// delete a specified topic via ajax
         /// </summary>
         /// <param name="id"></param>
@@ -149,7 +163,7 @@ namespace Garfielder.Controllers
                         obj.CreateAt = DateTime.Now;
                         obj.Id = Guid.NewGuid();
                         dbm = new Topic();
-                        dbm.CreatedAt = obj.CreateAt;
+                        dbm.CreatedAt=dbm.PublishedAt = obj.CreateAt;
                         
                         dbm.Id = obj.Id;
                         db.AddToTopics(dbm);
@@ -172,6 +186,7 @@ namespace Garfielder.Controllers
                     //save to db
                     var msg = Topic.ValidateSlug(dbm.Slug, db);
                     dbm.Slug = msg.Context["Slug"].ToString();
+                    dbm.ModifiedAt = DateTime.Now;
 
                     db.Attach(CurrentUser);
                     dbm.User = CurrentUser;

@@ -1,7 +1,7 @@
 ﻿/**
 *SWFUpload module
 */
-Garfielder.AddModule("SWFUpload", {
+Garfielder.M("SWFUpload", {
     init: function (opts) {
         this.opts = opts;
         //swfupload's default configuration
@@ -11,8 +11,8 @@ Garfielder.AddModule("SWFUpload", {
             post_params: null,
             // File Upload Settings
             file_size_limit: "2 MB",
-            file_types: "*.jpg",
-            file_types_description: "JPG Images",
+            file_types: "*.jpg,*.gif",
+            file_types_description: "Images",
             file_upload_limit: 0,    // Zero means unlimited
 
             // Event Handler Settings - these functions as defined in Handlers.js
@@ -59,32 +59,22 @@ Garfielder.AddModule("SWFUpload", {
         //private methods
         var p = {};
         p.addImage = function (src, data) {
-            var obj = document.getElementById("media-items");
+            var obj = $("#media-items");
             if (data && data.Error) {
-                obj.innerHTML = data.Msg;
-                obj.className = "error";
-                p.fadeIn(obj, 0);
+                obj[0].innerHTML = data.Msg;
+                obj.addClass("error");
+                p.fadeIn(obj[0], 0);
                 return;
             };
-            var newImg = document.createElement("img");
-            newImg.style.margin = "5px";
-
-            obj.appendChild(newImg);
-            if (newImg.filters) {
-                try {
-                    newImg.filters.item("DXImageTransform.Microsoft.Alpha").opacity = 0;
-                } catch (e) {
-                    // If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
-                    newImg.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=' + 0 + ')';
-                };
-            } else {
-                newImg.style.opacity = 0;
-            };
-
-            newImg.onload = function () {
-                p.fadeIn(newImg, 0);
-            };
-            newImg.src = Garfielder.SiteRoot + src;
+            var newImg = $("<img/>", { css: {opacity: 0} }).load(function () {
+                p.fadeIn(this, 0);
+            });
+            obj.append(newImg);
+            newImg.wrap('<div class="media-item"/>')
+                .attr("data-raw", Garfielder.SiteRoot + data.Name)
+                .attr("data-meta",data.Meta);
+            newImg[0].src = Garfielder.SiteRoot + src;
+            obj.removeClass("error");
         }; //addImage
 
         p.fadeIn = function (element, opacity) {
