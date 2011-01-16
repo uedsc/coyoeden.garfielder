@@ -32,7 +32,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\libs\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -42,8 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\AppSettingsHelper.cs" />
     <Compile Include="Infrastructure\ImageResizer.cs" />
+    <Compile Include="Infrastructure\ImgMetaData.cs" />
     <Compile Include="Infrastructure\Inflector.cs" />
+    <Compile Include="Infrastructure\ServiceLocatorX.cs" />
     <Compile Include="Infrastructure\Utils.str.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

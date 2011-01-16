@@ -1982,7 +1982,8 @@ namespace Garfielder.Models
         /// <param name="title">Initial value of the Title property.</param>
         /// <param name="userID">Initial value of the UserID property.</param>
         /// <param name="createdAt">Initial value of the CreatedAt property.</param>
-        public static XFile CreateXFile(global::System.Guid id, global::System.String name, global::System.String extension, global::System.String title, global::System.Guid userID, global::System.DateTime createdAt)
+        /// <param name="modifiedAt">Initial value of the ModifiedAt property.</param>
+        public static XFile CreateXFile(global::System.Guid id, global::System.String name, global::System.String extension, global::System.String title, global::System.Guid userID, global::System.DateTime createdAt, global::System.DateTime modifiedAt)
         {
             XFile xFile = new XFile();
             xFile.Id = id;
@@ -1991,6 +1992,7 @@ namespace Garfielder.Models
             xFile.Title = title;
             xFile.UserID = userID;
             xFile.CreatedAt = createdAt;
+            xFile.ModifiedAt = modifiedAt;
             return xFile;
         }
 
@@ -2191,6 +2193,54 @@ namespace Garfielder.Models
         private global::System.DateTime _CreatedAt;
         partial void OnCreatedAtChanging(global::System.DateTime value);
         partial void OnCreatedAtChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ModifiedAt
+        {
+            get
+            {
+                return _ModifiedAt;
+            }
+            set
+            {
+                OnModifiedAtChanging(value);
+                ReportPropertyChanging("ModifiedAt");
+                _ModifiedAt = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedAt");
+                OnModifiedAtChanged();
+            }
+        }
+        private global::System.DateTime _ModifiedAt;
+        partial void OnModifiedAtChanging(global::System.DateTime value);
+        partial void OnModifiedAtChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Meta
+        {
+            get
+            {
+                return _Meta;
+            }
+            set
+            {
+                OnMetaChanging(value);
+                ReportPropertyChanging("Meta");
+                _Meta = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Meta");
+                OnMetaChanged();
+            }
+        }
+        private global::System.String _Meta;
+        partial void OnMetaChanging(global::System.String value);
+        partial void OnMetaChanged();
 
         #endregion
     

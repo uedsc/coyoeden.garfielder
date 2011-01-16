@@ -56,33 +56,45 @@ namespace Garfielder.Core.Infrastructure
         /// <param name="newFileName">新图路径</param>
         /// <param name="maxWidth">最大宽度</param>
         /// <param name="maxHeight">最大高度</param>
-        public static void GetThumbnail(string fileName, string newFileName, int maxWidth, int maxHeight,bool ignoreIfInvalidSize=false)
+        public static ImgMetaData GetThumbnail(string fileName, string newFileName, int maxWidth, int maxHeight,bool ignoreIfInvalidSize=false)
         {
+            var meta = new ImgMetaData();
             try
             {
                 using(var original = Image.FromFile(fileName)){
-                    var _newSize = GetImgSize(original.Width, original.Height, maxWidth, maxHeight);
+                    meta.RawSize=new Size(original.Width,original.Height);
+                    meta.NewSize = GetImgSize(original.Width, original.Height, maxWidth, maxHeight);
 
-                    var invalidSize = _newSize.Width == original.Width && _newSize.Height == original.Height;
-                    if (invalidSize&&ignoreIfInvalidSize) {
-                        return;
+                    var invalidSize = meta.NewSize.Width == original.Width && meta.NewSize.Height == original.Height;
+                    if (invalidSize&&ignoreIfInvalidSize)
+                    {
+                        meta.Error = true;
+                        meta.Msg = "Invalid resizing size!";
+                        return meta;
                     }
 
-                    var thumbnailBitmap = new Bitmap(_newSize.Width, _newSize.Height);
+                    var thumbnailBitmap = new Bitmap(meta.NewSize.Width, meta.NewSize.Height);
                     var thumbnailGraph = Graphics.FromImage(thumbnailBitmap);
                     thumbnailGraph.CompositingQuality = CompositingQuality.HighQuality;
                     thumbnailGraph.SmoothingMode = SmoothingMode.HighQuality;
                     thumbnailGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-                    var imageRectangle = new Rectangle(0, 0, _newSize.Width,_newSize.Height);
+                    var imageRectangle = new Rectangle(0, 0, meta.NewSize.Width, meta.NewSize.Height);
                     thumbnailGraph.DrawImage(original, imageRectangle);
 
                     thumbnailBitmap.Save(newFileName, GetFormat(fileName));
 
                     thumbnailGraph.Dispose();
                     thumbnailBitmap.Dispose();
-                }
-            }catch{}
+                }//using
+            }catch(Exception ex)
+            {
+                //TODO:log
+                meta.Error = true;
+                meta.Msg = ex.Message;
+                return meta;
+            }//try
+            return meta;
         }
         /// <summary>
         /// 缩放图片

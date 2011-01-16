@@ -44,9 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.url.cs" />
     <Compile Include="ViewPageX.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Garfielder.Core\Garfielder.Core.csproj">
+      <Project>{DAB56064-5CFA-42DE-A2A5-0D939A952C75}</Project>
+      <Name>Garfielder.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -175,6 +175,8 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" Nullable="false" />
+          <Property Name="Meta" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="XFileComment">
           <Key>
@@ -472,6 +474,8 @@
           <NavigationProperty Name="User" Relationship="Garfielder.Models.FK_XFile_User" FromRole="XFile" ToRole="User" />
           <NavigationProperty Name="Comments" Relationship="Garfielder.Models.FK_XFileComment_XFile" FromRole="XFile" ToRole="XFileComment" />
           <NavigationProperty Name="Topics" Relationship="Garfielder.Models.TopicFile" FromRole="XFile" ToRole="Topic" />
+          <Property Type="DateTime" Name="ModifiedAt" Nullable="false" />
+          <Property Type="String" Name="Meta" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="XFileComment">
           <Key>
@@ -635,7 +639,9 @@
             <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="XFiles"><EntityTypeMapping TypeName="Garfielder.Models.XFile"><MappingFragment StoreEntitySet="XFile">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Url" ColumnName="Url" />
             <ScalarProperty Name="Extension" ColumnName="Extension" />

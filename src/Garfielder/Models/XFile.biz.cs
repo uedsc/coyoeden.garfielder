@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IO;
+using System.Web.Helpers;
 using System.Web.Hosting;
 
 using Garfielder.ViewModels;
@@ -60,6 +61,7 @@ namespace Garfielder.Models
         {
             var vm = new VMXFileEdit();
             vm.NoFlash = true;
+            
 
             if (req.Files.Count == 0 || req.Files[0].FileName == "" || req.Files[0].ContentLength==0)
             {
@@ -67,7 +69,7 @@ namespace Garfielder.Models
                 vm.Msg = "No file selected!Please select a file to upload!";
                 return vm;
             };
-
+            var refid = req.Params["RefId"];
             var uid = req.Params["UserID"];
             var uname = req.Params["UserName"];
             var fileName=req.Files[0].FileName.CHSToPinyin("-").ToLower();
@@ -98,35 +100,93 @@ namespace Garfielder.Models
 
                         path1=string.Format("{0}\\{1}",path1,fileName);
                         req.Files[0].SaveAs(path1);
-
-                        //图片缩略图处理
-                        if (IsImg(vm.Extension)) { 
+                       
+                        //图片缩略图处理);
+                        if (IsImg(vm.Extension))
+                        {
                             //大图800x600
-                            ImageResizer.GetThumbnail(path1, GetImgName(path1, "800x600"), 800, 600, true);
+                            var tempObj=ImageResizer.GetThumbnail(path1, GetImgName(path1, ImageFlags.L800X600), 800, 600, true);
+                            vm.MetaData.Width = tempObj.RawSize.Width;
+                            vm.MetaData.Height = tempObj.RawSize.Height;
+
+                            //原图
+                            vm.MetaData.AddThumb(ImageFlags.RAW,
+                                string.Format("{0}{1}",
+                                   Garfielder.Web.Utils.AbsoluteWebRoot, vm.Name),
+                                   vm.MetaData.Width, vm.MetaData.Height);
+                            
+                            if(!tempObj.Error)
+                            {
+                                vm.MetaData.AddThumb(ImageFlags.L800X600,
+                                                     string.Format("{0}{1}_800x600{2}",
+                                                                   Garfielder.Web.Utils.AbsoluteWebRoot, vm.Name1,
+                                                                   vm.Extension),tempObj.NewSize.Width,tempObj.NewSize.Height);
+                            }
                             //中大图500x500
-                            ImageResizer.GetThumbnail(path1,GetImgName(path1,"500x500"),500,500,true);
+                            tempObj=ImageResizer.GetThumbnail(path1,GetImgName(path1,ImageFlags.L500X500),500,500,true);
+                            if (!tempObj.Error)
+                            {
+                                vm.MetaData.AddThumb(ImageFlags.L500X500,
+                                                     string.Format("{0}{1}_500x500{2}",
+                                                                   Garfielder.Web.Utils.AbsoluteWebRoot, vm.Name1,
+                                                                   vm.Extension), tempObj.NewSize.Width, tempObj.NewSize.Height);
+                            }
                             //中
-                            ImageResizer.GetThumbnail(path1, GetImgName(path1, "300x300"), 300, 300, true);
+                            tempObj=ImageResizer.GetThumbnail(path1, GetImgName(path1,ImageFlags.M300X300), 300, 300, true);
+                            if (!tempObj.Error)
+                            {
+                                vm.MetaData.AddThumb(ImageFlags.M300X300,
+                                                     string.Format("{0}{1}_300x300{2}",
+                                                                   Garfielder.Web.Utils.AbsoluteWebRoot, vm.Name1,
+                                                                   vm.Extension), tempObj.NewSize.Width, tempObj.NewSize.Height);
+                            }
                             //中小图
-                            ImageResizer.GetThumbnail(path1, GetImgName(path1, "160x160"), 160, 160, true);
-                            ImageResizer.GetThumbnail(path1, GetImgName(path1, "160x100"), 160, 100);
+                            tempObj=ImageResizer.GetThumbnail(path1, GetImgName(path1,ImageFlags.M160X160), 160, 160, true);
+                            if (!tempObj.Error)
+                            {
+                                vm.MetaData.AddThumb(ImageFlags.M160X160,
+                                                     string.Format("{0}{1}_160x160{2}",
+                                                                   Garfielder.Web.Utils.AbsoluteWebRoot, vm.Name1,
+                                                                   vm.Extension), tempObj.NewSize.Width, tempObj.NewSize.Height);
+                            }
+                            tempObj=ImageResizer.GetThumbnail(path1, GetImgName(path1, ImageFlags.S160X100), 160, 100);
+                            if (!tempObj.Error)
+                            {
+                                vm.MetaData.AddThumb(ImageFlags.S160X100,
+                                                     string.Format("{0}{1}_160x100{2}",
+                                                                   Garfielder.Web.Utils.AbsoluteWebRoot, vm.Name1,
+                                                                   vm.Extension), tempObj.NewSize.Width, tempObj.NewSize.Height);
+                            }
                             //小
-                            ImageResizer.GetThumbnail(path1, GetImgName(path1, "64x64"), 64, 64);
-                        };
+                            tempObj=ImageResizer.GetThumbnail(path1, GetImgName(path1, ImageFlags.S64X64), 64, 64);
+                            if (!tempObj.Error)
+                            {
+                                vm.MetaData.AddThumb(ImageFlags.S64X64,
+                                                     string.Format("{0}{1}_64x64{2}",
+                                                                   Garfielder.Web.Utils.AbsoluteWebRoot, vm.Name1,
+                                                                   vm.Extension), tempObj.NewSize.Width, tempObj.NewSize.Height);
+                            }
+                           
+                            
+                        };//IsImg
 
                         dbm = new XFile();
                         dbm.Id = vm.Id;
                         dbm.Name = path0;
+                        dbm.Url = path0;
                         dbm.Title = vm.Title;
                         dbm.Description = vm.Description;
                         dbm.Extension = vm.Extension;
-                        dbm.CreatedAt = vm.CreatedAt;
+                        dbm.CreatedAt=dbm.ModifiedAt = vm.CreatedAt;
+                        dbm.Meta = vm.Meta;
 
                         dbm.UserID = Guid.Parse(uid);
                         db.CommandTimeout = 0;
                         db.AddToXFiles(dbm);
                         db.SaveChanges();
                         ClearCache();
+                        //attach to topic
+                        AttachToTopic(refid,db,dbm);
                     }
                     catch (Exception ex)
                     {
@@ -139,12 +199,30 @@ namespace Garfielder.Models
                     //FILE Exists
                     vm.Error = true;
                     vm.Msg = string.Format("File {0} exists!", path0);
+                    //attach to topic
+                    AttachToTopic(refid,db,dbm);
                 };
+
+
+                
 
             };//using
             return vm;
 
         }//SaveFile
+        private static void AttachToTopic(string topicID,GarfielderEntities db,XFile file)
+        {
+            //refID proccess
+            var objID = Guid.Parse(topicID);
+            if(objID==Guid.Empty) return;
+            var obj = file.Topics.SingleOrDefault(x => x.Id == objID);
+            //exists
+            if (obj != null) return;
+            //attach
+            file.Topics.Add(db.Topics.Single(x=>x.Id.Equals(objID)));
+            db.SaveChanges();
+        }
+
         /// <summary>
         /// list all items
         /// </summary>
@@ -186,7 +264,8 @@ namespace Garfielder.Models
                     CreatedAt = x.CreatedAt,
                     Extension = x.Extension,
                     Id = x.Id,
-                    UserName = x.UserName
+                    UserName = x.UserName,
+                    Meta = x.Meta
                 }));
             return r;
 

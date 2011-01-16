@@ -9,7 +9,10 @@ Garfielder.M("TopicAdd", {
                 $input: $("#ste_slug_auto"),
                 $lbl: $("#ste_slug_auto_holder"),
                 $loading: $("#loading-slug")
-            }
+            },
+            $tabs: $("#edt_toolbar .richedt-tab"),
+            $tabCT: $("#ste_richedt .richedt-tab-ct"),
+            $ifFiles: $("#ifTopicFiles")
 
         };
         var p = {};
@@ -27,7 +30,7 @@ Garfielder.M("TopicAdd", {
         p.initPreInput = function () {
             me.ui.$title.preInput({ val: p._lang.lblTitle });
             if (!opts.IsNew) {
-                $title.val(opts.Title).blur();
+                me.ui.$title.val(opts.Title).blur();
             };
             $("#newtag-topic").preInput({ val: p._lang.lblTag });
         };
@@ -74,12 +77,13 @@ Garfielder.M("TopicAdd", {
                 me.ui.slug.$lbl.html(this.value);
                 me.ui.slug.$input.width(me.ui.slug.$lbl.width() + 10);
             });
-        }
+
+        }; //initAutoSlug
         p.initAddMedia = function () {
             $("#edtbtn_img").click(function () {
                 IFModal.Show(this.rel, { minH: 420 });
             });
-        };
+        }; //initAddMedia
 
         //private area
         p.initVar = function () {
@@ -93,6 +97,16 @@ Garfielder.M("TopicAdd", {
             p.initPreInput();
             p.initAutoSlug();
             p.initAddMedia();
+
+            //editor tab-bar
+            me.ui.$tabs.click(function (e) {
+                me.ui.$tabs.removeClass("edtbtn_on").filter(this).addClass("edtbtn_on");
+                me.ui.$tabCT.hide().filter("#" + this.rel).fadeIn();
+                if (this.rel == "topic-files") {
+                    me.ui.$ifFiles.attr("src", me.opts.URL_FILES + "/" + me.opts.ObjID + "?t=" + new Date().getTime());
+                };
+
+            });
         };
 
         //init
@@ -102,7 +116,7 @@ Garfielder.M("TopicAdd", {
         $.preload([Garfielder.SiteRoot + 'assets/img/overlay-close.png']);
     },
     onLoad: function () {
-        $("#edt_hoder").tinymce({
+        this.ui.$editor = $("#edt_hoder").tinymce({
             script_url: Garfielder.SiteRoot + 'assets/js/tiny_mce/tiny_mce.js',
             theme: 'advanced',
             skin: 'lvLuna',
@@ -121,5 +135,11 @@ Garfielder.M("TopicAdd", {
             theme_advanced_resize_horizontal: "",
             dialog_type: "modal"
         });
-    } //onLoad
+    }, //onLoad
+    Editor: function () {
+        return this.ui.$editor.tinymce();
+    }, //editor
+    InsertHTML: function (html) {
+        this.Editor().execCommand('mceInsertContent', false, html);
+    } //inserhtml
 }); 

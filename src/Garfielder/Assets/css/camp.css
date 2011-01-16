@@ -115,7 +115,7 @@ table.fixed {
 	padding:0;
 	vertical-align:text-top;
 }
-.error
+.error,.common-tip
 {
 	padding:2px;
 	-webkit-box-shadow:2px 2px 6px #ddd;
@@ -175,7 +175,7 @@ table.fixed {
 #scMain
 {
 	margin-left:175px;
-	padding:50px 0 0 0;
+	padding:50px 0;
 	min-height:500px;
 	height:auto !important;
 	height:500px;
@@ -413,9 +413,11 @@ table.fixed {
 }
 #topic-files
 {
+    display:none;
     min-height:390px;
     height:auto !important;
-    height:390px;    
+    height:390px;  
+    padding:8px;  
 }
 
 
@@ -492,7 +494,7 @@ table.fixed {
 #scFoot{
 	border-style:solid none;
 	border-width:1px 0;
-	position:absolute;
+	position:fixed;
 	bottom:0;
 	left:0;
 	height:48px;
@@ -577,6 +579,7 @@ table.fixed {
 	border-width:1px;
 	width:670px;
 }
+#media-items .media-item{cursor:pointer;float:left;padding:3px;margin:5px;background:#333;}
 /* -- SWFUpload Object Styles ------------------------------- */
 .swfupload {
 	vertical-align: top;

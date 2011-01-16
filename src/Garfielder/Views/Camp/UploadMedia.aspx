@@ -23,8 +23,8 @@
 
 <%}else{%>
 <!--local ui-->
-<%Html.RenderPartial("UploadUI", Model); %>
-		
+<%ViewData["flag"] = "UploadMedia"; %>
+<%Html.RenderPartial("UploadUI", Model,ViewData); %>		
 <%} %>
 </asp:Content>
 
@@ -41,13 +41,13 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
-<script type="text/javascript" src="<%:Url.JS("Admin.AddMedia","2") %>"></script>
+<script type="text/javascript" src="<%:Url.JS("Admin.UploadMedia","2") %>"></script>
 <script type="text/javascript">
 	Garfielder.Cfg={
 		noFlash:<%:Model.NoFlash.ToString().ToLower() %>,
 		swfuOpts:{
 			upload_url:'<%:Url.Action("SaveMedia","Camp") %>',
-			post_params:{"UserID": "<%:Model.CurrentUser.Id %>","UserName":"<%:Model.CurrentUser.Name %>"},
+			post_params:{"UserID": "<%:Model.CurrentUser.Id %>","UserName":"<%:Model.CurrentUser.Name %>","RefId":"<%:Model.RelId %>"},
 			button_image_url:'<%:Url.Img("XPButtonNoText_160x22.png") %>'
 		}
 	};
