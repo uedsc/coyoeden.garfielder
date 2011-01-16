@@ -30,7 +30,7 @@
 <p class="common-tip">Single Click to view sizes,Double click to insert into the topic!</p>
 <div id="media-sizes" class="common-tip"></div>
 <script id="tpl-media-size" type="text/x-jquery-tmpl">
-<input id="ObjSize-${Flag}" type="radio" name="ObjSize" value="${Src}" />
+<input id="ObjSize-${Flag}" type="radio" name="ObjSize" value="${Src}" data-w="${Width}" data-h="${Height}"/>
 <label for="ObjSize-${Flag}">${Flag}</label>
 </script>        
 <%}%> 
@@ -40,7 +40,7 @@
   <%:Model.Msg %>
 <%}else if (Model.NoFlash && !string.IsNullOrEmpty(Model.Name))
   { %>
-  <div class="media-item" data-id="<%:Model.Id %>" data-meta="<%:Html.Raw(Model.Meta) %>"><img alt="<%:Model.Name1 %>" src="<%:Model.Url(ImageFlags.S160X100) %>" data-raw="<%:Model.Url()%>" /></div>
+  <div class="media-item" data-id="<%:Model.Id %>" data-meta="<%:Html.Raw(Model.Meta) %>"><img alt="<%:Model.Name1 %>" src="<%:Model.Url(ImageFlags.S160X100) %>" /></div>
 <%}%>
 </div>	
 <!--/upload ui-->

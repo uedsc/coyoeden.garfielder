@@ -185,6 +185,7 @@
     <Content Include="Assets\js\Admin.UploadMedia.js" />
     <Content Include="Assets\js\Garfielder.IFModal.js" />
     <Content Include="Assets\js\Garfielder.js" />
+    <Content Include="Assets\js\jquery-1.4.4.min.js" />
     <Content Include="Assets\js\jquery-ui-1.8.6.effects.min.js" />
     <Content Include="Assets\js\jquery.datalink.js" />
     <Content Include="Assets\js\jquery.json-2.2.min.js" />

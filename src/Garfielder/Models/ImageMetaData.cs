@@ -22,7 +22,7 @@ namespace Garfielder.Models
 
         public ImageMetaData AddThumb(string flag,string src,int w,int h)
         {
-            Thumbs.Add(new ImageThumbData(){Flag = flag,Src = src});
+            Thumbs.Add(new ImageThumbData(){Flag = flag,Src = src,Width = w,Height = h});
             return this;
         }
 
