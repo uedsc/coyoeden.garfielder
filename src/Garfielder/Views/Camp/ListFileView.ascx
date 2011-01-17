@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<dynamic>" %>
+<%@ Import Namespace="Garfielder.Models" %>
 <form id="filter" method="get" action="">
 	<div id="mediaList" class="listView">
 		<div class="row acts1">
@@ -25,12 +26,13 @@
 		</div>
 		<div class="row">
             <%if (Model.mode == "list"){%>
-			<table class="widefat post fixed" cellspacing="0">
+			<table class="widefat fixed" cellspacing="0">
 				<thead>
 					<tr>
 						<th class="manage-column column-icon" id="icon" scope="col"></th>										
 						<th scope="col" class="manage-column column-title">File</th>
-						<th scope="col" id="date" class="manage-column">Date</th>
+						<th scope="col" class="manage-column col-meta">Meta</th>
+                        <th scope="col" class="manage-column col-acts">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,15 +45,26 @@
                       item = Model.files[i];%>
 					<tr id='md-<%:item.Id%>' class='<%:i%2 == 0 ? "alt" : ""%> status-publish iedit' valign="top">
 						<td class="column-icon media-icon">				
-							<a title="Edit" href="javascript://">
-								<img title="" alt="" class="attachment-64x64" src="<%:Url.Home() + item.Name1 + "_64x64" + item.Extension%>"/>	
+							<a title="" href="javascript://">
+								<img title="" alt="" class="attachment-64x64" src="<%:item.Url(ImageFlags.S64X64)%>"/>	
 							</a>
 						</td>										
 						<td class="md-title column-title">
-							<a class="row-title" href="#" title=""><strong><%:item.Title%></strong></a>
+							<a class="row-title" href="javascript://" title=""><strong><%:item.Title%></strong></a>
 							<p><%:item.Extension%></p>
+                            <p class="tip"><%:item.CreatedAt.ToString("yyyy/MM/dd")%></p>
 						</td>
-						<td class="date"><abbr title=""><%:item.CreatedAt.ToString("yyyy/MM/dd")%></abbr></td>
+						<td class="col-meta">
+                            <div id="file-meta-<%:item.Id %>">
+                                <%item.MetaData.Thumbs.ForEach(x =>{%>
+                                <input id="mt-<%:x.Flag %>" type="radio" name="mt-<%:item.Id %>" value="<%:x.Src %>" data-w="<%:x.Width %>" data-h="<%:x.Height %>"/>
+                                <label for="mt-<%:x.Flag %>" title="<%:x.Width %>x<%:x.Height %>"><%:x.Flag %></label>
+                                <%});%>
+                            </div>
+                        </td>
+                        <td class="col-acts">
+                            <a href="javascript://" class="btn">Insert</a><a href="javascript://" class="btn">Attachment</a>
+                        </td>
 					</tr>	                 
 				<%
                   }%>																			
@@ -60,7 +73,8 @@
 					<tr>
 						<th class="manage-column column-icon" id="icon1" scope="col"></th>
 						<th scope="col"  class="manage-column column-title">File</th>
-						<th scope="col"  class="manage-column">Date</th>
+						<th scope="col" class="manage-column col-meta">Meta</th>
+                        <th scope="col" class="manage-column col-acts">Actions</th>
 					</tr>
 				</tfoot>
 			</table>							
@@ -73,8 +87,8 @@
                   {%>
 				<%item = Model.files[i];%>
                 <li>
-                    <a class="box-c" title="Edit" href="javascript://">
-					    <img title="<%:item.Title%>" alt="" class="attachment-64x64" src="<%:Url.Home() + item.Name1 + "_64x64" + item.Extension%>"/>	
+                    <a class="box-c" title="" href="javascript://">
+					    <img title="<%:item.Title%>" alt="" class="attachment-64x64" src="<%:item.Url(ImageFlags.S64X64)%>"/>	
 					</a>
                     <span class="file-ext"><%:item.Extension%></span>
                     <span class="file-date"><%:item.CreatedAt.ToString("yyyy/MM/dd")%></span>

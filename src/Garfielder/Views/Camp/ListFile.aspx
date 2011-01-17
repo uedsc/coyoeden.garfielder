@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/camp.Master" Inherits="System.Web.Mvc.ViewPage<VMXFileList>" %>
+<%@ Import Namespace="Garfielder.Models" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Media Library
@@ -55,7 +56,7 @@
 					<th scope="row" class="check-column"><input type="checkbox" name="md[]" value="117" /></th>
 					<td class="column-icon media-icon">				
 						<a title="Edit" href="#">
-							<img title="" alt="" class="attachment-64x64" src="<%:Url.Home()+item.Name1+"_64x64"+item.Extension %>"/>	
+							<img title="" alt="" class="attachment-64x64" src="<%:item.Url(ImageFlags.S64X64)%>"/>	
 						</a>
 					</td>										
 					<td class="md-title column-title">
