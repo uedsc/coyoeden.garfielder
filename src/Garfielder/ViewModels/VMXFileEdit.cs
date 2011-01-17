@@ -32,9 +32,12 @@ namespace Garfielder.ViewModels
         /// </summary>
         public bool NoFlash { get; set; }
         /// <summary>
-        /// Name without extension
+        /// Name without extension.Readonly
         /// </summary>
-        public string Name1 { get; set; }
+        public string Name1
+        {
+            get { return Name.Substring(0, Name.Length - Extension.Length); }
+        }
 
         #region meta data
 

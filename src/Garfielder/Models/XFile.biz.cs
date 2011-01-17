@@ -94,7 +94,7 @@ namespace Garfielder.Models
                         vm.Title = req.Files[0].FileName;
                         vm.Description = vm.Title;
                         vm.Extension = vm.Name.Substring(vm.Name.LastIndexOf("."));
-                        vm.Name1 = path0.Substring(0, path0.Length - vm.Extension.Length);
+                        
                         vm.Id = Guid.NewGuid();
                         vm.CreatedAt = DateTime.Now;
 
@@ -120,7 +120,7 @@ namespace Garfielder.Models
                                 vm.MetaData.AddThumb(ImageFlags.L800X600,
                                                      string.Format("{0}{1}_800x600{2}",
                                                                    Garfielder.Web.Utils.AbsoluteWebRoot, vm.Name1,
-                                                                   vm.Extension),tempObj.NewSize.Width,tempObj.NewSize.Height);
+                                                                   vm.Extension), tempObj.NewSize.Width, tempObj.NewSize.Height);
                             }
                             //中大图500x500
                             tempObj=ImageResizer.GetThumbnail(path1,GetImgName(path1,ImageFlags.L500X500),500,500,true);
@@ -190,6 +190,7 @@ namespace Garfielder.Models
                     }
                     catch (Exception ex)
                     {
+                        //TODO:log
                         vm.Error = true;
                         vm.Msg = ex.Message;
                     }//TRY
@@ -259,7 +260,6 @@ namespace Garfielder.Models
                 new VMXFileEdit
                 {
                     Name = x.Name,
-                    Name1 = x.Name.Substring(0, x.Name.Length - x.Extension.Length),
                     Title = x.Title,
                     CreatedAt = x.CreatedAt,
                     Extension = x.Extension,

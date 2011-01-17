@@ -184,11 +184,56 @@ namespace Garfielder.Models
                                                                Title = x.Title,
                                                                Extension = x.Extension,
                                                                Description = x.Description,
-                                                               UserName = x.User.Name
+                                                               UserName = x.User.Name,
+                                                               Name = x.Name,
+                                                               CreatedAt = x.CreatedAt
                                                            }));
                 r.RefTopic = obj;
             }//using
             return r;
+        }//ListFileData
+        /// <summary>
+        /// Detach files
+        /// </summary>
+        /// <param name="topicID"></param>
+        /// <param name="fileID"></param>
+        /// <returns></returns>
+        public static Msg DetachFiles(Guid topicID,params Guid[] fileID)
+        {
+            var msg = new Msg();
+            try
+            {
+                using (var db = new GarfielderEntities())
+                {
+                    var obj = db.Topics.SingleOrDefault(x => x.Id.Equals(topicID));
+                    if(obj==null||obj.XFiles.Count==0)
+                    {
+                        msg.Error = true;
+                        msg.Body = string.Format("Topic with id [{0}] not exists or it has no attachments!", topicID);
+                        return msg;
+                    }//if
+
+                    //delete all attached files
+                    if(fileID==null||fileID.Length==0)
+                    {
+                        obj.XFiles.Clear();
+                        db.SaveChanges();
+                        return msg;
+                    }//if
+                    
+                    //delete specified files
+                    var items = obj.XFiles.Where(x => !fileID.Contains(x.Id));
+                    obj.XFiles.Clear();
+                    items.ToList().ForEach(x => obj.XFiles.Add(x));
+                    db.SaveChanges();
+                } //using
+            }catch(Exception ex)
+            {
+                //TODO:log
+                msg.Error = true;
+                msg.Body = ex.Message;
+            }//try
+            return msg;
         }
     }
 }

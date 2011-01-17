@@ -5,8 +5,8 @@
  * 3,cmt=comment
  *
  */
-.clear,.w_ct,.row{zoom:1;}
-.clear:after,.w_ct:after,.row:after{display:block;content:'\20';clear:both;}
+.clear,.w_ct,.row,.pp{zoom:1;}
+.clear:after,.w_ct:after,.row:after,.pp:after{display:block;content:'\20';clear:both;}
 .l{float:left;}
 .r{float:right;}
 .hide{display:none;}
@@ -54,6 +54,32 @@ input[type="text"], input[type="password"], textarea {
 	-moz-box-sizing:border-box;
 }
 label{vertical-align:middle;cursor:pointer;}
+/* pp -picture group */
+.pp{text-align:center;}
+.pp li{display:inline;float:left;}
+.pp img{display:block;margin:0 auto;border:1px solid #E4E4E4;padding:1px;}
+.pp span{display:block;}
+/* 垂直居中-*font-size需根据具体高度算 */
+.box-c {
+    /* 非ie的主流浏览器识别的垂直居中 */
+    display:table-cell;
+    vertical-align:middle;
+    /* 设置水平居中 */
+    text-align:center;
+    /* 针对恶心的IE的HACK */
+    *display:block;
+    *font-size:70px;    /* 神的hack,人类目前无法解释。约为高度的0.873~0.877,如80*0.873=69.84 */
+    *font-family:Arial;      /* 防止非utf-8引起的hack失效问题,如gbk编码 */
+    /* 高宽 */
+    width:80px;
+    height:80px;
+}
+.box-c img {
+    /* 设置图片垂直居中 */
+    vertical-align:middle;
+    /* 注:block会破坏居中,另外请防止别的样式覆盖 */
+    display:inline-block; /* inline也行 */
+}
 /* loading */
 .loading-16 span{display:inline-block;width:16px;height:16px;background:url(../img/loading16x16_2.gif) no-repeat;vertical-align:middle;}
 /* table style */
@@ -122,6 +148,7 @@ table.fixed {
 	-moz-box-shadow:2px 2px 6px #ddd;
 	box-shadow:2px 2px 6px #ddd;	      
 }
+.common-tip .btn{margin-left:8px;}
 /* layout */
 
 /* header */
@@ -580,6 +607,10 @@ table.fixed {
 	width:670px;
 }
 #media-items .media-item{cursor:pointer;float:left;padding:3px;margin:5px;background:#333;}
+#media-items .on{background:#FFC0CB;}
+#media-items .media-item-entry{padding:3px;}
+#media-items .label .alignleft{float:left;}
+#media-items .label .alignright{float:right;}
 /* -- SWFUpload Object Styles ------------------------------- */
 .swfupload {
 	vertical-align: top;
@@ -643,3 +674,11 @@ table.fixed {
 	line-height: 28px;
 	padding: 0 7px;
 }
+/* ====ListTopicFile.aspx==== */
+.list-thumb li{margin:5px;position:relative;background:#666;padding:3px;}
+.list-thumb li.on{background:#FFC0CB;}
+.list-thumb .file-ext{position:absolute;font-size:0.8em;color:#fff;background:#666;border:1px solid #FFC0CB;top:-5px;right:-5px;}
+.list-thumb .file-date{color:#fff;font-size:0.8em;width:70px;margin:0 auto;}
+.list-thumb .box-c,.list-thumb .file-acts{background:#999;}
+.list-thumb li.on .box-c,.list-thumb li.on .file-acts{background:#eee;}
+.list-thumb .file-acts{display:none;}

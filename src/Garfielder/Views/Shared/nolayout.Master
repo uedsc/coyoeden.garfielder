@@ -17,7 +17,8 @@
 <body class="<%:this.Model.PageFlag %>">
 	<asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
 	<!--common js-->
-	<script type="text/javascript" src="<%:Url.JS("Garfielder") %>"></script> 
+	<script type="text/javascript" src="<%:Url.JS("Garfielder") %>"></script>
+    <script type="text/javascript" src="<%:Url.JS("Admin.Common") %>"></script> 
 	<!--/common js--> 
 	<asp:ContentPlaceHolder ID="cphFoot" runat="server"></asp:ContentPlaceHolder>
 	<script type="text/javascript">

@@ -10,7 +10,7 @@ namespace Garfielder.ViewModels
         /// <summary>
         /// topic id
         /// </summary>
-        public Guid RelId { get; set; }
+        public Guid RefId { get; set; }
         /// <summary>
         /// upload source
         /// </summary>

@@ -27,11 +27,11 @@
 </div>
 <%} %>
 <%if (ViewData["flag"] != null && ViewData["flag"].ToString() == "UploadMedia"){%>
-<p class="common-tip">Single Click to view sizes,Double click to insert into the topic!</p>
+<p class="common-tip">Single Click to view choices!<button id="btn-insert" class="btn">Insert into topic</button></p>
 <div id="media-sizes" class="common-tip"></div>
 <script id="tpl-media-size" type="text/x-jquery-tmpl">
-<input id="ObjSize-${Flag}" type="radio" name="ObjSize" value="${Src}" data-w="${Width}" data-h="${Height}"/>
-<label for="ObjSize-${Flag}">${Flag}</label>
+<input id="ObjSize-${Flag}" type="radio" name="ObjSize-${RefId}" value="${Src}" data-w="${Width}" data-h="${Height}"/>
+<label for="ObjSize-${Flag}" title="${Width}x${Height}">${Flag}</label>
 </script>        
 <%}%> 
 <div id="media-items" class="clear <%:Model.Str(Model.Error,"error") %>">
