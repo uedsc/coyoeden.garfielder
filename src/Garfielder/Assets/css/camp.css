@@ -113,6 +113,7 @@ table.fixed {
 	padding:0;
 	width:2.2em;
 }
+.widefat .col-acts .btn{margin-right:4px;}
 .fixed .column-comments {
 	padding-top:8px;
 	width:6em;
