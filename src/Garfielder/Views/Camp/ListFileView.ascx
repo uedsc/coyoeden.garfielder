@@ -28,9 +28,9 @@
 			<table class="widefat post fixed" cellspacing="0">
 				<thead>
 					<tr>
-						<th style="" class="manage-column column-icon" id="icon" scope="col"></th>										
-						<th scope="col" class="manage-column column-title" style="">File</th>
-						<th scope="col" id="date" class="manage-column" style="">Date</th>
+						<th class="manage-column column-icon" id="icon" scope="col"></th>										
+						<th scope="col" class="manage-column column-title">File</th>
+						<th scope="col" id="date" class="manage-column">Date</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -59,13 +59,13 @@
 				<tfoot>
 					<tr>
 						<th class="manage-column column-icon" id="icon1" scope="col"></th>
-						<th scope="col"  class="manage-column column-title" style="">File</th>
-						<th scope="col"  class="manage-column" style="">Date</th>
+						<th scope="col"  class="manage-column column-title">File</th>
+						<th scope="col"  class="manage-column">Date</th>
 					</tr>
 				</tfoot>
 			</table>							
 		    <%}else{%>
-            <ul class="list-thumb">
+            <ul id="list-file" class="pp list-thumb">
 				<%
                   var item = default(VMXFileEdit);%>
 				<%
@@ -73,11 +73,14 @@
                   {%>
 				<%item = Model.files[i];%>
                 <li>
-                    <a title="Edit" href="javascript://">
+                    <a class="box-c" title="Edit" href="javascript://">
 					    <img title="<%:item.Title%>" alt="" class="attachment-64x64" src="<%:Url.Home() + item.Name1 + "_64x64" + item.Extension%>"/>	
 					</a>
-                    <p><%:item.Extension%></p>
-                    <abbr title=""><%:item.CreatedAt.ToString("yyyy/MM/dd")%></abbr>
+                    <span class="file-ext"><%:item.Extension%></span>
+                    <span class="file-date"><%:item.CreatedAt.ToString("yyyy/MM/dd")%></span>
+                    <div class="file-acts">
+                        <a href="javascript://" class="file-del" rel="<%:item.Id %>">Delete</a>
+                    </div>
                 </li>                 
 				<%
                   }%>	                

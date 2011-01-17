@@ -176,7 +176,7 @@
           <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="ModifiedAt" Type="datetime" Nullable="false" />
-          <Property Name="Meta" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Meta" Type="ntext" />
         </EntityType>
         <EntityType Name="XFileComment">
           <Key>

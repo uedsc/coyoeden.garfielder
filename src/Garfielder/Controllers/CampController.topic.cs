@@ -220,7 +220,20 @@ namespace Garfielder.Controllers
                 
             };
             return View(obj);
-        }
+        }//edit topic
+        /// <summary>
+        /// Detach an attachment
+        /// </summary>
+        /// <param name="tid">topic id</param>
+        /// <param name="fid">file id</param>
+        /// <returns></returns>
+        public JsonResult DetachFile(Guid tid,Guid fid)
+        {
+            var msg = new Msg();
+            msg = Topic.DetachFiles(tid, fid);
+            return Json(msg);
+
+        }//detach file
 
         #region helper methods
         private ActionResult NewTopic() {

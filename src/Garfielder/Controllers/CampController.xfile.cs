@@ -68,12 +68,12 @@ namespace Garfielder.Controllers
             return View(vm);
         }
         [HttpGet]
-        public ActionResult UploadMedia(string RelId="",string Src="local",bool flash=true,string mode="list") {
+        public ActionResult UploadMedia(string RefId="",string Src="local",bool flash=true,string mode="list") {
             var vm = CreateViewData<VMUploadMedia>();
             vm.NoFlash = !flash;
             var rel=Guid.Empty;
-            Guid.TryParse(RelId,out rel);
-            vm.RelId = rel;
+            Guid.TryParse(RefId,out rel);
+            vm.RefId = rel;
             vm.Src = Src;
             vm.ViewMode = mode;
             vm.FileList = XFile.ListAllData();

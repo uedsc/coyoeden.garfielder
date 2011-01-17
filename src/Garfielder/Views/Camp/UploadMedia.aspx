@@ -7,9 +7,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div id="media-upload-header">
 	<ul id="sideMenu">
-		<li><a href="?RelId=<%:Model.RelId %>&Src=local" <%:Html.Raw(Str(Model.Src=="local","class=\"now\"")) %>>From Computer</a></li>
-		<li><a href="?RelId=<%:Model.RelId %>&Src=url&flash=false" <%:Html.Raw(Str(Model.Src=="url","class=\"now\"")) %>>From URL</a></li>
-		<li><a href="?RelId=<%:Model.RelId %>&Src=lib&flash=false" <%:Html.Raw(Str(Model.Src=="lib","class=\"now\"")) %>>From Media Library</a></li>
+		<li><a href="?RelId=<%:Model.RefId %>&Src=local" <%:Html.Raw(Str(Model.Src=="local","class=\"now\"")) %>>From Computer</a></li>
+		<li><a href="?RelId=<%:Model.RefId %>&Src=url&flash=false" <%:Html.Raw(Str(Model.Src=="url","class=\"now\"")) %>>From URL</a></li>
+		<li><a href="?RelId=<%:Model.RefId %>&Src=lib&flash=false" <%:Html.Raw(Str(Model.Src=="lib","class=\"now\"")) %>>From Media Library</a></li>
 	</ul>
 </div>
 <%if (Model.Src == "url")
@@ -48,7 +48,7 @@
 		noFlash:<%:Model.NoFlash.ToString().ToLower() %>,
 		swfuOpts:{
 			upload_url:'<%:Url.Action("SaveMedia","Camp") %>',
-			post_params:{"UserID": "<%:Model.CurrentUser.Id %>","UserName":"<%:Model.CurrentUser.Name %>","RefId":"<%:Model.RelId %>"},
+			post_params:{"UserID": "<%:Model.CurrentUser.Id %>","UserName":"<%:Model.CurrentUser.Name %>","RefId":"<%:Model.RefId %>"},
 			button_image_url:'<%:Url.Img("XPButtonNoText_160x22.png") %>'
 		}
 	};

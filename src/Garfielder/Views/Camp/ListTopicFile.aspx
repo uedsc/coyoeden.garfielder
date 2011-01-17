@@ -20,5 +20,11 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
-<script type="text/javascript" src="<%:Url.JS("Admin.TopicFileList") %>"></script>
+<script type="text/javascript">
+    Garfielder.Cfg = {
+        RefId:<%:Html.Raw(Model.RefTopic==null?"null":"'"+Model.RefTopic.Id+"'")%>,
+        URL_DELFILE:'<%:Url.Action("DetachFile","Camp") %>'
+    };
+</script>
+<script type="text/javascript" src="<%:Url.JS("Admin.TopicFileList","2") %>"></script>
 </asp:Content>

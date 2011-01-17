@@ -107,6 +107,14 @@ Garfielder.M("TopicAdd", {
                 };
 
             });
+            //auto frame height
+            me.ui.$ifFiles.load(function (e) {
+                if (this.contentDocument) {
+                    this.height = this.contentDocument.body.offsetHeight + 35;
+                } else {
+                    this.height = this.contentWindow.document.body.scrollHeight;
+                };
+            });
         };
 
         //init
@@ -121,6 +129,7 @@ Garfielder.M("TopicAdd", {
             theme: 'advanced',
             skin: 'lvLuna',
             width: "100%",
+            relative_urls: false,
             plugins: "safari,inlinepopups,spellchecker,paste,media,fullscreen,tabfocus",
             // Theme options
             theme_advanced_buttons1: "bold,italic,strikethrough,|,bullist,numlist,blockquote,|,justifyleft,justifycenter,justifyright,|,link,unlink,|,fullscreen",
