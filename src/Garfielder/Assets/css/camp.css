@@ -137,6 +137,10 @@ table.fixed {
 	padding:3px 7px;
 	vertical-align:top;
 }
+.widefat td.col-acts
+{
+    vertical-align:middle;
+}
 .widefat th input {
 	margin:0 0 0 8px;
 	padding:0;
@@ -548,6 +552,10 @@ table.fixed {
 .site-sm-w3{background:#88C32B}
 .site-sm-w4{background:#DA2C8B}
 /* alternate color for weight #FFDA06 #C5C4CC #CE700E #DA0116 */
+/* ========== camp/listopic ============== */
+.star_topic a{background:url(../img/star.gif) no-repeat 0 0px;display:block;height:15px;width:16px;}
+.star_topic a.off:hover{background-position:0 -32px;}
+.star_topic a.on{background-position:0 -16px;cursor:default;}
 /*=========== topic_add.html=============== */
 #ste_sidebar_ .widget .w_ct{margin:6px 6px 0;}
 #ste_slug_{margin-top:8px;padding:0 7px;overflow:hidden;}

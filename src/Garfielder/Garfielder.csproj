@@ -101,6 +101,7 @@
     <Compile Include="Models\Topic.biz.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\TopicElected.biz.cs" />
     <Compile Include="Models\XFile.biz.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -166,6 +167,7 @@
     <Content Include="Assets\img\menu-dark.gif" />
     <Content Include="Assets\img\menu.png" />
     <Content Include="Assets\img\page_white_add.png" />
+    <Content Include="Assets\img\star.gif" />
     <Content Include="Assets\img\toobig.gif" />
     <Content Include="Assets\img\uploadlimit.gif" />
     <Content Include="Assets\img\white-grad-active.png" />

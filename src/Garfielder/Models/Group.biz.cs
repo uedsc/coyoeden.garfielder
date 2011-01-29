@@ -101,7 +101,8 @@ namespace Garfielder.Models
                         Description = x.Description,
                         ParentID = x.ParentID,
                         ParentName = x.Parent == null ? "" : x.Parent.Name,
-                        CntTopic = x.Topics.Count
+                        CntTopic = x.Topics.Count,
+                        Sys=x.Sys
                     }
                 )
             );

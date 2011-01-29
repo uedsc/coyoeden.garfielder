@@ -25,7 +25,8 @@ var IFModal = (function ($) {
                 if (p.opts.hide) {
                     p.opts.hide(e);
                 };
-            }
+            },
+            top:'22%'
         });
         p.ovl = p.$ovl.data("overlay");
     };

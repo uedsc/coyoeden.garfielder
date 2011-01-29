@@ -234,6 +234,16 @@ namespace Garfielder.Controllers
             return Json(msg);
 
         }//detach file
+        /// <summary>
+        /// star a topic
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public JsonResult StarTopic(Guid id)
+        {
+            var msg = Topic.Star(id,CurrentUserName);
+            return Json(msg);
+        }
 
         #region helper methods
         private ActionResult NewTopic() {

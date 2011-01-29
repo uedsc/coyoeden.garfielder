@@ -300,7 +300,8 @@ namespace Garfielder.Models
         /// <param name="level">Initial value of the Level property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdAt">Initial value of the CreatedAt property.</param>
-        public static Group CreateGroup(global::System.Guid id, global::System.String name, global::System.String slug, global::System.Int32 level, global::System.String createdBy, global::System.DateTime createdAt)
+        /// <param name="sys">Initial value of the Sys property.</param>
+        public static Group CreateGroup(global::System.Guid id, global::System.String name, global::System.String slug, global::System.Int32 level, global::System.String createdBy, global::System.DateTime createdAt, global::System.Boolean sys)
         {
             Group group = new Group();
             group.Id = id;
@@ -309,6 +310,7 @@ namespace Garfielder.Models
             group.Level = level;
             group.CreatedBy = createdBy;
             group.CreatedAt = createdAt;
+            group.Sys = sys;
             return group;
         }
 
@@ -509,6 +511,30 @@ namespace Garfielder.Models
         private global::System.DateTime _CreatedAt;
         partial void OnCreatedAtChanging(global::System.DateTime value);
         partial void OnCreatedAtChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Sys
+        {
+            get
+            {
+                return _Sys;
+            }
+            set
+            {
+                OnSysChanging(value);
+                ReportPropertyChanging("Sys");
+                _Sys = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Sys");
+                OnSysChanged();
+            }
+        }
+        private global::System.Boolean _Sys;
+        partial void OnSysChanging(global::System.Boolean value);
+        partial void OnSysChanged();
 
         #endregion
     

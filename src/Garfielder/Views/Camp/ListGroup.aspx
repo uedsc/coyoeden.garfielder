@@ -87,14 +87,24 @@
 						   { %>
 						   <%item = Model.GroupList[i]; %>
 						   <tr id="g-<%:item.Id %>" class="<%:i%2==0?"alt":"" %>">
-								<th class="check-column" scope="row"> 
-									<input type="checkbox" class="cbx-objid" value="<%:item.Id %>" name="ObjIDList"/>
+								<th class="check-column" scope="row">
+                                    <%if (!item.Sys){%> 
+									<input type="checkbox" class="cbx-objid" value="<%:item.Id%>" name="ObjIDList"/>
+                                    <%}%>
 								</th>
 								<td class="name column-name">
-									<strong><a title="Edit [<%:item.Name %>] " href="javascript://" class="row-title act-edit"  rel='{"i":"<%:item.Id %>","n":"<%:item.Name %>","s":"<%:item.Slug %>","d":"<%:item.Description %>","p":"<%:item.ParentID %>","l":"<%:item.Level %>"}'><%:item.Name %></a></strong>
-									<div class="row-actions">
+									<strong>
+                                    <%if (!item.Sys){%>
+                                        <a title="Edit [<%:item.Name %>] " href="javascript://" class="row-title act-edit"  rel='{"i":"<%:item.Id %>","n":"<%:item.Name %>","s":"<%:item.Slug %>","d":"<%:item.Description %>","p":"<%:item.ParentID %>","l":"<%:item.Level %>"}'><%:item.Name%></a>
+                                    <%}else{%>
+                                        <%:item.Name%>
+                                    <%}%>
+                                    </strong>
+									<%if (!item.Sys){%> 
+                                    <div class="row-actions">
 										<span class="delete"><a href="javascript://" class="act-del" rel="<%:item.Id %>">Delete</a></span>
 									</div>
+                                    <%}%>
 								</td>
 								<td class="desc column-desc"><%:item.Description %></td>
 								<td class="slug column-slug"><%:item.Slug %></td>

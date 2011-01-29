@@ -235,5 +235,34 @@ namespace Garfielder.Models
             }//try
             return msg;
         }
+
+        /// <summary>
+        /// star a topic
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="who"></param>
+        /// <returns></returns>
+        public static Msg Star(Guid id,string who)
+        {
+            var msg = new Msg();
+            try
+            {
+                if(Models.TopicElected.Exists(id))
+                {
+                    msg.Error = true;
+                    msg.Body = string.Format("Topic {0} has already been starred!", id);
+                    return msg;
+                }
+
+                msg=Models.TopicElected.Create(id, DateTime.Now, DateTime.MaxValue, who);
+            }
+            catch (Exception ex)
+            {
+
+                msg.Error = true;
+                msg.Body = ex.Message;
+            }
+            return msg;
+        }
     }
 }

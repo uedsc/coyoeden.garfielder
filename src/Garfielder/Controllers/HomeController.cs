@@ -33,9 +33,7 @@ namespace Garfielder.Controllers
 
             //TODO:fake Login
             fakeLogin();
-
-            return RedirectToAction("Index", "Camp");
-            //return View(vm);
+            return View(vm);
         }
 
         private void fakeLogin() {

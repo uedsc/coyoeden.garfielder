@@ -78,6 +78,7 @@
           <Property Name="ParentID" Type="uniqueidentifier" />
           <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="Sys" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -398,6 +399,7 @@
           <NavigationProperty Name="SubGroups" Relationship="Garfielder.Models.FK_Group_Group" FromRole="Group" ToRole="Group1" />
           <NavigationProperty Name="Parent" Relationship="Garfielder.Models.FK_Group_Group" FromRole="Group1" ToRole="Group" />
           <NavigationProperty Name="Topics" Relationship="Garfielder.Models.TopicGroup" FromRole="Group" ToRole="Topic" />
+          <Property Type="Boolean" Name="Sys" Nullable="false" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -591,7 +593,8 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GarfielderModelsStoreContainer" CdmEntityContainer="GarfielderEntities">
           <EntitySetMapping Name="Groups"><EntityTypeMapping TypeName="Garfielder.Models.Group"><MappingFragment StoreEntitySet="Group">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Sys" ColumnName="Sys" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Slug" ColumnName="Slug" />
             <ScalarProperty Name="Description" ColumnName="Description" />
