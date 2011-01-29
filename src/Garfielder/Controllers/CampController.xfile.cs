@@ -88,6 +88,17 @@ namespace Garfielder.Controllers
             var vm = XFile.SaveFile(this.Request);
             return Json(vm);
         }
+        /// <summary>
+        /// attach a file to a topic
+        /// </summary>
+        /// <param name="fid"></param>
+        /// <param name="tid"></param>
+        /// <returns></returns>
+        public JsonResult AttachFileToTopic(string fid,string tid)
+        {
+            var msg = XFile.AttachToTopic(fid, tid);
+            return Json(msg);
+        }
 
     }
 }

@@ -26,7 +26,7 @@
 		</div>
 		<div class="row">
             <%if (Model.mode == "list"){%>
-			<table class="widefat fixed" cellspacing="0">
+			<table id="mediaList-main" class="widefat fixed" cellspacing="0">
 				<thead>
 					<tr>
 						<th class="manage-column column-icon" id="icon" scope="col"></th>										
@@ -56,14 +56,16 @@
 						</td>
 						<td class="col-meta">
                             <div id="file-meta-<%:item.Id %>">
+                                Sizes:
+                                <select class="file-meta-sizes">
                                 <%item.MetaData.Thumbs.ForEach(x =>{%>
-                                <input id="mt-<%:x.Flag %>" type="radio" name="mt-<%:item.Id %>" value="<%:x.Src %>" data-w="<%:x.Width %>" data-h="<%:x.Height %>"/>
-                                <label for="mt-<%:x.Flag %>" title="<%:x.Width %>x<%:x.Height %>"><%:x.Flag %></label>
+                                    <option value="<%:x.Src %>" data-w="<%:x.Width %>" data-h="<%:x.Height %>"><%:x.Flag %></option>
                                 <%});%>
+                                </select>
                             </div>
                         </td>
                         <td class="col-acts">
-                            <a href="javascript://" class="btn">Insert</a><a href="javascript://" class="btn">Attachment</a>
+                            <a href="javascript://" class="btn btn-insert" title="Insert into the topic">Insert</a><a href="javascript://" class="btn btn-attach" title="Set as an attachment!" rel="<%:item.Id %>">Attachment</a>
                         </td>
 					</tr>	                 
 				<%

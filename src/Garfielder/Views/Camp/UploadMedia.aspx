@@ -7,9 +7,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div id="media-upload-header">
 	<ul id="sideMenu">
-		<li><a href="?RelId=<%:Model.RefId %>&Src=local" <%:Html.Raw(Str(Model.Src=="local","class=\"now\"")) %>>From Computer</a></li>
-		<li><a href="?RelId=<%:Model.RefId %>&Src=url&flash=false" <%:Html.Raw(Str(Model.Src=="url","class=\"now\"")) %>>From URL</a></li>
-		<li><a href="?RelId=<%:Model.RefId %>&Src=lib&flash=false" <%:Html.Raw(Str(Model.Src=="lib","class=\"now\"")) %>>From Media Library</a></li>
+		<li><a href="?RefId=<%:Model.RefId %>&Src=local" <%:Html.Raw(Str(Model.Src=="local","class=\"now\"")) %>>From Computer</a></li>
+		<li><a href="?RefId=<%:Model.RefId %>&Src=url&flash=false" <%:Html.Raw(Str(Model.Src=="url","class=\"now\"")) %>>From URL</a></li>
+		<li><a href="?RefId=<%:Model.RefId %>&Src=lib&flash=false" <%:Html.Raw(Str(Model.Src=="lib","class=\"now\"")) %>>From Media Library</a></li>
 	</ul>
 </div>
 <%if (Model.Src == "url")
@@ -45,7 +45,9 @@
 <script type="text/javascript" src="<%:Url.JS("Admin.UploadMedia","2") %>"></script>
 <script type="text/javascript">
 	Garfielder.Cfg={
+        refId:'<%:Model.RefId %>',
 		noFlash:<%:Model.NoFlash.ToString().ToLower() %>,
+        url_attach:'<%:Url.Action("AttachFileToTopic","Camp") %>',
 		swfuOpts:{
 			upload_url:'<%:Url.Action("SaveMedia","Camp") %>',
 			post_params:{"UserID": "<%:Model.CurrentUser.Id %>","UserName":"<%:Model.CurrentUser.Name %>","RefId":"<%:Model.RefId %>"},

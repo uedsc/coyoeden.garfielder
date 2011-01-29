@@ -67,6 +67,28 @@
                 }
             });
         });
+        //star action
+
+        $("#tb-list .act-star").click(function () {
+            var $i = $(this);
+            if ($i.hasClass("on")) return;
+            $.ajax({
+                url:me.opts.url_star,
+                type: 'POST',
+                dataType: 'json',
+                data: { id: $i[0].rel },
+                success: function (msg) {
+                    if (msg.Error) {
+                        Garfielder.AdminCommon.ShowTip(msg.Body, true, 2000);
+                    } else {
+                        $i.removeClass("off").addClass("on");
+                    };
+                },
+                error: function (xhr, status) {
+                    Garfielder.AdminCommon.ShowTip("Server error!", true, 3000);
+                }
+            });
+        });
     },
     /**
     **submit the form

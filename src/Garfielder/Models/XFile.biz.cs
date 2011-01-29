@@ -223,7 +223,41 @@ namespace Garfielder.Models
             file.Topics.Add(db.Topics.Single(x=>x.Id.Equals(objID)));
             db.SaveChanges();
         }
+        /// <summary>
+        /// attach a file to a topic
+        /// </summary>
+        /// <param name="fileID"></param>
+        /// <param name="topicID"></param>
+        /// <returns></returns>
+        public static Msg AttachToTopic(string fileID,string topicID)
+        {
+            var msg = new Msg();
+            try
+            {
+                var dbm = default(XFile);
+                var id = Guid.Parse(fileID);
+                using(var db=new GarfielderEntities())
+                {
+                    dbm = db.XFiles.SingleOrDefault(x => x.Id.Equals(id));
+                    if(dbm==null)
+                    {
+                        msg.Error = true;
+                        msg.Body = string.Format("File with ID {0} has been deleted!", fileID);
+                    }else
+                    {
+                        AttachToTopic(topicID, db, dbm);
+                    }
+                }//using
+            }
+            catch (Exception ex)
+            {
 
+                msg.Error = true;
+                msg.Body = ex.Message;
+                //TODO:log
+            }
+            return msg;
+        }
         /// <summary>
         /// list all items
         /// </summary>

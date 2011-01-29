@@ -21,15 +21,18 @@ Garfielder.M("UploadMedia", {
         }; //if
 
         //insert img into the post
+        /* tab-from computer */
         me.ui.$insert.click(function (e) {
             if (!me.ui.$curItem) {
                 alert("Nothing selected!Please select a media file firstly!");
                 return;
             };
-            var $temp = me.ui.$curItem.clone(), $radio = me.ui.$curSizes.find("input:checked");
-            $temp.find("img").removeAttr("style").attr("src", $radio.val()).attr("width", $radio.attr("data-w")).attr("height", $radio.attr("data-h"));
-            parent.Garfielder.TopicAdd.InsertHTML($temp.html());
-            $temp = null;
+            var $radio = me.ui.$curSizes.find("input:checked");
+            me.insert({
+                src:$radio.val(),
+                w: $radio.attr("data-w"),
+                h: $radio.attr("data-h")
+            });
             $radio = null;
         });
         $("#media-items .media-item").live("click", function (e) {
@@ -64,5 +67,53 @@ Garfielder.M("UploadMedia", {
             me.ui.$curSizes = $("#" + prefix + id);
         });
 
-    } //onload
+        /* tab-from lib */
+        var getSelectedItem=function($tr){
+            var $sizes,$opt;
+            if(!($sizes=$tr.data("$sizes"))){
+                $tr.data("$sizes",($sizes=$tr.find(".file-meta-sizes")));
+            };
+            $opt=$sizes.find("option:selected");
+            return {
+                src:$opt.val(),
+                w:$opt.data("w"),
+                h:$opt.data("h")
+            };
+        };
+        $("#mediaList-main .btn-insert").click(function(e){
+            var item = getSelectedItem($(this).parent().parent());
+            me.insert(item);
+        });
+        $("#mediaList-main .btn-attach").click(function(e){
+            var i=this;
+            $.ajax({
+                url:me.opts.url_attach,
+                type:'POST',
+                dataType:'json',
+                data:{fid:i.rel,tid:me.opts.refId},
+                success:function(msg){
+                    if(msg.Error){
+                        parent.Garfielder.AdminCommon.ShowTip(msg.Body,true);
+                    } else {
+                        parent.Garfielder.AdminCommon.ShowTip("Operation done!", false,2000);
+                        $(i).fadeOut("normal", function () {
+                            $(this).remove();
+                        });
+                    };
+                },
+                error: function (xhr, txtStatus) {
+                    parent.Garfielder.AdminCommon.ShowTip("Server Error,Please try again later or contact the site developer!",true);
+                }
+            });
+        });
+
+    }, //onload
+    /**
+    * insert a pic into the topic
+    * @param {object} d pic data '{src:"xxx",w:"yyy",h:"zzz"}'
+    */
+    insert: function (d) {
+        var html = '<img src="' + d.src + '" width="' + d.w + '" height="' + d.h + '" alt=""/>';
+        parent.Garfielder.TopicAdd.InsertHTML(html);
+    }
 });

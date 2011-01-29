@@ -87,7 +87,7 @@
 							</div>
 						</td>
 						<td class="date column-date"><abbr title=""><%:item.CreateAt.ToString("yyyy-MM-dd") %></abbr><br />Published</td>					
-						<td class="featured column-featured"><div class="featured_post"><a class="off"></a></div></td>
+						<td class="featured column-featured"><div class="star_topic"><a class="act-star off" rel="<%:item.Id %>"></a></div></td>
 					</tr>
 					<%} %>																							
 				</tbody>
@@ -116,7 +116,9 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
 	<!--scripts-->
     <script type="text/javascript">
-        Garfielder.Cfg = {};
+        Garfielder.Cfg = {
+            url_star:'<%:Url.Action("StarTopic","Camp") %>'
+        };
     </script>
 	<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>
 	<script type="text/javascript" src="<%:Url.JS("Admin.TopicList") %>"></script>

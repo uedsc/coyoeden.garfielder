@@ -17,6 +17,7 @@ namespace Garfielder.ViewModels
         public string Description { get; set; }
 
         public int Level { get; set; }
+        public bool Sys { get; set; }
 
         public Guid? ParentID { get; set; }
         public string ParentName { get; set; }
