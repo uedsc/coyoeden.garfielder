@@ -15,6 +15,7 @@ h1{font-size:24px; margin-bottom:15px;}
 
 .gallery{width:980px; margin:0 auto; text-align:center; padding:180px 0;}
 .gallery img{ padding:10px; background:#858585;}
+.gallery a:hover img{background:#333}
 .gallery-tab{display:none;}
 .gallery-tab-on{display:block}
 .gallery-item{float:left;width:180px;height:120px;}
