@@ -34,6 +34,6 @@ namespace Garfielder.Models
         /// <summary>
         /// RAW image
         /// </summary>
-        public static readonly string RAW = "RAW";
+        public static readonly string RAW = "";
     }
 }

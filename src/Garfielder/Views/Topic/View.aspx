@@ -33,28 +33,32 @@
         <div class="gallery-tab clearfix<%:i==0?" gallery-tab-on":"" %>">
             <%for (var j = i * itemsPerPage; (j < (i + 1) * itemsPerPage) && (j < cntItem); j++){%>
             <div class="gallery-item">
-                <img width="160" height="100" alt="" src="<%:Model.Files[j].Url(ImageFlags.S160X100) %>"/>
+                <a href="javascript://"><img width="160" height="100" alt="" data-raw="<%:Model.Files[j].Url(ImageFlags.RAW) %>" src="<%:Model.Files[j].Url(ImageFlags.S160X100) %>"/></a>
             </div>
             <%}%>
         </div>
         <%}%>
 
     </div>
-
+    <!--overlay ui-->
+	<div id="ovl-wrap" class="ovl-apple">
+		<a class="ovl-close"></a>
+		<div class="ovl-ct">
+			<div id="ovl-ing" class="ovl-ing"><img src="<%:Url.Img("ovl-ing.gif") %>" alt="Loading..." /></div>
+			<img id="ovl-img" style="display:none" alt=""/>
+		</div>
+	</div>
+	<!--/overlay ui-->
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="cphHead" runat="server">
 <link href="<%:Url.CSS("main") %>" rel="stylesheet" type="text/css" />
 <link href="<%:Url.CSS("detail") %>" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%:Url.JS("jquery-1.4.4.min") %>"></script>
+<link href="<%:Url.CSS("overlay-apple") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
-<script type="text/javascript" src="<%:Url.JS("Garfielder") %>"></script>
+<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>
+<script type="text/javascript" src="<%:Url.JS("jquery.vPreload") %>"></script>
 <script type="text/javascript" src="<%:Url.JS("Topic") %>"></script>
-<script type="text/javascript">
-//<![CDATA[
-		Garfielder.Init({ siteRoot: '<%:Url.Home(true) %>',tip:<%:(!String.IsNullOrEmpty(Model.Msg)).ToString().ToLower() %> });
-//]]>
-</script>
 </asp:Content>

@@ -18,12 +18,11 @@
 	<asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
 	<!--common js-->
 	<script type="text/javascript" src="<%:Url.JS("Garfielder") %>"></script>
-    <script type="text/javascript" src="<%:Url.JS("Admin.Common") %>"></script> 
 	<!--/common js--> 
 	<asp:ContentPlaceHolder ID="cphFoot" runat="server"></asp:ContentPlaceHolder>
 	<script type="text/javascript">
 	//<![CDATA[
-	    Garfielder.Init({ siteRoot: '<%:Url.Home(true) %>' });
+	    Garfielder.Init({ siteRoot: '<%:Url.Home(true) %>',tip:<%:(!String.IsNullOrEmpty(Model.Msg)).ToString().ToLower() %> });
 	//]]>
 	</script>
 </body>
