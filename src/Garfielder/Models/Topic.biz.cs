@@ -241,20 +241,19 @@ namespace Garfielder.Models
         /// </summary>
         /// <param name="id"></param>
         /// <param name="who"></param>
+        /// <param name="noStar"></param>
         /// <returns></returns>
-        public static Msg Star(Guid id,string who)
+        public static Msg Star(Guid id,string who,bool noStar=false)
         {
             var msg = new Msg();
             try
             {
-                if(Models.TopicElected.Exists(id))
+                if(TopicElected.Exists(id))
                 {
-                    msg.Error = true;
-                    msg.Body = string.Format("Topic {0} has already been starred!", id);
                     return msg;
                 }
 
-                msg=Models.TopicElected.Create(id, DateTime.Now, DateTime.MaxValue, who);
+                msg=TopicElected.Create(id, DateTime.Now, DateTime.Now.AddMonths(1), who);
             }
             catch (Exception ex)
             {
@@ -263,6 +262,43 @@ namespace Garfielder.Models
                 msg.Body = ex.Message;
             }
             return msg;
+        }
+
+        /// <summary>
+        /// list all items by specified conditions
+        /// </summary>
+        /// <param name="published"></param>
+        /// <param name="term"></param>
+        /// <param name="callback"></param>
+        /// <returns></returns>
+        public static List<Topic> ListAll(bool published=false,string term="",Action<List<Topic>> callback=null)
+        {
+            var retVal = new List<Topic>();
+
+            //get topic data
+            using (var db = new GarfielderEntities())
+            {
+                //TODO:searching optimize
+                var q = default(IQueryable<Topic>);
+                //filter-whether is published
+                q = published ? db.Topics.Where(x => x.Published) : db.Topics;
+                //filter-searching term
+                if (!string.IsNullOrWhiteSpace(term))
+                {
+                    q = from obj in q
+                        where obj.Title.ToLower().Contains(term)
+                        select obj;
+                }
+                //sort
+                retVal = q.OrderByDescending(x => x.CreatedAt).ToList();
+                if(null!=callback)
+                {
+                    callback(retVal);
+                }
+                
+            }//using
+
+            return retVal;
         }
     }
 }

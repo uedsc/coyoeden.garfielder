@@ -83,11 +83,11 @@
 						<td class="tags column-tags"><a href='#'><%:item.TagsTxt %></a></td>
 						<td class="comments column-comments">
 							<div class="post-com-count-wrapper">
-								<a href='#' title='0 pending' class='post-com-count'><span class='comment-count'><%:item.CntComment %></span></a>		
+								<a href='javascript://' title='0 pending' class='post-com-count'><span class='comment-count'><%:item.CntComment %></span></a>		
 							</div>
 						</td>
 						<td class="date column-date"><abbr title=""><%:item.CreateAt.ToString("yyyy-MM-dd") %></abbr><br />Published</td>					
-						<td class="featured column-featured"><div class="star_topic"><a class="act-star off" rel="<%:item.Id %>"></a></div></td>
+						<td class="featured column-featured"><div class="star_topic" title="<%:Model.Str(item.Starred,"Un-star it!","Star it!") %>"><a class="act-star <%:Model.Str(item.Starred,"on","off") %>" rel="<%:item.Id %>"></a></div></td>
 					</tr>
 					<%} %>																							
 				</tbody>
