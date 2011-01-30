@@ -10,6 +10,11 @@ namespace Garfielder.Models
     public partial class Topic
     {
         /// <summary>
+        /// topic icon
+        /// </summary>
+        public VMXFileEdit Icon { get; set; }
+ 
+        /// <summary>
         /// validate a slug
         /// </summary>
         /// <param name="slug">slug</param>
@@ -73,6 +78,7 @@ namespace Garfielder.Models
 
             };
         }
+
         public static Msg DeleteByID(params Guid[] id)
         {
             var r = new Msg();
@@ -300,5 +306,116 @@ namespace Garfielder.Models
 
             return retVal;
         }
+        /// <summary>
+        /// list all starred topics
+        /// </summary>
+        /// <returns></returns>
+        public static List<Topic> ListAllStarred(Action<List<Topic>> callback=null)
+        {
+            var retVal = new List<Topic>();
+            try
+            {
+                //get topic data
+                using (var db = new GarfielderEntities())
+                {
+                    //TODO:searching optimize
+                    var q = default(IQueryable<Topic>);
+                    //filter-starred
+                    q = from obj in db.Topics
+                        where obj.Published&&obj.TopicElected!=null
+                        select obj;
+                    //sort
+                    retVal = q.OrderByDescending(x => x.CreatedAt).ToList();
+                    //parse icon
+                    retVal.ForEach(x =>
+                                       {
+                                           var tempFile=x.XFiles.OrderByDescending(y => y.Title).FirstOrDefault();
+                                           if(null!=tempFile)
+                                           {
+                                               x.Icon = new VMXFileEdit
+                                                            {
+                                                                Id = tempFile.Id,
+                                                                Title = tempFile.Title,
+                                                                Extension = tempFile.Extension,
+                                                                Description = tempFile.Description,
+                                                                UserName = tempFile.User.Name,
+                                                                Name = tempFile.Name,
+                                                                CreatedAt = tempFile.CreatedAt
+                                                            };
+                                           }
+                                           
+                                       });
+                    //callback);
+                    if (null != callback)
+                    {
+                        callback(retVal);
+                    }
+
+                }//using
+            }
+            catch (Exception ex)
+            {
+                //TODO:log
+      
+            }
+
+            return retVal;
+        }
+
+        #region frontend methods
+        /// <summary>
+        /// get full topic data by slug
+        /// </summary>
+        /// <param name="slug"></param>
+        /// <returns></returns>
+        public static VMTopicFull GetTopic(string slug)
+        {
+            slug = slug.Trim().ToLower();
+            var obj = new VMTopicFull();
+            obj.Files=new List<VMXFileEdit>();
+            obj.Groups=new List<Group>();
+            obj.Tags=new List<Tag>();
+            try
+            {
+                using (var db = new GarfielderEntities())
+                {
+
+                    var dbm = db.Topics.Single(x => x.Slug == slug);
+                    if (dbm == null) return obj;
+
+
+                    obj.Id = dbm.Id;
+                    obj.Title = dbm.Title;
+                    obj.Slug = dbm.Slug;
+                    obj.Desc = dbm.Description;
+                    obj.XContent = dbm.ContentX;
+                    obj.DateCreated = dbm.CreatedAt;
+
+                    obj.Groups = dbm.Groups.ToList();
+
+                    obj.Tags = dbm.Tags.ToList();
+
+                    dbm.XFiles.ToList().ForEach(x => obj.Files.Add(new VMXFileEdit
+                    {
+                        Id = x.Id,
+                        Title = x.Title,
+                        Extension = x.Extension,
+                        Description = x.Description,
+                        UserName = x.User.Name,
+                        Name = x.Name,
+                        CreatedAt = x.CreatedAt
+                    }));
+
+                };//using
+            }
+            catch (Exception ex)
+            {
+                
+                //TODO:log
+            }//try
+            return obj;
+
+        }
+        #endregion
     }
 }

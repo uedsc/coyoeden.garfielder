@@ -17,15 +17,15 @@ namespace Garfielder.Controllers
         public ActionResult Index()
         {
             var topics = new List<VMTopic>();
-            for (int i = 0; i < 12; i++) {
-                topics.Add(new VMTopic { 
-                    Id=i+1,
-                    Title="Topic title "+i,
-                    Desc="",
-                    Icon = "/assets/img/default.jpg",
-                    DateCreated=DateTime.Now
-                });
-            };
+            var topics1 = Topic.ListAllStarred(items => items.ForEach(x=>  topics.Add(new VMTopic
+                                                                                          {
+                                                                                              Id = x.Id,
+                                                                                              Title =x.Title,
+                                                                                              Slug=x.Slug,
+                                                                                              Desc =x.Description,
+                                                                                              Icon = x.Icon == null ? Url.Content("~/assets/img/default.jpg") : x.Icon.Url(ImageFlags.S160X100),
+                                                                                              DateCreated =x.CreatedAt
+                                                                                          })));
             var vm = new VMHome { 
                 TopicNum=topics.Count,
                 Topics=topics

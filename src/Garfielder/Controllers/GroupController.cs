@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Garfielder.Models;
+using Garfielder.ViewModels;
 
 namespace Garfielder.Controllers
 {
@@ -14,6 +16,13 @@ namespace Garfielder.Controllers
         public ActionResult Index(string id)
         {
             return View();
+        }
+
+        public ActionResult View(string id)
+        {
+            id = id.Trim().ToLower();
+            var vm = Group.Get(id);
+            return View(vm);
         }
 
     }
