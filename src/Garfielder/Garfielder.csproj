@@ -109,6 +109,7 @@
     <Compile Include="ViewModels\VMCampCommonFilter.cs" />
     <Compile Include="ViewModels\VMCampTopicListFilter.cs" />
     <Compile Include="ViewModels\VMCampTopicShow.cs" />
+    <Compile Include="ViewModels\VMGroupHome.cs" />
     <Compile Include="ViewModels\VMTagList.cs" />
     <Compile Include="ViewModels\VMGroupList.cs" />
     <Compile Include="ViewModels\VMTagEdit.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="ViewModels\VMCampTopicList.cs" />
     <Compile Include="ViewModels\VMHome.cs" />
     <Compile Include="ViewModels\VMTopic.cs" />
+    <Compile Include="ViewModels\VMTopicFull.cs" />
     <Compile Include="ViewModels\VMUploadMedia.cs" />
     <Compile Include="ViewModels\VMUserEdit.cs" />
     <Compile Include="ViewModels\VMUserList.cs" />
@@ -455,6 +457,7 @@
     <Content Include="Assets\js\tiny_mce\utils\form_utils.js" />
     <Content Include="Assets\js\tiny_mce\utils\mctabs.js" />
     <Content Include="Assets\js\tiny_mce\utils\validate.js" />
+    <Content Include="Assets\js\Topic.js" />
     <Content Include="Global.asax" />
     <Content Include="Assets\css\Site.css" />
     <Content Include="Scripts\jquery-1.4.3.js" />
@@ -478,7 +481,9 @@
     <Content Include="Views\Camp\UM_FromURL.ascx" />
     <Content Include="Views\Camp\UploadMedia.aspx" />
     <Content Include="Views\Camp\UploadUI.ascx" />
+    <Content Include="Views\Group\View.aspx" />
     <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Topic\View.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

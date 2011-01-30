@@ -133,7 +133,83 @@ namespace Garfielder.Models
                 
             return obj;
         }
+        /// <summary>
+        /// get full group data
+        /// </summary>
+        /// <param name="slug"></param>
+        /// <returns></returns>
+        public static VMGroupHome Get(string slug)
+        {
+            var retVal = new VMGroupHome();
+            try
+            {
+                using (var db=new GarfielderEntities())
+                {
+                    var g = db.Groups.SingleOrDefault(x=>x.Slug.Equals(slug));
+                    if(g==null)
+                    {
+                        return retVal;
+                    }
 
+                    retVal.Topics=new List<VMTopic>();
+                    g.Topics.ToList().ForEach(x=>
+                                                  {
+                                                      var tempFile = x.XFiles.OrderByDescending(y => y.Title).FirstOrDefault();
+                                                      if (null != tempFile)
+                                                      {
+                                                          x.Icon = new VMXFileEdit
+                                                          {
+                                                              Id = tempFile.Id,
+                                                              Title = tempFile.Title,
+                                                              Extension = tempFile.Extension,
+                                                              Description = tempFile.Description,
+                                                              UserName = tempFile.User.Name,
+                                                              Name = tempFile.Name,
+                                                              CreatedAt = tempFile.CreatedAt
+                                                          };
+                                                      }
+                                                      
+                                                      retVal.Topics.Add(new VMTopic
+                                                                            {
+                                                                                Id = x.Id,
+                                                                                Title = x.Title,
+                                                                                Slug = x.Slug,
+                                                                                Desc = x.Description,
+                                                                                Icon =
+                                                                                    x.Icon == null
+                                                                                        ? string.Format(
+                                                                                            "{0}assets/img/default.jpg",
+                                                                                            Web.Utils.AbsoluteWebRoot)
+                                                                                        : x.Icon.Url(ImageFlags.S160X100),
+                                                                                DateCreated = x.CreatedAt
+
+                                                                            });
+                                                  });
+
+                    retVal.GroupData = new VMGroupEdit()
+                                           {
+                                               Name = g.Name,
+                                               Slug = g.Slug,
+                                               Id = g.Id,
+                                               Level = g.Level,
+                                               Description = g.Description,
+                                               ParentID = g.ParentID,
+                                               ParentName = g.Parent == null ? "" : g.Parent.Name,
+                                               CntTopic = g.Topics.Count,
+                                               Sys = g.Sys
+                                           };
+
+                    retVal.TopicNum = g.Topics.Count;
+
+                }//using
+            }
+            catch (Exception ex)
+            {
+                //TODO:log
+                
+            }
+            return retVal;
+        }
         /// <summary>
         /// delete by specified id
         /// </summary>

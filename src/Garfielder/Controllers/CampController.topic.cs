@@ -134,7 +134,7 @@ namespace Garfielder.Controllers
                         obj.Id = Guid.NewGuid();
                         dbm = new Topic();
                         dbm.CreatedAt=dbm.PublishedAt = obj.CreateAt;
-                        
+                        dbm.Published = true;
                         dbm.Id = obj.Id;
                         db.AddToTopics(dbm);
                     }
