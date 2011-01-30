@@ -553,9 +553,9 @@ table.fixed {
 .site-sm-w4{background:#DA2C8B}
 /* alternate color for weight #FFDA06 #C5C4CC #CE700E #DA0116 */
 /* ========== camp/listopic ============== */
-.star_topic a{background:url(../img/star.gif) no-repeat 0 0px;display:block;height:15px;width:16px;}
-.star_topic a.off:hover{background-position:0 -32px;}
-.star_topic a.on{background-position:0 -16px;cursor:default;}
+.star_topic a{background:url(../img/star.gif) no-repeat 0 0px;display:block;height:15px;width:16px;cursor:pointer;}
+.star_topic a:hover,.star_topic a.on:hover{background-position:0 -32px;}
+.star_topic a.on{background-position:0 -16px;}
 /*=========== topic_add.html=============== */
 #ste_sidebar_ .widget .w_ct{margin:6px 6px 0;}
 #ste_slug_{margin-top:8px;padding:0 7px;overflow:hidden;}

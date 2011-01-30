@@ -43,7 +43,49 @@ namespace Garfielder.Models
         {
             _Items = null;
         }
-
+        /// <summary>
+        /// delete a record
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Msg Delete(Guid id)
+        {
+            var msg = new Msg();
+            try
+            {
+                var goOn = TopicElected.Exists(id);
+                if(!goOn)
+                {
+                    msg.Error = true;
+                    msg.Body = string.Format("Topic {0} doesn't exist!", id);
+                }else
+                {
+                    var dbm = ListAll().Single(x => x.Id.Equals(id));
+                    using (var db=new GarfielderEntities())
+                    {
+                        db.Attach(dbm);
+                        db.DeleteObject(dbm);
+                        db.SaveChanges();
+                        ClearCache();
+                    }//using
+                }
+            }
+            catch (Exception ex)
+            {
+                msg.Error = true;
+                msg.Body = ex.Message;
+                
+            }
+            return msg;
+        }
+        /// <summary>
+        /// create a record
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <param name="who"></param>
+        /// <returns></returns>
         public static Msg Create(Guid id,DateTime begin,DateTime end,string who)
         {
             var msg = new Msg();

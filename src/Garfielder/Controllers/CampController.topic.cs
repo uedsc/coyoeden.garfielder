@@ -19,50 +19,20 @@ namespace Garfielder.Controllers
             vm.Term = term;
             //get group data
             vm.GroupList = Group.ListAllData();
+            vm.TopicList=new List<VMCampTopicEdit>();
             //get topic data
-            using (var db = new GarfielderEntities())
-            {
-                //TODO:searching optimize
-                var items = new List<Topic>();
-                var q = default(IQueryable<Topic>);
-                //filter-whether is published
-                if(published)
-                {
-                    q = db.Topics.Where(x => !x.Id.Equals(Guid.Empty));
-                    //TODO:add a published column
-                }else
-                {
-                    q = db.Topics;
-                }
-                //filter-searching term
-                if(!string.IsNullOrWhiteSpace(term))
-                {
-                    q = from obj in q
-                        where obj.Title.ToLower().Contains(term)
-                        select obj;
-                }
-                //sort
-                items = q.OrderByDescending(x => x.CreatedAt).ToList();
-                vm.TopicList = new List<VMCampTopicEdit>();
-                var item=default(VMCampTopicEdit);
-                items.ForEach(x =>
-                {
-                    item = new VMCampTopicEdit
-                    {
-                        Id = x.Id,
-                        Title = x.Title,
-                        UserName = x.User.Name,
-                        Grade = x.Grade,
-                        CreateAt = x.CreatedAt,
-                        CntComment = x.Comments.Count
-                    };
-
-                    item.GroupsTxt = String.Join(",", x.Groups.ToList().ConvertAll(y => y.Name));
-                    item.TagsTxt = String.Join(",", x.Tags.ToList().ConvertAll(z => z.Name));
-
-                    vm.TopicList.Add(item);
-                });
-            }
+            Topic.ListAll(published, term, items => items.ForEach(x => vm.TopicList.Add(new VMCampTopicEdit
+                                                                                            {
+                                                                                                Id = x.Id,
+                                                                                                Title = x.Title,
+                                                                                                UserName = x.User.Name,
+                                                                                                Grade = x.Grade,
+                                                                                                CreateAt = x.CreatedAt,
+                                                                                                CntComment = x.Comments.Count,
+                                                                                                GroupsTxt = String.Join(",", x.Groups.ToList().ConvertAll(y => y.Name)),
+                                                                                                TagsTxt = String.Join(",", x.Tags.ToList().ConvertAll(z => z.Name)),
+                                                                                                Starred = TopicElected.Exists(x.Id)
+                                                                                            })));
             return View(vm);
         }
         [HttpPost]
@@ -238,10 +208,12 @@ namespace Garfielder.Controllers
         /// star a topic
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="star"></param>
         /// <returns></returns>
-        public JsonResult StarTopic(Guid id)
+        public JsonResult StarTopic(Guid id,bool star)
         {
-            var msg = Topic.Star(id,CurrentUserName);
+            var msg = default(Msg);
+            msg = star ? Topic.Star(id, CurrentUserName) : TopicElected.Delete(id);
             return Json(msg);
         }
 

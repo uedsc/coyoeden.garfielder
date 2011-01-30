@@ -1,5 +1,6 @@
 ﻿Garfielder.AddModule("TopicList", {
     init: function (opts) {
+        this.opts = opts;
         this.uiForm = {
             $form0: $("#frm-search"),
             $form1: $("#frm-filter"),
@@ -67,21 +68,26 @@
                 }
             });
         });
-        //star action
 
+        //star action
         $("#tb-list .act-star").click(function () {
-            var $i = $(this);
-            if ($i.hasClass("on")) return;
+            var $i = $(this), star = $i.hasClass("off");
+            Garfielder.AdminCommon.ShowTip("Loading...", false);
             $.ajax({
-                url:me.opts.url_star,
+                url: me.opts.url_star,
                 type: 'POST',
                 dataType: 'json',
-                data: { id: $i[0].rel },
+                data: { id: $i[0].rel, star: star },
                 success: function (msg) {
                     if (msg.Error) {
                         Garfielder.AdminCommon.ShowTip(msg.Body, true, 2000);
                     } else {
-                        $i.removeClass("off").addClass("on");
+                        Garfielder.AdminCommon.ShowTip("Operation done!", false, 2000);
+                        if (star) {
+                            $i.removeClass("off").addClass("on");
+                        } else {
+                            $i.removeClass("on").addClass("off");
+                        };
                     };
                 },
                 error: function (xhr, status) {
