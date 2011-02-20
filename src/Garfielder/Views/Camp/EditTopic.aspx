@@ -92,6 +92,7 @@
 				</div>
 				<div id="ste_richedt" class="richedt bd0">
 					<div id="edt_toolbar" class="clear">
+						<a id="E-edtbtn_cover" class="richedt-tab bd0" href="javascript://" rel="topic-cover">Cover</a>
                         <a id="E-edtbtn_files" class="richedt-tab bd0" href="javascript://" rel="topic-files">Attachments</a>
 						<a id="E-edtbtn_html" class="richedt-tab bd0" href="javascript://" rel="edt_main">HTML</a>
 						<a id="E-edtbtn_preview" class="richedt-tab bd0 edtbtn_on" href="javascript://" rel="edt_main">Preview</a>
@@ -106,6 +107,13 @@
                     <div id="topic-files" class="richedt-tab-ct bd0">
                         <iframe id="ifTopicFiles" name="ifTopicFiles" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
                     </div>
+					<div id="topic-cover" class="richedt-tab-ct bd0">
+						<%if (!String.IsNullOrWhiteSpace(Model.Logo)){%>
+						<img alt="cover" src="<%:Model.Logo %>" />
+						<%} else{%>
+						<span class="tip">No topic logo/cover image was specified!</span>
+						<%} %>
+					</div>
 				</div>
 			</div>
 		</div><!--#ste_main-->
@@ -125,7 +133,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="cphHead" runat="server">
-	<link rel="stylesheet" type="text/css" href="<%:Url.CSS("overlay-apple") %>"></link> 
+	<link rel="stylesheet" type="text/css" href="<%:Url.CSS("overlay-apple") %>"/>
 	<%this.Model.PageFlag = "topic_add";%> 
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
@@ -136,10 +144,11 @@
             ObjID:'<%:Model.Id%>',
             Title:'<%:Model.Title %>',
             URL_AUTOSLUG:'<%:Url.Action("AutoSlug","Camp") %>',
-            URL_FILES:'<%:Url.Action("ListTopicFile","Camp") %>'
+            URL_FILES:'<%:Url.Action("ListTopicFile","Camp") %>',
+			URL_LOGO:'<%:Model.Logo %>'
         };
     </script>
-	<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>
+	<script type="text/javascript" src="<%:Url.JS("jquery.tools-1.2.5.min") %>"></script>
 	<script type="text/javascript" src="<%:Url.JS("jquery.vsUtils") %>"></script>
 	<script type="text/javascript" src="<%:Url.JS("jquery.vPreload")%>"></script>
 	<script type="text/javascript" src="<%:Url.JS("tiny_mce/jquery.tinymce") %>"></script>

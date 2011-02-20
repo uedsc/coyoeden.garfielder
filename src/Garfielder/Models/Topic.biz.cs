@@ -69,6 +69,7 @@ namespace Garfielder.Models
                 vm.Grade = dbm.Grade;
                 vm.Description = dbm.Description;
                 vm.ContentX = dbm.ContentX;
+            	vm.Logo = dbm.Logo;
 
                 vm.Groups = dbm.Groups.ToList();
 
@@ -363,6 +364,42 @@ namespace Garfielder.Models
 
             return retVal;
         }
+		/// <summary>
+		/// update logo field
+		/// </summary>
+		/// <param name="img"></param>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public static Msg UpdateLogo(string img,string id)
+		{
+			var msg = new Msg();
+			if(string.IsNullOrWhiteSpace(img))
+			{
+				msg.Error = true;
+				msg.Body = "No Logo specified!";
+				return msg;
+			}
+			try
+			{
+				var gid = Guid.Parse(id);
+				var topic = default(Topic);
+				using(var db=new GarfielderEntities())
+				{
+					topic = db.Topics.SingleOrDefault(x => x.Id.Equals(gid));
+					if(topic!=null)
+					{
+						topic.Logo = img;
+						db.SaveChanges();
+					}
+				}
+			}catch(Exception ex)
+			{
+				msg.Error = true;
+				msg.Body = ex.Message;
+			}
+			return msg;
+		}
+
 
         #region frontend methods
         /// <summary>
