@@ -329,20 +329,22 @@ namespace Garfielder.Models
                     //parse icon
                     retVal.ForEach(x =>
                                        {
-                                           var tempFile=x.XFiles.OrderByDescending(y => y.Title).FirstOrDefault();
-                                           if(null!=tempFile)
-                                           {
-                                               x.Icon = new VMXFileEdit
-                                                            {
-                                                                Id = tempFile.Id,
-                                                                Title = tempFile.Title,
-                                                                Extension = tempFile.Extension,
-                                                                Description = tempFile.Description,
-                                                                UserName = tempFile.User.Name,
-                                                                Name = tempFile.Name,
-                                                                CreatedAt = tempFile.CreatedAt
-                                                            };
-                                           }
+                                           var tempFile = x.XFiles.SingleOrDefault(y => y.Url.Equals(x.Logo)) ??
+                                                          x.XFiles.OrderByDescending(y => y.Title).FirstOrDefault();
+
+											if(null!=tempFile)
+											{
+												x.Icon = new VMXFileEdit
+															{
+																Id = tempFile.Id,
+																Title = tempFile.Title,
+																Extension = tempFile.Extension,
+																Description = tempFile.Description,
+																UserName = tempFile.User.Name,
+																Name = tempFile.Name,
+																CreatedAt = tempFile.CreatedAt
+															};
+											}
                                            
                                        });
                     //callback);
@@ -390,6 +392,7 @@ namespace Garfielder.Models
                     obj.Desc = dbm.Description;
                     obj.XContent = dbm.ContentX;
                     obj.DateCreated = dbm.CreatedAt;
+                	obj.Logo = dbm.Logo;
 
                     obj.Groups = dbm.Groups.ToList();
 

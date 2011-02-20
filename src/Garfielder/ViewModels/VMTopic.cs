@@ -14,7 +14,7 @@ namespace Garfielder.ViewModels
         public string Slug { get; set; }
         [AllowHtml]
         public string XContent { get; set; }
-        public string Icon { get; set; }
+        public string Logo { get; set; }
         public DateTime DateCreated { get; set; }
 
     }

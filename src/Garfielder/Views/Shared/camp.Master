@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="/Assets/css/camp.css" />
 	<!--/css-->
 	<!--js-->
-	<script type="text/javascript" src="<%:Url.JS("jquery-1.4.4.min") %>"></script>
+	<script type="text/javascript" src="<%:Url.JS("jquery-1.5.min") %>"></script>
 	<!--/js-->
 	<asp:ContentPlaceHolder ID="cphHead" runat="server" />
 </head>

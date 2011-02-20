@@ -175,7 +175,7 @@ namespace Garfielder.Models
                                                                                 Title = x.Title,
                                                                                 Slug = x.Slug,
                                                                                 Desc = x.Description,
-                                                                                Icon =
+                                                                                Logo =
                                                                                     x.Icon == null
                                                                                         ? string.Format(
                                                                                             "{0}assets/img/default.jpg",
