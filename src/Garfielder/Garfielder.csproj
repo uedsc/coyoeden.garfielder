@@ -92,6 +92,7 @@
     <Compile Include="Controllers\CampController.tag.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudioController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -518,6 +519,7 @@
     <Content Include="Views\Camp\UploadUI.ascx" />
     <Content Include="Views\Group\View.aspx" />
     <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Studio\Index.aspx" />
     <Content Include="Views\Topic\Show.aspx" />
     <Content Include="Views\Topic\View.aspx" />
     <Content Include="Web.config">
