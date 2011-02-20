@@ -23,7 +23,7 @@ namespace Garfielder.Controllers
                                                                                               Title =x.Title,
                                                                                               Slug=x.Slug,
                                                                                               Desc =x.Description,
-                                                                                              Icon = x.Icon == null ? Url.Content("~/assets/img/default.jpg") : x.Icon.Url(ImageFlags.S160X100),
+                                                                                              Logo = x.Icon == null ? Url.Content("~/assets/img/default.jpg") : x.Icon.Url(ImageFlags.S160X100),
                                                                                               DateCreated =x.CreatedAt
                                                                                           })));
             var vm = new VMHome { 

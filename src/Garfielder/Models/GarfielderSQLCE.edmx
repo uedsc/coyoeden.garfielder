@@ -106,6 +106,7 @@
           <Property Name="ModifiedAt" Type="datetime" Nullable="false" />
           <Property Name="Published" Type="bit" Nullable="false" />
           <Property Name="PublishedAt" Type="datetime" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="TopicComment">
           <Key>
@@ -434,6 +435,7 @@
           <Property Type="Boolean" Name="Published" Nullable="false" />
           <Property Type="DateTime" Name="PublishedAt" Nullable="false" />
           <NavigationProperty Name="TopicElected" Relationship="Garfielder.Models.FK_TopicElected_Topic" FromRole="Topic" ToRole="TopicElected" />
+          <Property Type="String" Name="Logo" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TopicComment">
           <Key>
@@ -611,7 +613,8 @@
             <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Topics"><EntityTypeMapping TypeName="Garfielder.Models.Topic"><MappingFragment StoreEntitySet="Topic">
-            <ScalarProperty Name="PublishedAt" ColumnName="PublishedAt" />
+            <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="PublishedAt" ColumnName="PublishedAt" />
                 <ScalarProperty Name="Published" ColumnName="Published" />
                 <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -723,7 +726,7 @@
         <EntityTypeShape EntityType="Garfielder.Models.TopicComment" Width="1.5" PointX="7.5" PointY="3.5" Height="2.0853483072916656" IsExpanded="true" />
         <EntityTypeShape EntityType="Garfielder.Models.User" Width="1.5" PointX="0.75" PointY="3.375" Height="2.4140429687499996" IsExpanded="true" />
         <EntityTypeShape EntityType="Garfielder.Models.XFile" Width="1.5" PointX="3" PointY="7.125" Height="2.7427376302083317" IsExpanded="true" />
-        <EntityTypeShape EntityType="Garfielder.Models.XFileComment" Width="1.5" PointX="5.25" PointY="7.5" Height="2.0853483072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Garfielder.Models.XFileComment" Width="1.5" PointX="5.25" PointY="8.25" Height="2.3648893229166656" IsExpanded="true" />
         <AssociationConnector Association="Garfielder.Models.FK_Group_Group" ManuallyRouted="false">
           <ConnectorPoint PointX="3.5319230769230767" PointY="4.6177376302083335" />
           <ConnectorPoint PointX="3.5319230769230767" PointY="4.8677376302083335" />
@@ -731,10 +734,10 @@
           <ConnectorPoint PointX="3.9784615384615383" PointY="4.6177376302083335" />
         </AssociationConnector>
         <AssociationConnector Association="Garfielder.Models.FK_Topic_User" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="5.3908902994791665" />
-          <ConnectorPoint PointX="4.854166666666667" PointY="5.3908902994791656" />
-          <ConnectorPoint PointX="5.020833333333333" PointY="5.3908902994791665" />
-          <ConnectorPoint PointX="5.25" PointY="5.3908902994791665" />
+          <ConnectorPoint PointX="2.25" PointY="5.8504443359375" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="5.8504443359374987" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="5.8504443359375" />
+          <ConnectorPoint PointX="5.25" PointY="5.8504443359375" />
         </AssociationConnector>
         <AssociationConnector Association="Garfielder.Models.FK_TopicComment_Topic" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="4.5426741536458328" />
@@ -746,35 +749,31 @@
           <ConnectorPoint PointX="3" PointY="8.4963688151041659" />
         </AssociationConnector>
         <AssociationConnector Association="Garfielder.Models.FK_XFileComment_XFile" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="8.5426741536458337" />
-          <ConnectorPoint PointX="4.854166666666667" PointY="8.5426741536458337" />
-          <ConnectorPoint PointX="5.020833333333333" PointY="8.5426741536458337" />
-          <ConnectorPoint PointX="5.25" PointY="8.5426741536458337" />
+          <ConnectorPoint PointX="4.5" PointY="9.4324446614583337" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="9.4324446614583337" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="9.4324446614583337" />
+          <ConnectorPoint PointX="5.25" PointY="9.4324446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="Garfielder.Models.TopicFile" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="7.125" />
-          <ConnectorPoint PointX="4.875" PointY="6.75" />
-          <ConnectorPoint PointX="4.875" PointY="7.2681689453125" />
-          <ConnectorPoint PointX="4.8785744349011209" PointY="7.2645945104113778" />
-          <ConnectorPoint PointX="4.9964255650988791" PointY="7.14674338021362" />
-          <ConnectorPoint PointX="5.25" PointY="6.8931689453125" />
+          <ConnectorPoint PointX="4.5" PointY="7.3987532552083328" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="7.3987532552083319" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="7.3987532552083328" />
+          <ConnectorPoint PointX="5.25" PointY="7.3987532552083328" />
         </AssociationConnector>
         <AssociationConnector Association="Garfielder.Models.TopicGroup" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="3.8088688151041667" />
           <ConnectorPoint PointX="5.25" PointY="3.8088688151041667" />
         </AssociationConnector>
         <AssociationConnector Association="Garfielder.Models.TopicTag" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="11.438460538461539" />
-          <ConnectorPoint PointX="4.9375" PointY="11.000960538461539" />
-          <ConnectorPoint PointX="4.9375" PointY="4.5998795572916666" />
-          <ConnectorPoint PointX="5.25" PointY="4.5998795572916666" />
+          <ConnectorPoint PointX="4.5" PointY="11.376152846153847" />
+          <ConnectorPoint PointX="4.875" PointY="11.001152846153847" />
+          <ConnectorPoint PointX="4.875" PointY="4.8078341984492434" />
+          <ConnectorPoint PointX="5.25" PointY="4.8078341984492434" />
         </AssociationConnector>
         <EntityTypeShape EntityType="Garfielder.Models.TopicElected" Width="1.5" PointX="7.5" PointY="7" Height="1.9210009765624996" />
         <AssociationConnector Association="Garfielder.Models.FK_TopicElected_Topic" >
-          <ConnectorPoint PointX="6.75" PointY="6.8931689453125" />
-          <ConnectorPoint PointX="7.125" PointY="7.2681689453125" />
-          <ConnectorPoint PointX="7.125" PointY="6.625" />
-          <ConnectorPoint PointX="7.5" PointY="7" />
+          <ConnectorPoint PointX="6.75" PointY="7.3362532552083328" />
+          <ConnectorPoint PointX="7.5" PointY="7.3362532552083328" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

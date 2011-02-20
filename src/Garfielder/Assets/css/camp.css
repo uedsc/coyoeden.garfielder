@@ -620,6 +620,7 @@ table.fixed {
 #media-items .media-item-entry{padding:3px;}
 #media-items .label .alignleft{float:left;}
 #media-items .label .alignright{float:right;}
+#mediaList-main .col-meta{width:85px;}
 /* -- SWFUpload Object Styles ------------------------------- */
 .swfupload {
 	vertical-align: top;
