@@ -9,7 +9,7 @@
  	<ul class="conbox clearfix">
         <%Model.Topics.ForEach(x =>
           { %>
-            <li><a href="<%:Url.Action("View","Topic",new{id=x.Slug}) %>" title="<%:x.Title %>"><img width="160" height="100" src="<%:x.Icon %>" alt="" /></a></li>
+            <li><a href="<%:Url.Action("Show","Topic",new{id=x.Slug}) %>" title="<%:x.Title %>"><img width="160" height="100" src="<%:x.Logo %>" alt="" /></a></li>
         <%}); %>
     </ul>
 

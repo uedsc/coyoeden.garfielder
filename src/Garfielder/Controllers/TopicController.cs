@@ -21,7 +21,7 @@ namespace Garfielder.Controllers
             return "TODO:显示指定组的主题";        
         }
         /// <summary>
-        /// View a topic
+        /// View a topic-gallery mode
         /// </summary>
         /// <param name="id">slug</param>
         /// <returns></returns>
@@ -31,5 +31,16 @@ namespace Garfielder.Controllers
             vm.UrlGoBack = Request.UrlReferrer==null?Url.Action("Index","Home"):Request.UrlReferrer.ToString();
             return View(vm);
         }
+		/// <summary>
+		/// View a topic-normal node
+		/// </summary>
+		/// <param name="id">slug</param>
+		/// <returns></returns>
+		public ViewResult Show(string id)
+		{
+			var vm = Topic.GetTopic(id);
+			vm.UrlGoBack = Request.UrlReferrer == null ? Url.Action("Index", "Home") : Request.UrlReferrer.ToString();
+			return View(vm);
+		}
     }
 }

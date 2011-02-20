@@ -443,13 +443,17 @@ table.fixed {
 	border-style:solid;
 	border-width:1px;
 }
-#topic-files
+#topic-files,#topic-cover
 {
     display:none;
     min-height:390px;
     height:auto !important;
     height:390px;  
     padding:8px;  
+}
+#topic-cover
+{
+	overflow:auto;
 }
 
 
@@ -621,6 +625,8 @@ table.fixed {
 #media-items .label .alignleft{float:left;}
 #media-items .label .alignright{float:right;}
 #mediaList-main .col-meta{width:85px;}
+#mediaList-main .islogo .column-icon{background:#FFC0CB}
+#mediaList-main .islogo .btn-logo{display:none;}
 /* -- SWFUpload Object Styles ------------------------------- */
 .swfupload {
 	vertical-align: top;

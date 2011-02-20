@@ -31,7 +31,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="cphHead" runat="server">
 <link rel="stylesheet" type="text/css" href="/Assets/css/camp_font.css" />
 <link rel="stylesheet" type="text/css" href="/Assets/css/camp_color.css" />
-<link rel="stylesheet" type="text/css" href="/Assets/css/camp.css" />
+<link rel="stylesheet" type="text/css" href="/Assets/css/camp.css?v=2" />
 <% Model.PageFlag = "media_upload"; %>
 <%if (!Model.NoFlash)
   { %>
@@ -43,12 +43,13 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
 <script type="text/javascript" src="<%:Url.JS("Admin.Common") %>"></script> 
 <script type="text/javascript" src="<%:Url.JS("jquery.tmpl.min") %>"></script>
-<script type="text/javascript" src="<%:Url.JS("Admin.UploadMedia","2") %>"></script>
+<script type="text/javascript" src="<%:Url.JS("Admin.UploadMedia","3") %>"></script>
 <script type="text/javascript">
 	Garfielder.Cfg={
         refId:'<%:Model.RefId %>',
 		noFlash:<%:Model.NoFlash.ToString().ToLower() %>,
         url_attach:'<%:Url.Action("AttachFileToTopic","Camp") %>',
+		url_setlogo:'<%:Url.Action("SetTopicLogo","Camp") %>',
 		swfuOpts:{
 			upload_url:'<%:Url.Action("SaveMedia","Camp") %>',
 			post_params:{"UserID": "<%:Model.CurrentUser.Id %>","UserName":"<%:Model.CurrentUser.Name %>","RefId":"<%:Model.RefId %>"},

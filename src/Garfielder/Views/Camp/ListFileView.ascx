@@ -65,7 +65,9 @@
                             </div>
                         </td>
                         <td class="col-acts">
-                            <a href="javascript://" class="btn btn-insert" title="Insert into the topic">Insert</a><a href="javascript://" class="btn btn-attach" title="Set as an attachment!" rel="<%:item.Id %>">Attachment</a>
+                            <a href="javascript://" class="btn btn-insert" title="Insert into the topic">Insert</a>
+							<a href="javascript://" class="btn btn-logo" title="Set as topic cover">As Logo</a>
+							<a href="javascript://" class="btn btn-attach" title="Set as an attachment!" rel="<%:item.Id %>">Attachment</a>
                         </td>
 					</tr>	                 
 				<%

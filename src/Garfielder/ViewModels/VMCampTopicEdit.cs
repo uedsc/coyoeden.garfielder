@@ -21,6 +21,7 @@ namespace Garfielder.ViewModels
         public string GroupsTxt { get; set; }
         public string TagsTxt { get; set; }
         public bool Starred { get; set; }
+		public string Logo { get; set; }
 
         /*新建主题时需要的属性*/
         public List<Guid> GroupID { get; set; }

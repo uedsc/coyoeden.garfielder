@@ -191,7 +191,9 @@ namespace Garfielder.Controllers
             };
             return View(obj);
         }//edit topic
-        /// <summary>
+
+		#region ajax interactions
+		/// <summary>
         /// Detach an attachment
         /// </summary>
         /// <param name="tid">topic id</param>
@@ -216,9 +218,22 @@ namespace Garfielder.Controllers
             msg = star ? Topic.Star(id, CurrentUserName) : TopicElected.Delete(id);
             return Json(msg);
         }
+		/// <summary>
+		/// update the logo of  a topic
+		/// </summary>
+		/// <param name="img"></param>
+		/// <param name="tid"></param>
+		/// <returns></returns>
+		public JsonResult SetTopicLogo(string img, string tid)
+		{
+			var msg = Topic.UpdateLogo(img, tid);
+			return Json(msg);
+		}
 
-        #region helper methods
-        private ActionResult NewTopic() {
+		#endregion
+
+		#region helper methods
+		private ActionResult NewTopic() {
             var vm = CreateViewData<VMCampTopicShow>();
             vm.Id = Guid.Empty;
             return View(vm);
