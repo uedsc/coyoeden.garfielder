@@ -22,6 +22,13 @@ namespace Garfielder
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			routes.MapRoute(
+				"Default", // Route name
+				"{controller}/{action}/{id}", // URL with parameters
+				new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+			);
+
+			/*
 			//iis classic mode routes
 			routes.MapRoute(
 				"DefaultClassic", // Route name
@@ -36,6 +43,7 @@ namespace Garfielder
 				new { controller = "Home", action = "Index", id = UrlParameter.Optional }, // Parameter defaults
 				new { mode = new IntegratedModeConstraint() }// Constraints
 			);
+			 */
 
 
         }
