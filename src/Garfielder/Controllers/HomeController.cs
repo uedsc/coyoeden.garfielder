@@ -15,7 +15,8 @@ namespace Garfielder.Controllers
         // GET: /Home/
         public ActionResult Index()
         {
-        	return RedirectToAction("Index", "Studio");
+            var vm = CreateViewData<VMHome>();
+            return View(vm);
         }
 
         private void fakeLogin() {
