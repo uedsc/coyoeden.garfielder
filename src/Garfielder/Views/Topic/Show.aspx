@@ -16,7 +16,7 @@
 				  {%>
                 <ul id="pager" class="page">
                 <%for (var i = 0; i < Model.Files.Count; i++){%>
-                   <li><a href="#item<%:Model.Files[i].Id %>">[<%:i+1 %>]</a></li> 
+                   <li><a class="<%:i==0?"on":""%>" href="#item<%:Model.Files[i].Id %>">[<%:i+1 %>]</a></li> 
                 <%}%>
                 </ul>
                 <%}%>
