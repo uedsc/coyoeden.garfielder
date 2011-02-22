@@ -18,4 +18,3 @@ h1{font-size:24px; margin-bottom:15px;}
 .gallery a:hover img{background:#333}
 .gallery-tab{display:none;}
 .gallery-tab-on{display:block}
-.gallery-item{float:left;width:180px;height:120px;}

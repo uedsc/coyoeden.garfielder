@@ -198,6 +198,7 @@
     <Content Include="Assets\js\Admin.TopicFileList.js" />
     <Content Include="Assets\js\Admin.TopicList.js" />
     <Content Include="Assets\js\Admin.UploadMedia.js" />
+    <Content Include="Assets\js\Topic.show.js" />
     <Content Include="Assets\js\Garfielder.IFModal.js" />
     <Content Include="Assets\js\Garfielder.js" />
     <Content Include="Assets\js\html5.js" />
