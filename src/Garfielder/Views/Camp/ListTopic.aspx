@@ -120,7 +120,7 @@
             url_star:'<%:Url.Action("StarTopic","Camp") %>'
         };
     </script>
-	<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>
+	<script type="text/javascript" src="<%:Url.JS("jquery.tools-1.2.5.min") %>"></script>
 	<script type="text/javascript" src="<%:Url.JS("Admin.TopicList") %>"></script>
 	<!--/scripts-->		
 </asp:Content>
