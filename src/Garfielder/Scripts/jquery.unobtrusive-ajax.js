@@ -1,4 +1,4 @@
-﻿/// <reference path="jquery-1.4.1.js" />
+﻿/// <reference path="jquery-1.4.4.js" />
 
 /*!
 ** Unobtrusive Ajax support library for jQuery
@@ -149,8 +149,8 @@
             $(form).removeData(data_click);
         }, 0);
     });
-
-    $("form[data-ajax=true]").live("submit", function (evt) {
+    //mvc3 bug while using "live(submit..."
+    $("form[data-ajax=true]").bind("submit", function (evt) {
         var clickInfo = $(this).data(data_click) || [];
         evt.preventDefault();
         if (!validate(this)) {

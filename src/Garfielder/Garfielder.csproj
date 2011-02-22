@@ -473,8 +473,9 @@
     <Content Include="Assets\css\Site.css" />
     <Content Include="Assets\js\jQuery.tmpl.js" />
     <Content Include="Assets\js\jQuery.tmpl.min.js" />
-    <Content Include="Scripts\jquery-1.4.3.js" />
-    <Content Include="Scripts\jquery-1.4.3.min.js" />
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.4.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
