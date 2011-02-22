@@ -26,7 +26,7 @@
     </div>
     <div id="gallery" class="gallery">
 		<%for (var i = 0; i < Model.Files.Count; i++){%>
-        <div id="item<%:Model.Files[i].Id %>" class="gallery-item">
+        <div id="item<%:Model.Files[i].Id %>" class="gallery-item<%:i>0?" hide":"" %>">
            <img  alt=""  src="<%:Model.Files[i].Url(ImageFlags.RAW) %>"/>
         </div>
         <%}%>
@@ -39,4 +39,5 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
+<script type="text/javascript" src="<%:Url.JS("Topic.show") %>"></script>
 </asp:Content>
