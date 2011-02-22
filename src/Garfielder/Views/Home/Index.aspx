@@ -8,12 +8,12 @@
 
     <section id="main">
 		<h1>Lizishop.cn is under constructing...</h1>
-		<h3>Redirect to the <a href="/Studio">Lingzhi emotion studio</a> in <strong id="second">10</strong> seconds</h3>
+		<h3>Redirect to the <a href="/Studio">Lingzhi emotion studio</a> in <strong id="second">5</strong> seconds</h3>
 	</section>
 	<script type="text/javascript">
 	    (function () {
 	        var obj = document.getElementById("second"),
-				cnt = 10,
+				cnt = 5,
 				timer = null,
 				cd = function () {
 				    if (cnt === 0) {
