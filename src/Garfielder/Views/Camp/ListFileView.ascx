@@ -59,7 +59,7 @@
                                 Sizes:
                                 <select class="file-meta-sizes">
                                 <%item.MetaData.Thumbs.ForEach(x =>{%>
-                                    <option value="<%:x.Src %>" data-w="<%:x.Width %>" data-h="<%:x.Height %>"><%:x.Flag %></option>
+                                    <option value="<%:x.Src %>" data-w="<%:x.Width %>" data-h="<%:x.Height %>"><%:String.IsNullOrWhiteSpace(x.Flag)?"RAW":x.Flag %></option>
                                 <%});%>
                                 </select>
                             </div>
