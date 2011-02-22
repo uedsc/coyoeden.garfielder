@@ -127,9 +127,9 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="cphFoot" runat="server">
 <!--scripts-->
-<script src="<%:Url.Content("~/Scripts/jquery.unobtrusive-ajax.js") %>" type="text/javascript"></script>
-<script src="<%:Url.Content("~/Scripts/jquery.validate.js") %>" type="text/javascript"></script>
-<script src="<%:Url.Content("~/Scripts/jquery.validate.unobtrusive.js") %>" type="text/javascript"></script>
+<script src="<%:Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js") %>" type="text/javascript"></script>
+<script src="<%:Url.Content("~/Scripts/jquery.validate.min.js") %>" type="text/javascript"></script>
+<script src="<%:Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js") %>" type="text/javascript"></script>
 <script type="text/javascript" src="<%:Url.JS("jquery-ui-1.8.6.effects.min") %>"></script>
 <script type="text/javascript" src="<%:Url.JS("jquery.json-2.2.min") %>"></script>
 <script id="tpl_item" type="text/x-jquery-tmpl">
