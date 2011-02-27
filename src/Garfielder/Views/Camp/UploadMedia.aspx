@@ -19,7 +19,7 @@
 
 <%}else if (Model.Src == "lib"){%>
 <!--lib ui-->
-<% Html.RenderPartial("ListFileView",new{mode=Model.ViewMode,files=Model.FileList,refId=Model.RefId}); %>
+<% Html.RenderPartial("ListFileView",new{mode=Model.ViewMode,files=Model.FileList,refId=Model.RefId,attachments=Model.RefAttachments}); %>
 
 <%}else{%>
 <!--local ui-->

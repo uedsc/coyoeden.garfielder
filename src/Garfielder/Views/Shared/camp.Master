@@ -27,7 +27,7 @@
 		</h1>
 		<div id="sch_info" class="r">
 			<div id="favlinks" class="l">
-				<div id="favlink0"><%:Html.ActionLink("New Topic","EditTopic","Camp",null,null) %></div>
+				<div id="favlink0"><%:Html.ActionLink("New Topic","EditTopic","Camp",new{id=""},null) %></div>
 				<div id="favlink_trigger"></div>
 				<div id="favlinks_" class="hide">
 						

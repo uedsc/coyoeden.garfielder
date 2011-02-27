@@ -12,13 +12,33 @@ namespace Garfielder.Controllers
 {
     public partial class CampController
     {
-        public ActionResult ListFile()
+        public ActionResult ListFile(string siteTip=null)
         {
             var vm = CreateViewData<VMXFileList>();
             vm.FileList = XFile.ListAllData();
+        	vm.Msg = siteTip;
             return View(vm);
         }
-        [HttpGet]
+		[HttpPost]
+		public ActionResult ListFile(CommonFilterData filter)
+		{
+			var vm = CreateViewData<VMXFileList>();
+
+			switch (filter.Action)
+			{
+				case "trash":
+					var msg = XFile.DeleteByID(filter.ObjIDList.ToArray());
+					if (!msg.Error) return ListFile(string.Format("Items with id [{0}] have been deleted!", String.Join(",", filter.ObjIDList)));
+					vm.Msg = msg.Body;
+					vm.Error = msg.Error;
+					break;
+			}
+
+			vm.FileList = XFile.ListAllData();
+			return View(vm);
+		}
+
+    	[HttpGet]
         public ActionResult EditFile(Guid id)
         {
             var vm = CreateViewData<VMXFileEdit>();
@@ -77,6 +97,10 @@ namespace Garfielder.Controllers
             vm.Src = Src;
             vm.ViewMode = mode;
             vm.FileList = XFile.ListAllData();
+			if(!rel.Equals(Guid.Empty))
+			{
+				vm.RefAttachments = Topic.GetAttachments(rel);
+			}
             return View(vm);
         }
 

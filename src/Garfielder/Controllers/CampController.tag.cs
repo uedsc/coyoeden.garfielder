@@ -24,7 +24,7 @@ namespace Garfielder.Controllers
         /// <param name="filter"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult ListTag(VMCampCommonFilter filter)
+        public ActionResult ListTag(CommonFilterData filter)
         {
             var vm = CreateViewData<VMTagList>();
             switch (filter.Action)

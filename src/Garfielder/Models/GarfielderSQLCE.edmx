@@ -97,7 +97,7 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Slug" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Url" Type="nvarchar" MaxLength="100" />
+          <Property Name="Url" Type="nvarchar" MaxLength="500" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="ContentX" Type="ntext" />
           <Property Name="Grade" Type="real" Nullable="false" />
@@ -106,7 +106,7 @@
           <Property Name="ModifiedAt" Type="datetime" Nullable="false" />
           <Property Name="Published" Type="bit" Nullable="false" />
           <Property Name="PublishedAt" Type="datetime" Nullable="false" />
-          <Property Name="Logo" Type="nvarchar" MaxLength="100" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="TopicComment">
           <Key>
@@ -173,7 +173,7 @@
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="500" />
           <Property Name="Url" Type="nvarchar" MaxLength="500" />
           <Property Name="Extension" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="500" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
@@ -420,7 +420,7 @@
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Slug" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Url" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="ContentX" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Grade" Type="Single" Nullable="false" />
@@ -471,7 +471,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="Url" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="Extension" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="UserID" Type="Guid" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" />

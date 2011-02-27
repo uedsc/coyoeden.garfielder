@@ -10,7 +10,6 @@
     	<div class="title">
             <div class="info">
         	    <h1><%:Model.Title%></h1>
-                <p><%:Model.DateCreated%></p>
                 <p><%:Html.Raw(Model.Desc)%></p>
                 <%if (Model.Files.Count > 1)
 				  {%>

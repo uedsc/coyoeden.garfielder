@@ -75,11 +75,41 @@ namespace Garfielder.Models
 
                 vm.Tags = dbm.Tags.ToList();
 
+            	//vm.Attachments = dbm.XFiles.ToList();
+
                 return vm; 
 
             };
         }
-
+		/// <summary>
+		/// get attachment ids
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public static List<Guid> GetAttachments(Guid id)
+		{
+			var retVal = new List<Guid>();
+			try
+			{
+				using (var db=new GarfielderEntities())
+				{
+					var obj = db.Topics.Single(x => x.Id.Equals(id));
+					obj.XFiles.ToList().ForEach(y=>retVal.Add(y.Id));
+				}
+			}
+			catch (Exception ex)
+			{
+				
+				//do nothing			
+			
+			}
+			return retVal;
+		}
+		/// <summary>
+		/// delete by id
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
         public static Msg DeleteByID(params Guid[] id)
         {
             var r = new Msg();
@@ -330,7 +360,7 @@ namespace Garfielder.Models
                     //parse icon
                     retVal.ForEach(x =>
                                        {
-                                           var tempFile = x.XFiles.SingleOrDefault(y => y.Url.Equals(x.Logo)) ??
+                                           var tempFile = db.XFiles.SingleOrDefault(y => y.Meta.IndexOf(x.Logo)>=0) ??
                                                           x.XFiles.OrderByDescending(y => y.Title).FirstOrDefault();
 
 											if(null!=tempFile)

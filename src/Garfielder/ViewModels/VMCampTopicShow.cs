@@ -78,5 +78,9 @@ namespace Garfielder.ViewModels
                 return TagsAll.OrderByDescending(x => x.CntTopic).ToList();
             }
         }
+		/// <summary>
+		/// attachments
+		/// </summary>
+		public List<XFile> Attachments { get; set; }
     }
 }

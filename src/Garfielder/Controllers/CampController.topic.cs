@@ -158,6 +158,8 @@ namespace Garfielder.Controllers
                     dbm.Slug = msg.Context["Slug"].ToString();
                     dbm.ModifiedAt = DateTime.Now;
 
+                	obj.Logo = dbm.Logo;
+
                     db.Attach(CurrentUser);
                     dbm.User = CurrentUser;
                     db.SaveChanges();

@@ -37,7 +37,9 @@
 				</thead>
 				<tbody>
 				<%
-                  var item = default(VMXFileEdit);%>
+					var item = default(VMXFileEdit);
+					var attachments =(List<Guid>) Model.attachments;
+				  %>
 				<%
                   for (var i = 0; i < Model.files.Count; i++)
                   {%>
@@ -67,7 +69,9 @@
                         <td class="col-acts">
                             <a href="javascript://" class="btn btn-insert" title="Insert into the topic">Insert</a>
 							<a href="javascript://" class="btn btn-logo" title="Set as topic cover">As Logo</a>
-							<a href="javascript://" class="btn btn-attach" title="Set as an attachment!" rel="<%:item.Id %>">Attachment</a>
+							<%if(!attachments.Contains(item.Id)) {%>
+								<a href="javascript://" class="btn btn-attach" title="Set as an attachment!" rel="<%:item.Id %>">Attachment</a>
+							<%} %>
                         </td>
 					</tr>	                 
 				<%

@@ -11,3 +11,5 @@ glob:_ReSharper*/
 glob:*.orig
 glob:*~
 glob:src/Garfielder/Garfielder.Publish.xml
+glob:*.bak
+glob:src/Garfielder/Assets/Upload/*
