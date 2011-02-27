@@ -8,7 +8,7 @@ namespace Garfielder.ViewModels
     /// <summary>
     /// 
     /// </summary>
-    public class VMCampCommonFilter
+    public class CommonFilterData
     {
         /// <summary>
         /// action name

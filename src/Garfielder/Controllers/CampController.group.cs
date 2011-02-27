@@ -25,7 +25,7 @@ namespace Garfielder.Controllers
         /// <param name="filter"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult ListGroup(VMCampCommonFilter filter)
+        public ActionResult ListGroup(CommonFilterData filter)
         {
             var vm = CreateViewData<VMGroupList>();
             switch (filter.Action)

@@ -109,9 +109,10 @@
                     </div>
 					<div id="topic-cover" class="richedt-tab-ct bd0">
 						<%if (!String.IsNullOrWhiteSpace(Model.Logo)){%>
-						<img alt="cover" src="<%:Model.Logo %>" />
+						<img id="topic-logo" alt="cover" src="<%:Model.Logo %>" />
 						<%} else{%>
-						<span class="tip">No topic logo/cover image was specified!</span>
+						<img id="topic-logo" style="display:none" alt="cover" />
+						<span id="topic-cover-tip" class="tip">No topic logo/cover image was specified!</span>
 						<%} %>
 					</div>
 				</div>

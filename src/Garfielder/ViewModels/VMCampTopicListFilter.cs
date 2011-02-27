@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Garfielder.ViewModels
 {
-    public class VMCampTopicListFilter:VMCampCommonFilter
+    public class VMCampTopicListFilter:CommonFilterData
     {
         public string Date { get; set; }
         

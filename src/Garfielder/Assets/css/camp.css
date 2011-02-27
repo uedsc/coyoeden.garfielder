@@ -455,6 +455,11 @@ table.fixed {
 {
 	overflow:auto;
 }
+#topic-cover img
+{
+	padding:2px;
+	background-color:#ddd;
+}
 
 
 /* comment view */

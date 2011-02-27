@@ -102,6 +102,7 @@ Garfielder.M("UploadMedia", {
 						$(i).fadeOut("normal", function () {
 							$(this).remove();
 						});
+						parent.Garfielder.TopicAdd.RefreshAttachments();
 					};
 				},
 				error: function (xhr, txtStatus) {
@@ -132,8 +133,9 @@ Garfielder.M("UploadMedia", {
 						if (me.ui.$trLogo) {
 							me.ui.$trLogo.removeClass("islogo");
 						};
-						me.ui.$trLogo=$(i).parents("tr").addClass("islogo");
-						parent.Garfielder.Cfg.URL_LOGO = item.src;
+						me.ui.$trLogo = $(i).parents("tr").addClass("islogo");
+						me.data.url_topicLogo = item.src;
+						parent.Garfielder.TopicAdd.UpdateLogo(item.src);
 					};
 				},
 				error: function (xhr, txtStatus) {
@@ -146,7 +148,7 @@ Garfielder.M("UploadMedia", {
 			var $me = $(this), $tr = $me.parents("tr").removeClass("islogo");
 			var img = $me.find("option:selected").val();
 			if (isLogo(img)) {
-				me.ui.$trLogo=$tr.addClass("islogo");
+				me.ui.$trLogo = $tr.addClass("islogo");
 			};
 			//dispose
 			$tr = null;

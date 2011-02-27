@@ -21,5 +21,9 @@ namespace Garfielder.ViewModels
         /// list view mode
         /// </summary>
         public string ViewMode { get; set; }
+		/// <summary>
+		/// topic's attachments
+		/// </summary>
+		public List<Guid> RefAttachments { get; set; }
     }
 }
