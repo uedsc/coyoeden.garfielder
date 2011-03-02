@@ -8,6 +8,7 @@
 		<input type="file" name="File" id="txtFile" size="40" />
 		<input type="submit" value="Upload" class="btn" />
 		<input type="hidden" name="UserID" value="<%:Model.CurrentUser.Id %>" />
+		<input type="hidden" name="RefId" value="<%:Model.RefId%>" />
 		<input type="hidden" name="UserName" value="<%:Model.CurrentUser.Name %>" />
 		<p class="upload-html-bypass">You are using the Browser uploader.  Try the <a href="?flash=true">Flash uploader</a> instead.</p> 
 	</form>
