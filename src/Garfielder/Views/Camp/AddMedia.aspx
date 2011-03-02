@@ -27,7 +27,7 @@
 		noFlash:<%:Model.NoFlash.ToString().ToLower() %>,
 		swfuOpts:{
 			upload_url:'<%:Url.Action("SaveMedia","Camp") %>',
-			post_params:{"UserID": "<%:Model.CurrentUser.Id %>","UserName":"<%:Model.CurrentUser.Name %>"},
+			post_params:{"UserID": "<%:Model.CurrentUser.Id %>","UserName":"<%:Model.CurrentUser.Name %>","RefId":"<%:Model.RefId %>"},
 			button_image_url:'<%:Url.Img("XPButtonNoText_160x22.png") %>'
 		}
 	};

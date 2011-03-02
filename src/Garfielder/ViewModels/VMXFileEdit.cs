@@ -36,8 +36,16 @@ namespace Garfielder.ViewModels
         /// </summary>
         public string Name1
         {
-            get { return Name.Substring(0, Name.Length - Extension.Length); }
+            get
+            {
+            	return string.IsNullOrWhiteSpace(Name) ? "" : Name.Substring(0, Name.Length - Extension.Length);
+            }
         }
+
+		/// <summary>
+		/// topic id
+		/// </summary>
+		public Guid RefId { get; set; }
 
         #region meta data
 

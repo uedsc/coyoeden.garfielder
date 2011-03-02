@@ -8,10 +8,6 @@ namespace Garfielder.ViewModels
     public partial class VMUploadMedia:VMXFileEdit
     {
         /// <summary>
-        /// topic id
-        /// </summary>
-        public Guid RefId { get; set; }
-        /// <summary>
         /// upload source
         /// </summary>
         public string Src { get; set; }
