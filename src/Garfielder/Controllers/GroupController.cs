@@ -17,7 +17,7 @@ namespace Garfielder.Controllers
         {
             return View();
         }
-
+		[OutputCache(Duration = 300)]
         public ActionResult View(string id)
         {
             id = id.Trim().ToLower();

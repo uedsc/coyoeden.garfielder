@@ -154,7 +154,8 @@ namespace Garfielder.Models
                     retVal.Topics=new List<VMTopic>();
                     g.Topics.ToList().ForEach(x=>
                                                   {
-                                                      var tempFile = x.XFiles.OrderByDescending(y => y.Title).FirstOrDefault();
+													  var tempFile = db.XFiles.SingleOrDefault(y => y.Meta.IndexOf(x.Logo) >= 0) ??
+			   x.XFiles.OrderByDescending(y => y.Title).FirstOrDefault();
                                                       if (null != tempFile)
                                                       {
                                                           x.Icon = new VMXFileEdit

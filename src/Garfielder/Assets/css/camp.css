@@ -629,6 +629,7 @@ table.fixed {
 #media-items .media-item-entry{padding:3px;}
 #media-items .label .alignleft{float:left;}
 #media-items .label .alignright{float:right;}
+#mediaList-wrap{height:400px;overflow:auto;}
 #mediaList-main .col-meta{width:85px;}
 #mediaList-main .islogo .column-icon{background:#FFC0CB}
 #mediaList-main .islogo .btn-logo{display:none;}

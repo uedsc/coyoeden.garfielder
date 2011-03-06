@@ -34,7 +34,12 @@ Garfielder.M("TopicAdd", {
 			if (!opts.IsNew) {
 				me.ui.$title.val(opts.Title).blur();
 			};
-			$("#newtag-topic").preInput({ val: p._lang.lblTag });
+			$("#newtag-topic").preInput({
+				val: p._lang.lblTag,
+				afterBlur: function ($i) {
+					$i.val($.noScript($i.val()));
+				}
+			});
 		};
 		p.initAutoSlug = function () {
 			if (opts.IsNew) {

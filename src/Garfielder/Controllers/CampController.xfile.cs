@@ -100,6 +100,9 @@ namespace Garfielder.Controllers
 			if(!rel.Equals(Guid.Empty))
 			{
 				vm.RefAttachments = Topic.GetAttachments(rel);
+			}else
+			{
+				vm.RefAttachments=new List<Guid>();
 			}
             return View(vm);
         }
