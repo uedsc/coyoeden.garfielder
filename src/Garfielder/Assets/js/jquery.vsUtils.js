@@ -190,12 +190,30 @@
 		};
 		return flag;
 	}; //endof $.noScript
+	$.clearScript = function(text,replacor) {
+		///<summary>判断指定的字符串没有有害的script字符</summary>
+		///<return>bool</return>
+		var flag = true;
+		var scriptWord = "<|>|script|alert|{|}|(|)|#|$|'|\"|:|;|&|*|@|%|^|?";
+		var words = scriptWord.split('|'),
+			cnt= words.length,
+			appIndex;
+		replacor=replacor||"XX";
+		for (var i = 0; i <cnt; i++) {
+			appIndex = text.indexOf(words[i]);
+			if (appIndex != -1) {
+				text = text.replace(words[i], replacor);
+			}
+		};
+		return text;
+	}; //endof $.clearScript
 	$.clearSql = function(text) {
 		///<summary>清除字符串中的sql关键字</summary>
 		var repWord = "|and|exec|insert|select|delete|update|count|*|chr|mid|master|truncate|char|declare|set|;|from";
 		var repWords = repWord.split('|');
-		var appIndex;
-		for (var i = 0; i < repWords.length; i++) {
+		var appIndex,
+			cnt=repWords.length;
+		for (var i = 0; i < cnt; i++) {
 			appIndex = text.indexOf(repWords[i]);
 			if (appIndex != -1) {
 				text = text.replace(repWords[i], "");

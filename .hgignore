@@ -13,3 +13,4 @@ glob:*~
 glob:src/Garfielder/Garfielder.Publish.xml
 glob:*.bak
 glob:src/Garfielder/Assets/Upload/*
+glob:src/Garfielder/App_Data/Garfielder_.sdf

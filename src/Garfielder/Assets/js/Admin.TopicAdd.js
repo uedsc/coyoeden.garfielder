@@ -30,14 +30,19 @@ Garfielder.M("TopicAdd", {
 			});
 		};
 		p.initPreInput = function () {
-			me.ui.$title.preInput({ val: p._lang.lblTitle });
+			me.ui.$title.preInput({
+				val: p._lang.lblTitle,
+				afterblur: function ($i) {
+					$i.val($.clearScript($i.val()));
+				}
+			});
 			if (!opts.IsNew) {
 				me.ui.$title.val(opts.Title).blur();
 			};
 			$("#newtag-topic").preInput({
 				val: p._lang.lblTag,
-				afterBlur: function ($i) {
-					$i.val($.noScript($i.val()));
+				afterblur: function ($i) {
+					$i.val($.clearScript($i.val()));
 				}
 			});
 		};
