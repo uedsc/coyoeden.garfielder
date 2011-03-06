@@ -26,7 +26,7 @@ namespace Garfielder.Controllers
 			var vm = new VMHome
 			{
 				TopicNum = topics.Count,
-				Topics = topics
+				Topics = topics.OrderBy(x=>x.Slug).ToList()
 			};
 
 			//TODO:fake Login
