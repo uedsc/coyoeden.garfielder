@@ -1,4 +1,4 @@
-﻿/*
+/*
 Javascript Module Pattern 模板v1.0
 Author:Levin Van
 Last Modified On 2010.05.25

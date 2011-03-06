@@ -24,7 +24,7 @@
 				<input type="submit" class="btn" value="Filter" id="btnFilter" />
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" id="mediaList-wrap">
             <%if (Model.mode == "list"){%>
 			<table id="mediaList-main" class="widefat fixed" cellspacing="0">
 				<thead>
