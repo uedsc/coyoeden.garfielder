@@ -1,0 +1,17 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body{background:#4f4f4f; color:#fff;}
+h1{font-size:24px; margin-bottom:15px;}
+.header{background:#000; height:90px; width:100%; padding:30px 0; position:fixed; _positon:absolute;}
+.title{ width:980px; position:relative; left:50%; margin-left:-490px;}
+.back{float:right; width:131px; height:97px;}
+.back a{background:url(../image/bg.jpg) no-repeat -171px -351px; display:block; height:97px; width:131px; text-indent:-9999px;}
+.back a:hover{background-position:-309px -351px;}
+.info{float:left; padding:5px 0;}
+.page li{ float:left; padding:0 5px 0 0;}
+.page li a{color:#888;}
+.page li a.on{color:#fff;}
+
+.gallery{width:980px; margin:0 auto; text-align:center; padding:180px 0;}
+.gallery img{ padding:10px; background:#858585;}
