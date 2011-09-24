@@ -1,0 +1,19 @@
+JF.studio.group = [
+	{
+		"id":1,
+		"name":"graphic",
+		"desc":"graphic平面设计"
+	},{
+		"id":2,
+		"name":"web",
+		"desc":"web网页设计"
+	},{
+		"id":3,
+		"name":"others",
+		"desc":"others"
+	},{
+		"id":4,
+		"name":"shop",
+		"desc":"shop"
+	}
+];
