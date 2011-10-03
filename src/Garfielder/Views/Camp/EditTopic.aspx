@@ -78,7 +78,7 @@
 				<div id="ste_title">
 					<div id="ste_title_">
                         <input id="topicId" name="Id" type="hidden" value="<%:Model.Id %>" />
-						<input id="topicTitle" class="bigipt bd0" type="text" value="" tabindex="1" size="30" name="Title"/>
+						<input id="topicTitle" class="bigipt bd0" type="text" value="<%:Model.Title %>" tabindex="1" size="30" name="Title"/>
 					</div>
 					<div id="ste_slug">
 						<div id="ste_slug_">
