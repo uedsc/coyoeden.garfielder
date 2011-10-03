@@ -269,6 +269,8 @@ var JF = (function($) {
 	//给外部调用（例如android的webview调用)
 	pub.onLoad=p.onLoaded;
 
+	pub.emptyFun = function(){};
+
 	return pub;
 
 }) (window["jQuery"]);
