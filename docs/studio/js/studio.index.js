@@ -11,20 +11,27 @@ JF.M("sindex",(function($){
 	p.main={
 		View:{
 			tpl_li:'<li><a href="detail.html?%name%"><img src="%logo%" alt="%title%"/></a></li>',
+			tpl_li0:'<li class="no_result">Ooh! Bingo!! Nothing found in the group [%group%]...</li>',
 			render:function(d){
-				var html="";
-				for(var i =0,l=d.length;i<l;i++){
-					if (!d[i].isElected)
-					{
-						continue;
+				var html="",
+					l = d.length;
+
+				if ( l === 0 )
+				{
+					html = JF.EvalTpl(this.tpl_li0,{
+						"group":p.main.Model.groupId
+					});
+				}else{
+					for(var i =0;i<l;i++){
+						html += JF.EvalTpl(this.tpl_li,d[i]);
 					}
-					html += JF.EvalTpl(this.tpl_li,d[i]);
 				}
 				$("#J_content").html(html);
 			}
 		},
 		Model:{
 			albumList:null,
+			groupId:'',
 			init:function(){
 				this.albumList = JF.studio.album;
 			},
@@ -38,9 +45,10 @@ JF.M("sindex",(function($){
 			getAlbumsByGroup: function(groupId){
 				if (!groupId)
 				{
+					this.groupId = 'Hot hits';
 					return this.getAlbumsElected();
 				}
-
+				this.groupId = groupId;
 				var retVal = $.grep(this.albumList,function(v,i){
 					return ( $.inArray( groupId ,v.groups ) > -1 );
 				});
@@ -61,7 +69,7 @@ JF.M("sindex",(function($){
 		},
 		initEvts:function(){
 			//监听nav模块的onNavClick事件
-			$(JF.studio).bind('onNavClick',function(evt,data){
+			$(JF.snav).bind('onNavClick',function(evt,data){
 				var groupId = data.rel;
 				p.main.Controller.render(groupId);
 			});
@@ -74,7 +82,7 @@ JF.M("sindex",(function($){
 				// parse the group id based on the hash.
 				var gid = location.hash.replace( /^#/, '' ) || false;
 
-				JF.studio.selectNav(gid);
+				JF.snav.selectNav(gid);
 				//load data
 				p.main.Controller.render(gid);
 			})

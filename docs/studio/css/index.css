@@ -11,22 +11,22 @@ body{background:#f4f4f4; color:#fff;}
 .logo .lz:hover{background-position:-307px 0px;}
 .nav{float:right; padding:58px 44px 0 0;}
 .nav li{float:left; text-indent:-9999px; height:38px; margin:0 0 0 30px;}
-.nav li a{background:url(../img/bg.jpg) no-repeat; display:block; height:26px;}
+.nav a{background:url(../img/bg.jpg) no-repeat; display:block; height:26px;}
 
-.nav li#web a{width:38px;background-position:0 -88px;}
-.nav li#web a:hover,.nav li#web a.on{width:38px;background-position:0 -129px;}
+	.nav-web a{width:38px;background-position:0 -88px;}
+	.nav-web a:hover,.nav-web a.on{width:38px;background-position:0 -129px;}
 
-.nav li#graphic a{width:57px;background-position:-67px -88px;}
-.nav li#graphic a:hover,.nav li#graphic a.on{width:57px;background-position:-67px -129px;}
+	.nav-graphic a{width:57px;background-position:-67px -88px;}
+	.nav-graphic a:hover,.nav-graphic a.on{width:57px;background-position:-67px -129px;}
 
-.nav li#illu a{width:75px;background-position:-154px -88px;}
-.nav li#illu a:hover,.nav li#illu a.on{width:75px;background-position:-154px -129px;}
+	.nav-illu a{width:75px;background-position:-154px -88px;}
+	.nav-illu a:hover,.nav-illu a.on{width:75px;background-position:-154px -129px;}
 
-.nav li#others a{width:54px;background-position:-257px -88px;}
-.nav li#others a:hover,.nav li#others a.on{width:54px;background-position:-257px -129px;}
+	.nav-others a{width:54px;background-position:-257px -88px;}
+	.nav-others a:hover,.nav-others a.on{width:54px;background-position:-257px -129px;}
 
-.nav li#shop a{width:40px;background-position:-339px -88px;}
-.nav li#shop a:hover,.nav li#shop a.on{width:40px;background-position:-339px -129px;}
+	.nav-shop a{width:40px;background-position:-339px -88px;}
+	.nav-shop a:hover,.nav-shop a.on{width:40px;background-position:-339px -129px;}
 
 /*header-end*/
 
@@ -36,6 +36,14 @@ body{background:#f4f4f4; color:#fff;}
 .conbox li{float:left; width:170px; height:113px;}
 .conbox li a{display:block; text-align:center; padding:6px; height:100px; width:160px;}
 .conbox li a:hover{background:url(../img/bg.jpg) no-repeat -9px -184px;}
+.conbox li.no_result{
+	float:none;
+	width:auto;
+	height:auto;
+	background:#eee;
+	color:red;
+	padding:3px 5px;
+}
 
 /*content-end*/
 
