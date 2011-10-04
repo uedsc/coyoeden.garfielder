@@ -6,29 +6,29 @@
 		<link href="css/main.css" rel="stylesheet" type="text/css" />
 		<link href="css/detail.css" rel="stylesheet" type="text/css" />
 		<script src="js/lib/jquery-1.6.3.min.js"></script>
+		<script src="js/lib/jquery.ba-hashchange.min.js"></script>
 		<script src="js/jf.core.js"></script>
 		<script src="js/studio.js"></script>
 		<script src="js/studio.detail.js"></script>
 		<script src="js/data/album.js"></script>
 	</head>
 
-	<body>
+	<body class="gallery-full">
 		<div class="header">
 			<div class="title">
 				<div class="info">
-					<h1>Metroer Space</h1>
-					<p>May,2006</p>
-					<p>Client:&nbsp;Metroer.com</p>
-					<ul class="page">
-					<li><a href="#" class="on">[1]</a></li>
-					<li><a href="#">[2]</a></li>
-					</ul>
+					<h1 id="J_title"></h1>
+					<div id="J_desc"></div>
+					<ul id="J_pager" class="page"></ul>
 				</div>
-				<p class="back"><a href="#">back</a></p>
+				<div class="back"><a id="J_btn_back" href="#">back</a></div>
 			</div>
 		</div>
-		<div class="gallery">
+		<div id="J_gallery" class="gallery">
 			<img src="../image/default.jpg" width="160" height="100" />
 		</div>
 	</body>
+	<script>
+		JF.Init();
+	</script>
 </html>
