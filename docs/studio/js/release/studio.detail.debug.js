@@ -536,6 +536,12 @@ JF.M("sdetail",(function($){
 		},
 		goback:function(){
 
+			if (this.rawLen==0)
+			{
+				window.location.href = 'index.html';
+				return;
+			}
+
 			var curLen = window.history.length,
 				step = curLen -this.rawLen;
 
