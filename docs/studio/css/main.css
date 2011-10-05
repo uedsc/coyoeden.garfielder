@@ -23,9 +23,27 @@ a:hover{color:#fff; overflow:hidden; text-decoration:underline;}
 * html .clearfix {height:1%;}
 .clearfix {display:block;}
 
-p,li{line-height:24px;}
-
 /*clearfix-end*/
 
 .hide{display:none;}
+p,li{line-height:24px;}
+.no_result,.sitetip{
+	float:none;
+	width:auto;
+	height:auto;
+	background:#eee;
+	color:red;
+	padding:3px 5px;
+}
+.no_result strong,.sitetip strong{font-weight:bold;}
+.sitetip{
+	position:fixed;
+	top:0;
+	right:10px;
+	padding:10px;
+	border-radius:4px;
+	background:#333;
+	z-index:100;
+}
+.sitetip a{font-weight:bold;}
 

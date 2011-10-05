@@ -47,10 +47,11 @@ JF.M("snav",(function($){
 						return;
 					}
 					view.highlightNav(this.rel);
-
+					/* we rely on the hash change!
 					$(JF.snav).trigger('onNavClick',{
 						"rel":this.rel
 					});
+					*/
 
 				}).each(function(o,i){
 					if(!this.id){

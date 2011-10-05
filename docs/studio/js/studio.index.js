@@ -11,7 +11,7 @@ JF.M("sindex",(function($){
 	p.main={
 		View:{
 			tpl_li:'<li><a href="detail.html?%name%"><img src="%logo%" alt="%title%"/></a></li>',
-			tpl_li0:'<li class="no_result">Ooh! Bingo!! Nothing found in the group [%group%]...</li>',
+			tpl_li0:'<li class="no_result">Ooh! Bingo!! Nothing found in the group [<strong>%group%</strong>]...</li>',
 			render:function(d){
 				var html="",
 					l = d.length;
@@ -75,8 +75,7 @@ JF.M("sindex",(function($){
 			});
 
 			//hashchange
-			// Bind an event to window.onhashchange that, when the hash changes, gets the
-			// hash and adds the class "selected" to any matching nav link.
+			// Bind an event to window.onhashchange that, when the hash changes, gets the hash
 			$(window).hashchange( function(){
 
 				// parse the group id based on the hash.

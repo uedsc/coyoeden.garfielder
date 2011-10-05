@@ -1,0 +1,5 @@
+lib\jquery-1.6.4.min.js
+lib\jquery.ba-hashchange.min.js
+jf.core.js
+studio.js
+studio.detail.js
