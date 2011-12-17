@@ -228,7 +228,7 @@ JF.M("sdetail",(function($){
 		},
 		goback:function(){
 
-			if (this.rawLen==0)
+			if (this.rawLen==1)
 			{
 				window.location.href = 'index.html';
 				return;
