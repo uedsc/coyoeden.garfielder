@@ -11,7 +11,7 @@ JF.M("snav",(function($){
 	p.nav = {
 		View:{
 			cl_on:'on',
-			tpl_li:'<li class="nav-%name%"><a rel="%name%" href="#%name%">%name%</a></li>',
+			tpl_li:'<li class="nav-%name%"><a rel="%name%" href="%href%" class="%class%" target="%target%">%name%</a></li>',
 			$curNav:null,
 			render: function(d){
 				var html="";
@@ -40,7 +40,7 @@ JF.M("snav",(function($){
 			},
 			_initEvts:function(){
 				var view = this;
-				this.$layout.find('a').click(function(e){
+				this.$layout.find('a.in_lnk').click(function(e){
 
 					var $this = $(this);
 					if( $this.hasClass(view.cl_on) ){
