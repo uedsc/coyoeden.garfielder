@@ -74,8 +74,8 @@ body{background:#f4f4f4; color:#fff;}
 	.nav-others a{width:54px;background-position:-257px -88px;}
 	.nav-others a:hover,.nav-others a.on{width:54px;background-position:-257px -129px;}
 
-	.nav-shop a{width:40px;background-position:-339px -88px;}
-	.nav-shop a:hover,.nav-shop a.on{width:40px;background-position:-339px -129px;}
+	.nav-shop a,.nav-film a{width:40px;background-position:-339px -88px;}
+	.nav-shop a:hover,.nav-shop a.on,.nav-film a:hover,.nav-film a.on{width:40px;background-position:-339px -129px;}
 
 /*header-end*/
 

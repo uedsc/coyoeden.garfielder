@@ -1,19 +1,37 @@
 JF.studio.group = [
-	{
+	/*{
 		"id":"2266f8c4-65b0-426c-8c76-e85fd6711257",
 		"name":"graphic",
-		"desc":"graphic平面设计"
-	},{
+		"desc":"graphic平面设计",
+		"class":"in_lnk",
+		"target":"_self"
+	},*/{
 		"id":"43699ad1-06e0-4ca1-a192-c7b9cf90f4c2",
 		"name":"web",
-		"desc":"web网页设计"
+		"desc":"web网页设计",
+		"class":"in_lnk",
+		"href":"#web",
+		"target":"_self"
 	},{
 		"id":"5f15e965-e296-433c-94db-b7326c650a61",
 		"name":"others",
-		"desc":"others"
-	},{
+		"desc":"others",
+		"class":"in_lnk",
+		"href":"#others",
+		"target":"_self"
+	}/*,{
 		"id":"98deda39-adf9-4fda-a054-b8c419c7cf36",
 		"name":"shop",
-		"desc":"shop"
+		"desc":"shop",
+		"class":"in_lnk",
+		"href":"#shop",
+		"target":"_self"
+	}*/,{
+		"id":"nav_film",
+		"name":"film",
+		"desc":"film",
+		"href":"http://www.youtube.com/user/lingzhi29?feature=mhee",
+		"class":"out_link",
+		"target":"_blank"
 	}
 ];
