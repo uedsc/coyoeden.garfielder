@@ -16,3 +16,4 @@ glob:src/Garfielder/Assets/Upload/*
 glob:src/Garfielder/App_Data/Garfielder_.sdf
 syntax: glob
 docs/studio/upload/20110628/untitled-1_64x64.jpg
+docs/studio/upload/*
